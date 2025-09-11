@@ -6,6 +6,13 @@ documentation to increase interoperability.
 
 - [Documentation](docs/README.md)
 
+## Contributing
+
+To contribute, fork the repository and create pull requests.
+The group (co-)lead and task (co-)owners merge pull requests
+into the mainline, based on the QTSP group’s advice when
+needed.
+
 ## Funding
 
 ![Co-funded by the European Union](https://github.com/EWC-consortium/ewc-wiki/assets/455274/1ac9b4e3-06b9-4c3c-a2af-ec5fbf584517)
