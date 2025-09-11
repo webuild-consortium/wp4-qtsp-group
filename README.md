@@ -4,6 +4,8 @@ The [WE BUILD](https://www.webuildconsortium.eu/) WP4 QTSP group uses
 this repository to collaborate publicly on internal reference code and
 documentation to increase interoperability.
 
+- [Documentation](docs/README.md)
+
 ## Funding
 
 ![Co-funded by the European Union](https://github.com/EWC-consortium/ewc-wiki/assets/455274/1ac9b4e3-06b9-4c3c-a2af-ec5fbf584517)
