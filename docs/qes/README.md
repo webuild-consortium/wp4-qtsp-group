@@ -1,5 +1,7 @@
 # QES documentation
 
+This is documentation of the [WE BUILD: WP4 QTSP group](../README.md).
+
 ## Informative references
 
 - Standards
