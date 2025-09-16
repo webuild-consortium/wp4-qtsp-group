@@ -6,6 +6,9 @@ This is documentation of the [WE BUILD: WP4 QTSP group](../README.md).
 
 - [QES](qes/README.md)
 - [QEAA](qeaa/README.md)
+- [QERDS](qerds/README.md)
+- [rWSCD](rwscd/README.md)
+- [RPC](rpc/README.md)
 
 ## General references
 
