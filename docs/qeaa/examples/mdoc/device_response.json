@@ -3,21 +3,14 @@
   "documents": [
     {
       "docType": "eu.web.hwa.v1",
-      "issuerSigned": {
+      "deviceSigned": {
         "nameSpaces": {
           "eu.web.hwa": [
             {
-              "elementIdentifier": "message",
-              "elementValue": "Hello World!",
-              "status": 0
+              "name": "message",
+              "value": "Hello World!"
             }
           ]
-        },
-        "issuerAuth": "COSE_Sign1(...)"
-      },
-      "deviceSigned": {
-        "deviceAuth": {
-          "deviceSignature": "COSE_Sign1(...SessionTranscriptHash...)"
         }
       }
     }

@@ -1,17 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/data-schemas/ds0xx_hello_world.json",
-  "title": "DS0XX \u2014 Hello World Attestation",
-  "description": "Minimal data schema for the Hello World Attestation (HWA).",
-  "version": "0.1-draft",
-  "docType": "eu.web.hwa.v1",
-  "namespace": "eu.web.hwa",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Hello World Attestation Schema",
   "type": "object",
   "properties": {
     "message": {
       "type": "string",
-      "const": "Hello World!",
-      "description": "Fixed attribute value for the Hello World Attestation."
+      "const": "Hello World!"
     },
     "issuer": {
       "type": "string"
@@ -23,9 +17,6 @@
     "expiry": {
       "type": "string",
       "format": "date-time"
-    },
-    "credentialStatus": {
-      "type": "object"
     }
   },
   "required": [
@@ -33,5 +24,10 @@
     "issuer",
     "issuedAt",
     "expiry"
+  ],
+  "allOf": [
+    {
+      "$comment": "expiry must be \u226424h after issuedAt (enforce in implementation)"
+    }
   ]
 }

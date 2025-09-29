@@ -1,10 +1,8 @@
 {
   "@context": {
     "@version": 1.1,
-    "id": "@id",
-    "type": "@type",
-    "schema": "https://schema.org/",
-    "HelloWorldAttestation": "https://example.org/contexts/hello-world#HelloWorldAttestation",
-    "message": "schema:text"
+    "hwa": "https://example.org/credentials/hwa#",
+    "HelloWorldAttestation": "hwa:HelloWorldAttestation",
+    "message": "hwa:message"
   }
 }

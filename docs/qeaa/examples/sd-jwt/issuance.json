@@ -1,13 +1,9 @@
 {
-  "iss": "did:example:issuer123",
-  "iat": 1737892800,
-  "exp": 1737979200,
+  "iss": "https://issuer.example.org",
+  "iat": 1737913200,
+  "exp": 1737999600,
   "vct": "eu.web.hwa.v1",
-  "type": [
-    "VerifiableCredential",
-    "HelloWorldAttestation"
-  ],
-  "credentialSubject": {
+  "claims": {
     "message": "Hello World!"
   }
 }
