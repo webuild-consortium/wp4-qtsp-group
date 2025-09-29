@@ -1,0 +1,7 @@
+{
+  "sd_jwt": "<compact SD-JWT from issuer>",
+  "disclosures": [
+    "WyIxYjY1OGI5Zi0wYzVhLTQ0ZTEtOGEwMS1mYzliNmUyYTRhNzciLCJtZXNzYWdlIiwiSGVsbG8gV29ybGQhIl0"
+  ],
+  "kb_jwt": "<compact KB-JWT from holder>"
+}

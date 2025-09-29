@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/data-schemas/ds0xx_hello_world.json",
+  "title": "DS0XX \u2014 Hello World Attestation",
+  "description": "Minimal data schema for the Hello World Attestation (HWA).",
+  "version": "0.1-draft",
+  "docType": "eu.web.hwa.v1",
+  "namespace": "eu.web.hwa",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "const": "Hello World!",
+      "description": "Fixed attribute value for the Hello World Attestation."
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiry": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "credentialStatus": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "message",
+    "issuer",
+    "issuedAt",
+    "expiry"
+  ]
+}

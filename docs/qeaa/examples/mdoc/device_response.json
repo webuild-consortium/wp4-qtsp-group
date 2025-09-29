@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "documents": [
+    {
+      "docType": "eu.web.hwa.v1",
+      "issuerSigned": {
+        "nameSpaces": {
+          "eu.web.hwa": [
+            {
+              "elementIdentifier": "message",
+              "elementValue": "Hello World!",
+              "status": 0
+            }
+          ]
+        },
+        "issuerAuth": "COSE_Sign1(...)"
+      },
+      "deviceSigned": {
+        "deviceAuth": {
+          "deviceSignature": "COSE_Sign1(...SessionTranscriptHash...)"
+        }
+      }
+    }
+  ]
+}
