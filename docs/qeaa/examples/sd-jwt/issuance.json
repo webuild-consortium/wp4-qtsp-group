@@ -1,9 +1,8 @@
 {
-  "iss": "https://issuer.example.org",
-  "iat": 1737913200,
-  "exp": 1737999600,
   "vct": "eu.web.hwa.v1",
-  "claims": {
-    "message": "Hello World!"
-  }
+  "iss": "https://issuer.example.org",
+  "iat": 1730131200,
+  "exp": 1730217599,
+  "message": "Hello World!",
+  "attestation_legal_category": "non-qualified-EAA"
 }

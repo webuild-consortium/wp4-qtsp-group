@@ -3,19 +3,12 @@
   "issuerSigned": {
     "nameSpaces": {
       "eu.web.hwa": [
-        {
-          "name": "message",
-          "value": "Hello World!"
-        },
-        {
-          "name": "issuedAt",
-          "value": "2025-09-29T12:00:00Z"
-        },
-        {
-          "name": "expiry",
-          "value": "2025-09-30T12:00:00Z"
-        }
+        { "name": "message", "value": "Hello World!" },
+        { "name": "attestation_legal_category", "value": "non-qualified-EAA" },
+        { "name": "issuedAt", "value": "2025-09-29T12:00:00Z" },
+        { "name": "expiry", "value": "2025-09-29T23:59:59Z" }
       ]
-    }
+    },
+    "issuerAuth": "<COSE_Sign1 placeholder for demo>"
   }
 }

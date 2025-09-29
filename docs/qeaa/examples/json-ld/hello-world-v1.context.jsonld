@@ -3,6 +3,7 @@
     "@version": 1.1,
     "hwa": "https://example.org/credentials/hwa#",
     "HelloWorldAttestation": "hwa:HelloWorldAttestation",
-    "message": "hwa:message"
+    "message": "hwa:message",
+    "attestation_legal_category": "hwa:attestation_legal_category"
   }
 }

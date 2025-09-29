@@ -3,31 +3,14 @@
   "title": "Hello World Attestation Schema",
   "type": "object",
   "properties": {
-    "message": {
-      "type": "string",
-      "const": "Hello World!"
-    },
-    "issuer": {
-      "type": "string"
-    },
-    "issuedAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "expiry": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "message": { "type": "string", "const": "Hello World!" },
+    "attestation_legal_category": { "type": "string", "const": "non-qualified-EAA" },
+    "issuer": { "type": "string" },
+    "issuedAt": { "type": "string", "format": "date-time" },
+    "expiry": { "type": "string", "format": "date-time" }
   },
-  "required": [
-    "message",
-    "issuer",
-    "issuedAt",
-    "expiry"
-  ],
+  "required": ["message", "attestation_legal_category", "issuer", "issuedAt", "expiry"],
   "allOf": [
-    {
-      "$comment": "expiry must be \u226424h after issuedAt (enforce in implementation)"
-    }
+    { "$comment": "expiry must be ≤24h after issuedAt (enforce in implementation)" }
   ]
 }

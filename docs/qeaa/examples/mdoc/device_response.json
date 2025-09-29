@@ -6,12 +6,11 @@
       "deviceSigned": {
         "nameSpaces": {
           "eu.web.hwa": [
-            {
-              "name": "message",
-              "value": "Hello World!"
-            }
+            { "name": "message", "value": "Hello World!" },
+            { "name": "attestation_legal_category", "value": "non-qualified-EAA" }
           ]
-        }
+        },
+        "deviceAuth": "<COSE_Sign1 placeholder for device signature>"
       }
     }
   ]

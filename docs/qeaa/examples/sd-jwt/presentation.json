@@ -1,7 +1,5 @@
 {
-  "sd_jwt": "<signed-JWT>",
-  "disclosures": [
-    "<disclosure-message>"
-  ],
-  "kb_jwt": "<holder-binding-JWT>"
+  "sd_jwt": "eyJ... (placeholder base64-encoded SD-JWT)",
+  "disclosures": ["<base64-encoded disclosure for message: Hello World!>"],
+  "kb_jwt": "<optional holder-binding JWT, not required for demo>"
 }
