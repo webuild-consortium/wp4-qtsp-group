@@ -5,7 +5,7 @@
 
 # Abstract
 
-This document proposes a structured approach for collecting WE BUILD user stories and use case needs related to Qualified Electronic Signatures and Seals (QES) and (Qualified) Electronic Attestation of Attributes (QEAA).
+This document proposes a structured approach by the QTSP group for collecting WE BUILD user stories and use case needs related to Qualified Electronic Signatures and Seals (QES) and (Qualified) Electronic Attestation of Attributes (QEAA).
 
 # Terminology
 
@@ -13,7 +13,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Background
 
-The purpose of the WE BUILD project is to further the development of the EUDI wallet ecosystem by piloting a set of use cases. In order to support the stocktaking, specification and development of trust services in the WE BUILD use cases, and more specifically in terms of QES/QEAA at this stage, we are collecting insights and feedback on what the use cases' needs will be.
+The purpose of the WE BUILD project is to further the development of the EUDI wallet ecosystem by piloting a set of use cases. In order to support the stocktaking, specification and development of trust services in the WE BUILD use cases, and more specifically in terms of QES/QEAA at this stage, the QTSP group is collecting insights and feedback on what the use cases' needs will be.
 
 The purpose of the collection of QES and QEAA user stories and needs, particularly in the earlier phases of WE BUILD, is to:
 
