@@ -19,13 +19,15 @@ For each feature in scope for the pilots, the QTSP group develops an interop pro
 
 Participants of the QTSP group may issue QEAA under any of the schemes referenced below.
 
-- **Hello World Rulebook**: The [Hello World Attestation (HWA) Rulebook](rb0xx_hello_world_attestation.md) defines a minimal, non-qualified Electronic Attestation of Attributes (EAA) for baseline interoperability testing in EUDI Wallet implementations. It is designed for onboarding, demonstration, and testing, with no production-trust value and no source verification required. The HWA includes a single fixed attribute (`message: "Hello World!"`) and the mandatory `attestation_legal_category: "non-qualified-EAA"`. It supports three encodings: ISO/IEC 18013-5 (mdoc), SD-JWT VC, and W3C VCDM v2.0 (JSON-LD VC). 
-  - **Examples**: Illustrative examples are embedded in the Rulebook (Sections 3.1–3.3). Testable versions are available in the repository:
-    - mdoc: [`docs/qeaa/examples/mdoc/issuance.json`](docs/qeaa/examples/mdoc/issuance.json), [`docs/qeaa/examples/mdoc/device_response.json`](docs/qeaa/examples/mdoc/device_response.json)
-    - SD-JWT VC: [`docs/qeaa/examples/sd-jwt/issuance.json`](docs/qeaa/examples/sd-jwt/issuance.json), [`docs/qeaa/examples/sd-jwt/presentation.json`](docs/qeaa/examples/sd-jwt/presentation.json)
-    - JSON-LD VC: [`docs/qeaa/examples/json-ld/credential.json`](docs/qeaa/examples/json-ld/credential.json), [`docs/qeaa/examples/json-ld/hello-world-v1.context.jsonld`](docs/qeaa/examples/json-ld/hello-world-v1.context.jsonld)
-    - JSON Schema: [`docs/qeaa/data-schemas/ds0xx_hello_world.json`](docs/qeaa/data-schemas/ds0xx_hello_world.json)
-  - **Feedback**: Submit issues or PRs at [https://github.com/webuild-consortium/wp4-qtsp-group/issues](https://github.com/webuild-consortium/wp4-qtsp-group/issues).
+# Hello World Attestation (HWA) Rulebook Description
+
+**Hello World Rulebook**: The [Hello World Attestation (HWA) Rulebook](rb0xx_hello_world_attestation.md) defines a minimal, short-lived Qualified Electronic Attestation of Attributes (QEAA) compliant with Regulation (EU) 2024/1183 and the EUDI Architecture and Reference Framework (ARF). It is designed for testing pre-production QEAA issuance, presentation, and verification workflows with real Qualified Trust Service Providers (QTSPs) in production-like EUDI Wallet environments, supporting onboarding of trusted wallet systems, demonstration of compliant issuance capabilities, and interoperability across QEAA-compliant implementations. The HWA has limited production trust value within the WEBUILD consortium’s testing context and requires QTSP issuance with Trusted List-bound signatures for source verification. It includes a single fixed attribute (`message: "Hello World!"`), the mandatory `attestation_legal_category: "QEAA"`, and Annex V metadata (e.g., issuer legal identifiers, trust anchor URLs). It supports two encodings: ISO/IEC 18013-5 (mdoc) and SD-JWT VC. Revocation is not implemented; attestations are valid until expiry (≤24h).
+
+- **Examples**: Illustrative examples are embedded in the Rulebook (Sections 3.1–3.2). Testable versions are available in the repository:
+  - mdoc: [`docs/qeaa/examples/mdoc/issuance.json`](docs/qeaa/examples/mdoc/issuance.json), [`docs/qeaa/examples/mdoc/device_response.json`](docs/qeaa/examples/mdoc/device_response.json)
+  - SD-JWT VC: [`docs/qeaa/examples/sd-jwt/issuance.json`](docs/qeaa/examples/sd-jwt/issuance.json), [`docs/qeaa/examples/sd-jwt/presentation.json`](docs/qeaa/examples/sd-jwt/presentation.json)
+  - JSON Schema: [`docs/qeaa/data-schemas/ds0xx_hello_world.json`](docs/qeaa/data-schemas/ds0xx_hello_world.json)
+- **Feedback**: Submit issues or PRs at [https://github.com/webuild-consortium/wp4-qtsp-group/issues](https://github.com/webuild-consortium/wp4-qtsp-group/issues).
 
 ## Informative references
 

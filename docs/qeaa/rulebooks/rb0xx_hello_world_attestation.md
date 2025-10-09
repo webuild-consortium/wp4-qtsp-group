@@ -1,6 +1,6 @@
 
 
-# Attestation Rulebook for attestations of type `eu.web.hwa.v1` (Hello World Attestation)
+# Attestation Rulebook for attestations of type Hello World
 
 **Author(s):**  
 Jochem Oosterlee, Cleverbase
@@ -13,6 +13,7 @@ Jochem Oosterlee, Cleverbase
 | Version | Date       | Description |
 |---------|------------|-------------|
 | 0.1     | 2025-09-29 | Initial draft — Hello World Attestation (≤24h), demo/test only |
+| 0.2     | 2025-10-09 | Switched to QEAA profile; updated metadata naming |
 
 **Feedback:**  
 https://github.com/webuild-consortium/wp4-qtsp-group/issues
@@ -22,13 +23,13 @@ https://github.com/webuild-consortium/wp4-qtsp-group/issues
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
-This Rulebook defines the **Hello World Attestation (HWA)**, a minimal, short-lived Electronic Attestation of Attributes (EAA).  
-Its purpose is to provide a trivial, universal test credential that can be issued and presented in EUDI Wallet implementations for **onboarding, demonstration, and interoperability testing**.  
-It has **no production-trust value**.
+This Rulebook defines the **Hello World Attestation (HWA)**, a minimal, short-lived Qualified Electronic Attestation of Attributes (QEAA) compliant with Regulation (EU) 2024/1183.  
+Its purpose is to test pre-production QEAA issuance workflows with real Qualified Trust Service Providers (QTSPs) in production-like EUDI Wallet environments, supporting onboarding of trusted wallet systems, demonstration of compliant issuance capabilities, and interoperability across QEAA-compliant implementations.  
+The HWA is intended for testing and has limited production trust value within the WEBUILD consortium’s controlled environment.
 
 ### 1.2 Document structure
-- Chapter 2 describes the attributes and metadata in an encoding-independent way.  
-- Chapter 3 specifies how these are encoded in ISO/IEC 18013-5 (mdoc), SD-JWT VC, and W3C VCDM v2.0 (JSON-LD VC).  
+- Chapter 2 describes the attributes and metadata in an encoding-independent way.
+- Chapter 3 specifies how these are encoded in ISO/IEC 18013-5 (mdoc) and SD-JWT VC.
 - Chapter 4 specifies usage scenarios.  
 - Chapter 5 defines trust anchors.  
 - Chapter 6 defines revocation (short-lived validity).  
@@ -38,23 +39,23 @@ It has **no production-trust value**.
 This document uses the capitalised key words **SHALL**, **SHOULD**, and **MAY** as specified in [RFC 2119]. *must* indicates an external requirement; *can* denotes a capability.
 
 ### 1.4 Terminology
-This document uses the terminology specified in Annex 1 of the ARF.
+This document uses the terminology specified in Annex 1 of the ARF, including Qualified Electronic Attestation of Attributes (QEAA), Qualified Trust Service Provider (QTSP), Trusted List, and Annex V metadata requirements.
 
 ---
 
 ## 2 Attestation attributes and metadata
 
 ### 2.1 Introduction
-The Hello World Attestation is a **non-qualified EAA**.  
-It defines a single fixed attribute and minimal metadata.  
-The attribute `attestation_legal_category` SHALL be `"non-qualified-EAA"`.
+The Hello World Attestation is a **Qualified EAA (QEAA)** for testing purposes.  
+It defines a single fixed attribute and mandatory Annex V metadata to comply with Regulation (EU) 2024/1183.  
+The attribute `attestation_legal_category` SHALL be `"QEAA"`.
 
 ### 2.2 Mandatory attributes
 
 | Data Identifier | Definition         | Data type | Example value  |
 |-----------------|-------------------|-----------|----------------|
 | message         | Fixed test string | string    | "Hello World!" |
-| attestation_legal_category | Legal category | string | "non-qualified-EAA" |
+| attestation_legal_category | Legal category | string | "QEAA" |
 
 ### 2.3 Optional attributes
 _None._
@@ -64,17 +65,18 @@ _None._
 
 ### 2.5 Mandatory metadata
 
-| Data Identifier | Definition   | Data type | Example value                  |
-|-----------------|-------------|-----------|--------------------------------|
-| issuer          | Issuer ID   | string    | `did:example:issuer123`        |
-| issuedAt        | Issue time  | tdate     | `2025-09-29T12:00:00Z`         |
-| expiry          | Expiry time | tdate     | `2025-09-29T23:59:59Z` (≤24h)  |
+| Data Identifier      | Definition                     | Data type | Example value                  |
+|----------------------|-------------------------------|-----------|--------------------------------|
+| issuing_authority    | Issuer ID                     | string    | `did:example:issuer123`        |
+| issuer_legal_id      | Legal person identifier       | string    | `LEI:1234567890`              |
+| trust_anchor_url     | Trusted List URL              | string    | `https://trustedlist.eu/issuer`|
+| attestation_scheme   | Scheme details                | string    | `QEAA:HelloWorld`             |
+| issuance_date        | Issue time                    | tdate     | `2025-10-07T12:00:00Z`        |
+| expiry_date          | Expiry time                   | tdate     | `2025-10-07T23:59:59Z` (≤24h) |
 
 ### 2.6 Optional metadata
 
-| Data Identifier   | Definition          | Data type | Example value               |
-|-------------------|--------------------|-----------|-----------------------------|
-| credentialStatus  | Revocation reference | object  | URL to status list endpoint |
+_None._
 
 ### 2.7 Conditional metadata
 _None._
@@ -83,129 +85,110 @@ _None._
 
 ## 3 Attestation encoding
 
-### 3.1 ISO/IEC 18013-5-compliant encoding
-- **docType:** `eu.web.hwa.v1`  
-- **Namespace:** `eu.web.hwa`  
-- Attributes:  
-  - `message`: `tstr` UTF-8  
-  - `attestation_legal_category`: `tstr` UTF-8  
-  - `issuedAt`, `expiry`: `tdate` (RFC 3339, UTC, no fractions)  
-- Proof: COSE_Sign1 in `issuerAuth`.  
+## 3.1 ISO/IEC 18013-5-compliant encoding
+- **docType:** `eu.web.qeaa.hwa.v1`
+- **Namespace:** `eu.web.qeaa.hwa`
+- Attributes:
+  - `message`: `tstr` UTF-8
+  - `attestation_legal_category`: `tstr` UTF-8
+  - `issuing_authority`: `tstr` UTF-8
+  - `issuer_legal_id`: `tstr` UTF-8
+  - `trust_anchor_url`: `tstr` UTF-8
+  - `attestation_scheme`: `tstr` UTF-8
+  - `issuance_date`: `tdate` (RFC 3339, UTC, no fractions)
+  - `expiry_date`: `tdate` (RFC 3339, UTC, no fractions)
+- Proof: COSE_Sign1 in `issuerAuth`, signed by a QTSP key registered in a Trusted List.
 - Illustrative example:
   ```json
   {
-    "docType": "eu.web.hwa.v1",
+    "docType": "eu.web.qeaa.hwa.v1",
     "issuerSigned": {
       "nameSpaces": {
-        "eu.web.hwa": [
+        "eu.web.qeaa.hwa": [
           { "name": "message", "value": "Hello World!" },
-          { "name": "attestation_legal_category", "value": "non-qualified-EAA" },
-          { "name": "issuedAt", "value": "2025-09-29T12:00:00Z" },
-          { "name": "expiry", "value": "2025-09-29T23:59:59Z" }
+          { "name": "attestation_legal_category", "value": "QEAA" },
+          { "name": "issuing_authority", "value": "did:example:issuer123" },
+          { "name": "issuer_legal_id", "value": "LEI:1234567890" },
+          { "name": "trust_anchor_url", "value": "https://trustedlist.eu/issuer" },
+          { "name": "attestation_scheme", "value": "QEAA:HelloWorld" },
+          { "name": "issuance_date", "value": "2025-10-07T12:00:00Z" },
+          { "name": "expiry_date", "value": "2025-10-07T23:59:59Z" }
         ]
       },
-      "issuerAuth": "<COSE_Sign1 placeholder for demo>"
+      "issuerAuth": "<COSE_Sign1 signed by Trusted List-bound QTSP key>"
     }
   }
   ```
-- A supplementary device response example is provided in `docs/qeaa/examples/mdoc/device_response.json` (WEBUILD repo, https://github.com/webuild-consortium/wp4-qtsp-group).
 
-### 3.2 SD-JWT VC-based encoding
-- **Verifiable Credential Type (vct):** `eu.web.hwa.v1`  
+## 3.2 SD-JWT VC-based encoding
+- **Verifiable Credential Type (vct):** `eu.web.qeaa.hwa.v1`
 - Claims:
 
-| Data Identifier | Attribute identifier     | Encoding format | Notes | Disclosable |
-|-----------------|--------------------------|----------------|-------|-------------|
-| message         | message                  | string         | Fixed value | MUST |
-| attestation_legal_category | attestation_legal_category | string | Non-qualified-EAA | MUST NOT |
-| issuer          | iss                      | string         | JWT claim | MUST NOT |
-| issuedAt        | iat                      | number (epoch) | JWT claim | MUST NOT |
-| expiry          | exp                      | number (epoch) | ≤24h after iat | MUST NOT |
+| Data Identifier      | Attribute identifier     | Encoding format | Notes | Disclosable |
+|----------------------|--------------------------|----------------|-------|-------------|
+| message              | message                  | string         | Fixed value | MUST |
+| attestation_legal_category | attestation_legal_category | string | QEAA | MUST NOT |
+| issuing_authority    | iss                      | string         | JWT claim | MUST NOT |
+| issuer_legal_id      | issuer_legal_id          | string         | Annex V | MUST NOT |
+| trust_anchor_url     | trust_anchor_url         | string         | Annex V | MUST NOT |
+| attestation_scheme   | attestation_scheme       | string         | Annex V | MUST NOT |
+| issuance_date        | iat                      | number (epoch) | JWT claim | MUST NOT |
+| expiry_date          | exp                      | number (epoch) | ≤24h after iat | MUST NOT |
 
-- Note (ARB_31/ARB_32): For production-grade rulebooks, the template recommends referencing a Type Metadata Document (TMD) and a normative JSON Schema for the SD-JWT VC claims structure. For this Hello World demo attestation, these artifacts are OPTIONAL; if available, they SHOULD be cited here with stable URLs to enable automated validation and improved interoperability. The JSON Schema is available at `docs/qeaa/data-schemas/ds0xx_hello_world.json` (WEBUILD repo, https://github.com/webuild-consortium/wp4-qtsp-group).
+- Note (ARB_31/ARB_32): A Type Metadata Document (TMD) and normative JSON Schema for the SD-JWT VC claims structure SHALL be referenced for QEAA compliance. The JSON Schema is available at `docs/qeaa/data-schemas/ds0xx_hello_world.json` (WEBUILD repo, https://github.com/webuild-consortium/wp4-qtsp-group).
 - Illustrative example:
   ```json
   {
-    "vct": "eu.web.hwa.v1",
-    "iss": "https://issuer.example.org",
-    "iat": 1730131200,
-    "exp": 1730217599,
+    "vct": "eu.web.qeaa.hwa.v1",
+    "iss": "did:example:issuer123",
+    "iat": 1760025600,
+    "exp": 1760111999,
     "message": "Hello World!",
-    "attestation_legal_category": "non-qualified-EAA"
+    "attestation_legal_category": "QEAA",
+    "issuer_legal_id": "LEI:1234567890",
+    "trust_anchor_url": "https://trustedlist.eu/issuer",
+    "attestation_scheme": "QEAA:HelloWorld"
   }
   ```
 - Issued SD-JWT (base64 placeholder): `eyJ...`
 - Disclosures: `["<base64-encoded disclosure for message: Hello World!>"]`
-- A presentation example, including optional holder-binding JWT (`kb_jwt`), is provided in `docs/qeaa/examples/sd-jwt/presentation.json` (WEBUILD repo).
-
-### 3.3 W3C VCDM v2.0-based encoding (JSON-LD VC)
-- Context: `https://www.w3.org/ns/credentials/v2` + `hello-world-v1.context.jsonld`  
-- Proof: W3C Data Integrity Proof (e.g., `ecdsa-rdfc-2019`)  
-- Illustrative example:
-  ```json
-  {
-    "@context": [
-      "https://www.w3.org/ns/credentials/v2",
-      "https://example.org/credentials/hwa#"
-    ],
-    "id": "urn:uuid:1234",
-    "type": ["VerifiableCredential", "HelloWorldAttestation"],
-    "issuer": "https://issuer.example.org",
-    "issuanceDate": "2025-09-29T12:00:00Z",
-    "expirationDate": "2025-09-29T23:59:59Z",
-    "credentialSubject": {
-      "hwa:message": "Hello World!",
-      "hwa:attestation_legal_category": "non-qualified-EAA"
-    },
-    "proof": {
-      "type": "DataIntegrityProof",
-      "cryptosuite": "ecdsa-rdfc-2019",
-      "created": "2025-09-29T12:00:00Z",
-      "verificationMethod": "did:example:123#key-1",
-      "proofPurpose": "assertionMethod",
-      "proofValue": "zBase58Signature"
-    }
-  }
-  ```
-- Context definition: Available at `docs/qeaa/examples/json-ld/hello-world-v1.context.jsonld` (WEBUILD repo).
 
 ---
 
 ## 4 Attestation usage
-- **Use case:** Demo / onboarding / testing flows.  
+- **Use case:** Testing (pre-production) QEAA issuance, presentation, and verification in production-like EUDI Wallet environments with trusted wallets and relying parties.  
 - **Wallets** SHALL reject attestations with expiry >24h.  
-- **Relying Parties** SHALL validate signature, expiry, and (if present) status.  
+- **Relying Parties** SHALL validate Trusted List-bound signatures, Annex V metadata, and (if present) status.  
 - PID binding not required.  
-- Attestation SHALL NOT be trusted for production.
+- The HWA is intended for testing within the WEBUILD consortium and has limited production trust value.  
 - No transactional data defined as per Topic 20.
 
 ---
 
 ## 5 Trust anchors
-- Any issuer MAY issue HWA.  
-- Issuer keys MAY be discovered via DID or JWKS.  
-- RPs SHALL use the `issuer` metadata to resolve signing keys via DID or JWKS discovery.  
-- No QTSP trusted list binding.  
-- Verifiers SHALL treat all issuers as **non-trustworthy** (demo only).
+- The HWA SHALL be issued by QTSPs with keys registered in a Member State’s Trusted List, per Regulation (EU) 2024/1183 (Annex V) and ARB_20.  
+- Issuer keys SHALL be discoverable via trust anchor URLs provided in the `trustAnchorUrl` metadata.  
+- RPs SHALL resolve signing keys via Trusted List URLs and verify signatures against trust anchors.  
 
 ---
 
 ## 6 Revocation
-- Attestations SHALL be short-lived (≤24h), aligning with Topic 7 which makes revocation OPTIONAL for such profiles.  
-- Revocation is OPTIONAL.  
+- Attestations SHALL be short-lived (≤24h), aligning with Topic 7, which makes revocation OPTIONAL for such profiles.  
+- Revocation SHALL NOT be implemented. Attestations SHALL be valid until expiry. 
 - If implemented, SD-JWT MAY use Status List 2021.  
 - If not, attestation SHALL be valid until expiry.
 
 ---
 
 ## 7 Compliance
-This Rulebook complies with the ARF (Topic 12):  
+This Rulebook complies with Regulation (EU) 2024/1183 (Annex V) and the ARF for QEAAs:  
 - Attributes defined encoding-independent (§2).  
-- Encodings for ISO/IEC 18013-5, SD-JWT VC, and W3C VCDM v2.0 (§3).  
+- Encodings for ISO/IEC 18013-5 and SD-JWT VC (§3), compliant with ARB_01a/ARB_02/ARB_03.  
+- Trusted List-bound issuance (§5) aligned with ARB_20.  
 - Usage guidance (§4) and trust anchors (§5) aligned with ARB_21/ARB_26.  
-- Revocation approach (§6) aligned with Topic 7 for short-lived EAAs.  
+- Short-lived validity (§6) aligned with Topic 7.  
 - No transactional data defined (§4, Topic 20).  
-It follows [RFC 2119], [RFC 8174], ISO/IEC 18013-5, SD-JWT VC, and W3C VCDM v2.0.  
+It follows [RFC 2119], [RFC 8174], ISO/IEC 18013-5, SD-JWT VC, and Regulation (EU) 2024/1183.
 
 ---
 
@@ -218,7 +201,6 @@ It follows [RFC 2119], [RFC 8174], ISO/IEC 18013-5, SD-JWT VC, and W3C VCDM v2.0
 | [ISO/IEC 18013-5] | ISO/IEC 18013-5:2021, mDL |
 | [SD-JWT VC] | IETF draft-ietf-oauth-sd-jwt-vc-11 |
 | [IANA JWT Claims] | IANA JSON Web Token Claims Registry |
-| [W3C VCDM v2.0] | W3C Verifiable Credentials Data Model v2.0 |
 | [RFC 2119] | Key words for use in RFCs |
 | [RFC 8174] | Ambiguity of uppercase key words |
 | [RFC 3339] | Date and Time on the Internet |
