@@ -67,7 +67,7 @@ _None._
 
 | Data Identifier      | Definition                     | Data type | Example value                  |
 |----------------------|-------------------------------|-----------|--------------------------------|
-| issuing_authority    | Issuer ID                     | string    | `did:example:issuer123`        |
+| issuing_authority    | Issuer ID (URI resolvable via Trusted List) | string    | `https://issuer.webuildconsortium.eu` |
 | issuer_legal_id      | Legal person identifier       | string    | `LEI:1234567890`              |
 | trust_anchor_url     | Trusted List URL              | string    | `https://trustedlist.eu/issuer`|
 | attestation_scheme   | Scheme details                | string    | `QEAA:HelloWorld`             |
