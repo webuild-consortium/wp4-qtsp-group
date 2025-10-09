@@ -4,13 +4,28 @@
   "type": "object",
   "properties": {
     "message": { "type": "string", "const": "Hello World!" },
-    "attestation_legal_category": { "type": "string", "const": "non-qualified-EAA" },
-    "issuer": { "type": "string" },
-    "issuedAt": { "type": "string", "format": "date-time" },
-    "expiry": { "type": "string", "format": "date-time" }
+    "attestation_legal_category": { "type": "string", "const": "QEAA" },
+    "issuing_authority": { "type": "string", "format": "uri" },
+    "issuer_legal_id": { "type": "string" },
+    "trust_anchor_url": { "type": "string", "format": "uri" },
+    "attestation_scheme": { "type": "string", "const": "QEAA:HelloWorld" },
+    "issuance_date": { "type": "string", "format": "date-time" },
+    "expiry_date": { "type": "string", "format": "date-time" }
   },
-  "required": ["message", "attestation_legal_category", "issuer", "issuedAt", "expiry"],
+  "required": [
+    "message",
+    "attestation_legal_category",
+    "issuing_authority",
+    "issuer_legal_id",
+    "trust_anchor_url",
+    "attestation_scheme",
+    "issuance_date",
+    "expiry_date"
+  ],
+  "additionalProperties": false,
   "allOf": [
-    { "$comment": "expiry must be ≤24h after issuedAt (enforce in implementation)" }
+    { "$comment": "expiry_date must be ≤24h after issuance_date (enforce in implementation)" },
+    { "$comment": "For SD-JWT VC: issuing_authority maps to iss, issuance_date to iat (epoch seconds), expiry_date to exp (epoch seconds)" },
+    { "$comment": "Disclosable claims (SD-JWT VC): message (MUST), others (MUST NOT)" }
   ]
 }

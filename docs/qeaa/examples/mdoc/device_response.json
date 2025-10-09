@@ -2,12 +2,12 @@
   "version": "1.0",
   "documents": [
     {
-      "docType": "eu.web.hwa.v1",
+      "docType": "eu.webuildconsortium.helloworld.v1",
       "deviceSigned": {
         "nameSpaces": {
-          "eu.web.hwa": [
+          "eu.webuildconsortium.helloworld": [
             { "name": "message", "value": "Hello World!" },
-            { "name": "attestation_legal_category", "value": "non-qualified-EAA" }
+            { "name": "attestation_legal_category", "value": "QEAA" }
           ]
         },
         "deviceAuth": "<COSE_Sign1 placeholder for device signature>"

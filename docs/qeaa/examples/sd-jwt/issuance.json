@@ -1,8 +1,11 @@
 {
-  "vct": "eu.web.hwa.v1",
-  "iss": "https://issuer.example.org",
-  "iat": 1730131200,
-  "exp": 1730217599,
+  "vct": "eu.webuildconsortium.helloworld.v1",
+  "iss": "https://issuer.webuildconsortium.eu",
+  "iat": 1760025600,
+  "exp": 1760111999,
   "message": "Hello World!",
-  "attestation_legal_category": "non-qualified-EAA"
+  "attestation_legal_category": "QEAA",
+  "issuer_legal_id": "LEI:1234567890",
+  "trust_anchor_url": "https://trustedlist.eu/issuer",
+  "attestation_scheme": "QEAA:HelloWorld"
 }

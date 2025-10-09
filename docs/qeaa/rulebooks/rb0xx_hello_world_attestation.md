@@ -86,8 +86,8 @@ _None._
 ## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
-- **docType:** `eu.web.qeaa.hwa.v1`
-- **Namespace:** `eu.web.qeaa.hwa`
+- **docType:** `eu.webuildconsortium.helloworld.v1`
+- **Namespace:** `eu.webuildconsortium.helloworld`
 - Attributes:
   - `message`: `tstr` UTF-8
   - `attestation_legal_category`: `tstr` UTF-8
@@ -101,13 +101,13 @@ _None._
 - Illustrative example:
   ```json
   {
-    "docType": "eu.web.qeaa.hwa.v1",
+    "docType": "eu.webuildconsortium.helloworld.v1",
     "issuerSigned": {
       "nameSpaces": {
-        "eu.web.qeaa.hwa": [
+        "eu.webuildconsortium.helloworld": [
           { "name": "message", "value": "Hello World!" },
           { "name": "attestation_legal_category", "value": "QEAA" },
-          { "name": "issuing_authority", "value": "did:example:issuer123" },
+          { "name": "issuing_authority", "value": "https://issuer.webuildconsortium.eu" },
           { "name": "issuer_legal_id", "value": "LEI:1234567890" },
           { "name": "trust_anchor_url", "value": "https://trustedlist.eu/issuer" },
           { "name": "attestation_scheme", "value": "QEAA:HelloWorld" },
@@ -115,13 +115,13 @@ _None._
           { "name": "expiry_date", "value": "2025-10-07T23:59:59Z" }
         ]
       },
-      "issuerAuth": "<COSE_Sign1 signed by Trusted List-bound QTSP key>"
+      "issuerAuth": "<COSE_Sign1 placeholder for demo>"
     }
   }
   ```
 
 ## 3.2 SD-JWT VC-based encoding
-- **Verifiable Credential Type (vct):** `eu.web.qeaa.hwa.v1`
+- **Verifiable Credential Type (vct):** `eu.webuildconsortium.helloworld.v1`
 - Claims:
 
 | Data Identifier      | Attribute identifier     | Encoding format | Notes | Disclosable |
@@ -139,8 +139,8 @@ _None._
 - Illustrative example:
   ```json
   {
-    "vct": "eu.web.qeaa.hwa.v1",
-    "iss": "did:example:issuer123",
+    "vct": "eu.webuildconsortium.helloworld.v1",
+    "iss": "https://issuer.webuildconsortium.eu",
     "iat": 1760025600,
     "exp": 1760111999,
     "message": "Hello World!",
