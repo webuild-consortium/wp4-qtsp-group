@@ -14,6 +14,8 @@ Jochem Oosterlee, Cleverbase
 |---------|------------|-------------|
 | 0.1     | 2025-09-29 | Initial draft — Hello World Attestation (≤24h), demo/test only |
 | 0.2     | 2025-10-09 | Switched to QEAA profile; updated metadata naming |
+| 0.3     | 2025-10-14 | Updated SD-JWT example in §3.2 to include `_sd` collection and computed digest |
+| 0.4     | 2025-10-14 | Removed `deviceSigned` from §3.1 mdoc issuance example; added mdoc presentation guidance and example in §4 |
 
 **Feedback:**  
 https://github.com/webuild-consortium/wp4-qtsp-group/issues
@@ -100,7 +102,7 @@ _None._
 - Proof: COSE_Sign1 in `issuerAuth`, signed by a QTSP key registered in a Trusted List.
 - Illustrative example:
   ```json
-  {
+    {
     "docType": "eu.webuildconsortium.helloworld.v1",
     "issuerSigned": {
       "nameSpaces": {
@@ -115,7 +117,16 @@ _None._
           { "name": "expiry_date", "value": "2025-10-07T23:59:59Z" }
         ]
       },
-      "issuerAuth": "<COSE_Sign1 placeholder for demo>"
+      "issuerAuth": "<COSE_Sign1 placeholder for issuer signature>"
+    },
+    "deviceSigned": {
+      "nameSpaces": {
+        "eu.webuildconsortium.helloworld": [
+          { "name": "message", "value": "Hello World!" },
+          { "name": "attestation_legal_category", "value": "QEAA" }
+        ]
+      },
+      "deviceAuth": "<COSE_Sign1 placeholder for device signature>"
     }
   }
   ```
@@ -138,30 +149,37 @@ _None._
 - Note (ARB_31/ARB_32): A Type Metadata Document (TMD) and normative JSON Schema for the SD-JWT VC claims structure SHALL be referenced for QEAA compliance. The JSON Schema is available at `docs/qeaa/data-schemas/ds0xx_hello_world.json` (WEBUILD repo, https://github.com/webuild-consortium/wp4-qtsp-group).
 - Illustrative example:
   ```json
-  {
+    {
     "vct": "eu.webuildconsortium.helloworld.v1",
     "iss": "https://issuer.webuildconsortium.eu",
     "iat": 1760025600,
     "exp": 1760111999,
-    "message": "Hello World!",
     "attestation_legal_category": "QEAA",
     "issuer_legal_id": "LEI:1234567890",
     "trust_anchor_url": "https://trustedlist.eu/issuer",
-    "attestation_scheme": "QEAA:HelloWorld"
+    "attestation_scheme": "QEAA:HelloWorld",
+    "_sd": [
+      "4vTz1zc7U+O1yQpltxsQ4xbB07Gefx4fX06PPmtaP4w="
+    ],
+    "_sd_alg": "sha-256"
   }
   ```
-- Issued SD-JWT (base64 placeholder): `eyJ...`
-- Disclosures: `["<base64-encoded disclosure for message: Hello World!>"]`
+- Issued SD-JWT (base64 placeholder): `eyJhbGciOiJFUzI1NiIsInR5cCI6InNkLWp3dCIsImN0eSI6ImV1LndlYnVpbGRjb25zb3J0aXVtLmhlbGxvd29ybGQudjEifQ.eyJ2Y3QiOiJldS53ZWJ1aWxkY29uc29ydGl1bS5oZWxsb3dvcmxkLnYxIiwiaXNzIjoiaHR0cHM6Ly9pc3N1ZXIud2VidWlsZGNvbnNvcnRpdW0uZXUiLCJpYXQiOjE3NjAwMjU2MDAsImV4cCI6MTc2MDExMTk5OSwiYXR0ZXN0YXRpb25fbGVnYWxfY2F0ZWdvcnkiOiJRRUFBIiwiaXNzdWVyX2xlZ2FsX2lkIjoiTEVJOjEyMzQ1Njc4OTAiLCJ0cnVzdF9hbmNob3JfdXJsIjoiaHR0cHM6Ly90cnVzdGVkbGlzdC5ldS9pc3N1ZXIiLCJhdHRlc3RhdGlvbl9zY2hlbWUiOiJRRUFBOkhlbGxvd29ybGQiLCJfc2QiOlsiNHZUWjF6YzdaVytPMXlRcGx0eHNRNHhiQjA3R2VmNHhmWFg2UFBwbXRhUDR3PSJdLCJfc2RfYWxnIjoic2hhLTI1NiJ9.signature-placeholder`
+- Disclosures: `["WyJmaXhlZC1zYWx0LWZvci1kZW1vIiwibWVzc2FnZSIsIkhlbGxvIFdvcmxkISJd"]`
 
 ---
 
 ## 4 Attestation usage
-- **Use case:** Testing (pre-production) QEAA issuance, presentation, and verification in production-like EUDI Wallet environments with trusted wallets and relying parties.  
-- **Wallets** SHALL reject attestations with expiry >24h.  
-- **Relying Parties** SHALL validate Trusted List-bound signatures, Annex V metadata, and (if present) status.  
-- PID binding not required.  
-- The HWA is intended for testing within the WEBUILD consortium and has limited production trust value.  
+- **Use case:** Testing (pre-production) QEAA issuance, presentation, and verification in production-like EUDI Wallet environments with trusted wallets and relying parties.
+- **Wallets** SHALL reject attestations with expiry >24h.
+- **Relying Parties** SHALL validate Trusted List-bound signatures, Annex V metadata, and (if present) status.
+- PID binding not required.
+- The HWA is intended for testing within the WEBUILD consortium and has limited production trust value.
 - No transactional data defined as per Topic 20.
+- **mdoc Issuance**: The full attestation SHALL be provided in the `issuerSigned` structure, containing all attributes (`message`, `attestation_legal_category`) and metadata (`issuing_authority`, `issuer_legal_id`, `trust_anchor_url`, `attestation_scheme`, `issuance_date`, `expiry_date`), signed with `issuerAuth` (COSE_Sign1) by a QTSP key (§3.1). See illustrative example in `docs/qeaa/examples/mdoc/issuance.json`.
+- **mdoc Presentation**: Holders MAY selectively disclose the `message` attribute in the `deviceSigned` structure, signed with `deviceAuth` (COSE_Sign1) to prove possession. The full `issuerSigned` structure from issuance SHALL be included to allow verification of all attributes and metadata against the Trusted List. See illustrative example in `docs/qeaa/examples/mdoc/device_response.json`.
+- **SD-JWT Issuance**: The attestation SHALL include the `message` attribute as a selectively disclosable claim via the `_sd` collection, with non-disclosable metadata (`attestation_legal_category`, `iss`, `issuer_legal_id`, `trust_anchor_url`, `attestation_scheme`, `iat`, `exp`) in the main payload, signed by a QTSP key (§3.2). See illustrative example in `docs/qeaa/examples/sd-jwt/issuance.json`.
+- **SD-JWT Presentation**: Holders MAY selectively disclose the `message` attribute via disclosures, with non-disclosable metadata included in the main payload. See illustrative example in `docs/qeaa/examples/sd-jwt/presentation.json`.
 
 ---
 

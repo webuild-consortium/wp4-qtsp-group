@@ -13,6 +13,6 @@
         { "name": "expiry_date", "value": "2025-10-07T23:59:59Z" }
       ]
     },
-    "issuerAuth": "<COSE_Sign1 placeholder for demo>"
+    "issuerAuth": "<COSE_Sign1 placeholder for QTSP issuer signature>"
   }
 }
