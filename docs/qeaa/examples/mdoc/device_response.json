@@ -1,26 +1,35 @@
 {
-  "docType": "eu.webuildconsortium.helloworld.v1",
-  "issuerSigned": {
-    "nameSpaces": {
-      "eu.webuildconsortium.helloworld": [
-        { "name": "message", "value": "Hello World!" },
-        { "name": "attestation_legal_category", "value": "QEAA" },
-        { "name": "issuing_authority", "value": "https://issuer.webuildconsortium.eu" },
-        { "name": "issuer_legal_id", "value": "LEI:1234567890" },
-        { "name": "trust_anchor_url", "value": "https://trustedlist.eu/issuer" },
-        { "name": "attestation_scheme", "value": "QEAA:HelloWorld" },
-        { "name": "issuance_date", "value": "2025-10-07T12:00:00Z" },
-        { "name": "expiry_date", "value": "2025-10-07T23:59:59Z" }
-      ]
-    },
-    "issuerAuth": "<COSE_Sign1 placeholder for QTSP issuer signature>"
-  },
-  "deviceSigned": {
-    "nameSpaces": {
-      "eu.webuildconsortium.helloworld": [
-        { "name": "message", "value": "Hello World!" }
-      ]
-    },
-    "deviceAuth": "<COSE_Sign1 placeholder for wallet device signature>"
-  }
+  "version": "1.0",
+  "documents": [
+    {
+      "docType": "eu.webuildconsortium.helloworld.v1",
+      "issuerSigned": {
+        "nameSpaces": {
+          "eu.webuildconsortium.helloworld": [
+            { "elementIdentifier": "message", "elementValue": "Hello World!" },
+            { "elementIdentifier": "attestation_legal_category", "elementValue": "QEAA" },
+            { "elementIdentifier": "issuing_authority", "elementValue": "https://issuer.webuildconsortium.eu" },
+            { "elementIdentifier": "issuer_legal_id", "elementValue": "LEI:1234567890" },
+            { "elementIdentifier": "trust_anchor_url", "elementValue": "https://trustedlist.eu/issuer" },
+            { "elementIdentifier": "attestation_scheme", "elementValue": "QEAA:HelloWorld" }
+          ]
+        },
+        "validityInfo": {
+          "signed": 1759838400,
+          "validFrom": 1759838400,
+          "validUntil": 1759881599
+        },
+        "issuerAuth": "<COSE_Sign1 placeholder for QTSP issuer signature>"
+      },
+      "deviceSigned": {
+        "nameSpaces": {
+          "eu.webuildconsortium.helloworld": [
+            { "elementIdentifier": "message", "elementValue": "Hello World!" }
+          ]
+        },
+        "deviceAuth": "<COSE_Sign1 placeholder for wallet device signature>"
+      }
+    }
+  ],
+  "status": "ok"
 }

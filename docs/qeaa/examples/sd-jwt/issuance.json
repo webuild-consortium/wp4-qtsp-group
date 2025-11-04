@@ -8,7 +8,7 @@
   "trust_anchor_url": "https://trustedlist.eu/issuer",
   "attestation_scheme": "QEAA:HelloWorld",
   "_sd": [
-    "4vTz1zc7U+O1yQpltxsQ4xbB07Gefx4fX06PPmtaP4w="
+    "4vTz1zc7U-O1yQpltxsQ4xbB07Gefx4fX06PPmtaP4w"
   ],
   "_sd_alg": "sha-256"
 }
