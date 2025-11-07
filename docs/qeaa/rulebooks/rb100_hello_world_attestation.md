@@ -17,6 +17,7 @@ Jochem Oosterlee, Cleverbase
 | 0.3     | 2025-10-14 | Updated SD-JWT example in §3.2 to include `_sd` collection and computed digest |
 | 0.4     | 2025-10-14 | Removed `deviceSigned` from §3.1 mdoc issuance example; added mdoc presentation guidance and example in §4 |
 | 0.5     | 2025-11-04 | aligned `docType`/`namespace`, corrected `elementIdentifier`/`elementValue`, clarified `validityInfo` vs `iat`/`exp`, added full `DeviceResponse`, fixed `_sd` encoding, added salt warning, removed `cty`, and finalized all examples (`issuance.json`, `device_response.json`, `presentation.json`) |
+| **1.0** | **2025-11-07** | **First stable release — publication of finalized Hello World Attestation Rulebook and data schema (QEAA profile v1.0).** |
 
 **Feedback:**  
 https://github.com/webuild-consortium/wp4-qtsp-group/issues
