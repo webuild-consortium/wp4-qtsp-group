@@ -83,7 +83,10 @@ Rev    -->|10\. QeAA revocation      | EAAS
 
 #### Protocol profiles
 
-The interfaces listed below are those from the [Deployment model and interfaces](#deployment-model-and-interfaces). Each protocol ideally is specified in a [WE BUILD Conformance Specification](https://github.com/webuild-consortium/wp4-architecture) (WBCS), so that interoperability can be tested on the [Interoperability Test Bed](https://github.com/webuild-consortium/wp4-interop-test-bed).
+The interfaces listed below are those from the [Deployment model and interfaces](#deployment-model-and-interfaces).
+Each protocol ideally is specified in a [WE BUILD Conformance Specification](https://github.com/webuild-consortium/wp4-architecture) (WBCS).
+This way, interoperability can be tested on the [Interoperability Test Bed](https://github.com/webuild-consortium/wp4-interop-test-bed).
+Some interfaces do not have common protocols since these are considered to be internal implementation details where WE BUILD does not require interoperability.
 
 |Interface|Protocol|QTSP role|
 |--|--|--|
@@ -93,10 +96,68 @@ The interfaces listed below are those from the [Deployment model and interfaces]
 |4\. Source discovery      |||
 |5\. Attribute retrieval   |||
 |6\. Attribute verification|||
-|7\. Identity proofing     |||
+|7\. Identity proofing     |N/A|N/A|
 |8\. QeAA issuance         |[WBCS 1: Credential Issuance](https://github.com/webuild-consortium/architecture/blob/main/conformance-specs/cs-01-credential-issuance.md)|Attestation Provider (Issuer)|
 |9\. QeAA validation       |||
-|10\. QeAA revocation      |||
+|10\. QeAA revocation      |N/A|N/A|
+
+### Example use case scenarios
+
+#### [QEAA issuance to EUDIW, Wallet-initiated](./issuance-to-eudiw.feature.md#scenario-wallet-initiated)
+
+```mermaid
+sequenceDiagram
+participant AS as Authentic<br>source
+participant CatAtt as Catalogue of<br>attributes
+box Qualified trust service provider
+    participant EAAS as QeAA service
+    participant IPS as Identity<br>proofing<br>service
+end
+participant Wallet
+Wallet ->>+ EAAS : 8. QeAA issuance (authorization request)
+EAAS ->>+ IPS : 7. Identity proofing (request)
+loop For each eID/eAA
+    IPS <<->> Wallet : eID/eAA presentation
+end
+IPS -->>- EAAS : 7. Identity proofing (response)
+loop For each attribute
+    EAAS <<->> CatAtt : 4. Source discovery
+    EAAS <<->> AS : 6. Attribute verification
+end
+EAAS -->>- Wallet : 8. QeAA issuance (authorization grant)
+activate Wallet
+Wallet <<->> EAAS : 8. QeAA issuance (access)
+Wallet <<->>- EAAS : 8. QeAA issuance (credential)
+```
+
+#### [QEAA issuance to EUDIW, Issuer-initiated](./issuance-to-eudiw.feature.md#scenario-issuer-initiated) with a pre-authorised code
+
+```mermaid
+sequenceDiagram
+participant AS as Authentic<br>source
+participant CatAtt as Catalogue of<br>attributes
+box Qualified trust service provider
+    participant EAAS as QeAA service
+    participant IPS as Identity<br>proofing<br>service
+end
+participant Wallet
+actor User
+User ->>+ EAAS : 8. QeAA issuance (request)
+EAAS ->>+ IPS : 7. Identity proofing (request)
+loop For each eID/eAA
+    IPS <<->> Wallet : eID/eAA presentation
+end
+IPS -->>- EAAS : 7. Identity proofing (response)
+loop For each attribute
+    EAAS <<->> CatAtt : 4. Source discovery
+    EAAS <<->> AS : 6. Attribute verification
+end
+EAAS -->>- User : 8. QeAA issuance (transaction code)
+EAAS -)+ Wallet : 8. QeAA issuance (credential offer)
+User -) Wallet : Transaction code
+Wallet <<->> EAAS : 8. QeAA issuance (access)
+Wallet <<->>- EAAS : 8. QeAA issuance (credential)
+```
 
 ## Deviations from European Digital Identity
 
