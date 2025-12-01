@@ -14,7 +14,7 @@ In WE BUILD, QTSPs as defined under [eIDAS](https://eur-lex.europa.eu/legal-cont
 
 ## Technical specifications for QeAA
 
-### QeAA functional decomposition
+### Functional decomposition
 
 The following decomposition is inspired by [ETSI TS 119 471 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119471/01.01.01_60/ts_119471v010101p.pdf).
 
@@ -25,6 +25,16 @@ The following decomposition is inspired by [ETSI TS 119 471 v1.1.1](https://www.
     - **QeAA revocation:** The *QTSP* revokes a QeAA upon a trigger *revocation event*, such as an authorised request by a subject or subscriber.
     - **QeAA validation:** The *relying party* uses a *relying party instance* to verify and confirm that a QeAA is valid, typically under mutual authentication with its containing *wallet*.
 - **Identity proofing service:** An electronic service by which the identity and additional attributes of an applying *subscriber* are verified. The verification process uses evidence attesting to the required identity attributes, including evidence from *PID/eAA presentation*, *attribute retrieval*, and *attribute verification*. To discover authentic sources, the QTSP may consult the *catalogue of attributes*.
+
+### Policy and security requirements
+
+#### QeAA service
+
+The requirements from [ETSI TS 119 471 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119471/01.01.01_60/ts_119471v010101p.pdf) apply.
+
+#### Identity proofing service
+
+The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
 
 ### Deployment model and interfaces
 
