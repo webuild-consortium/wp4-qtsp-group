@@ -37,6 +37,10 @@ The requirements from [ETSI TS 119 471 v1.1.1](https://www.etsi.org/deliver/etsi
 
 The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
 
+#### Attribute proofing service
+
+The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
+
 ### Deployment model and interfaces
 
 The visualisation below represents a value chain, in which the primary data flows from left to right. The technical control flow may be reverse, for example using service request-response patterns.
