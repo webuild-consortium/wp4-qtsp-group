@@ -4,7 +4,7 @@
 
 ### Purpose of this document
 
-This document specifies the high-level architecture for the issuance and validation of qualified electronic attestations of attributes (QeAA) within WE BUILD.
+This document specifies the high-level architecture for the [issuance and validation of qualified electronic attestations of attributes (QeAA)](README.md) within WE BUILD.
 It aims to guide the specification, development, testing and implementation of QeAA.
 It complements the [WE BUILD architecture documentation](https://github.com/webuild-consortium/architecture) which specifies, among other topics, the issuance and validation of attestations within WE BUILD in general.
 
