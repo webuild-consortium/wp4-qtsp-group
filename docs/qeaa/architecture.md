@@ -38,6 +38,8 @@ The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi
 
 ### Deployment model and interfaces
 
+The visualisation below represents a value chain, in which the primary data flows from left to right. The technical control flow may be reverse, for example using service request-response patterns.
+
 ```mermaid
 ---
 config:
@@ -46,7 +48,7 @@ config:
   flowchart:
     #defaultRenderer: "elk"
 ---
-flowchart BT
+flowchart LR
 subgraph Responsible body
     AS[Authentic
     source]@{shape: cyl}
@@ -77,16 +79,16 @@ subgraph "TL scheme operator"
     TL["Trusted
     list (TL)"]@{shape: doc}
 end
-CatSch -->|1\. eAA scheme publication| EAAS
-EAAS   -->|2\. QTSP registration     | TL
-Wallet -->|3\. eID/eAA presentation  | IPS
-CatAtt -->|4\. Source discovery      | IPS
-AS     -->|5\. Attribute retrieval   | IPS
-AS     -->|6\. Attribute verification| IPS
-IPS    -->|7\. Identity proofing     | EAAS
-EAAS   -->|8\. QeAA issuance         | Wallet
-EAAS   -->|9\. QeAA validation       | RP
-Rev    -->|10\. QeAA revocation      | EAAS
+CatSch ---|1\. eAA scheme publication| EAAS
+EAAS   ---|2\. QTSP registration     | TL
+Wallet ---|3\. eID/eAA presentation  | IPS
+CatAtt ---|4\. Source discovery      | IPS
+AS     ---|5\. Attribute retrieval   | IPS
+AS     ---|6\. Attribute verification| IPS
+IPS   ----|7\. Identity proofing     | EAAS
+EAAS   ---|8\. QeAA issuance         | Wallet
+EAAS   ---|9\. QeAA validation       | RP
+Rev    ---|10\. QeAA revocation      | EAAS
 ```
 
 ### Data flows and interactions
