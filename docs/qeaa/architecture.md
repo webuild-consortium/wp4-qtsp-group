@@ -24,7 +24,7 @@ The following decomposition is inspired by [ETSI TS 119 471 v1.1.1](https://www.
     - **QeAA renewal:** The *QTSP* issues a new QeAA with the same attribute values as the previous QeAA.
     - **QeAA revocation:** The *QTSP* revokes a QeAA upon a trigger *revocation event*, such as an authorised request by a subject or subscriber.
     - **QeAA validation:** The *relying party* uses a *relying party instance* to verify and confirm that a QeAA is valid, typically under mutual authentication with its containing *wallet*.
-- **Identity proofing service:** An electronic service by which the identity and additional attributes of an applying *subscriber* are verified. The verification process uses evidence attesting to the required identity attributes, including evidence from *PID/eAA presentation*, *attribute retrieval*, and *attribute verification*. To discover authentic sources, the QTSP may consult the *catalogue of attributes*.
+- **Identity and attribute proofing service:** An electronic service by which the identity and additional attributes of an applying *subscriber* are verified. The verification process uses evidence attesting to the required identity attributes, including evidence from *PID/eAA presentation*, *attribute retrieval*, and *attribute verification*. To discover authentic sources, the QTSP may consult the *catalogue of attributes*.
 
 ### Policy and security requirements
 
@@ -60,7 +60,8 @@ subgraph EC[Commission]
     eAA schemes]@{shape: docs}
 end
 subgraph QTSP[Qualified trust service provider]
-    IPS[Identity
+    IPS[Identity and
+    attribute
     proofing
     service]@{shape: rounded}
     EAAS["QeAA service"]@{shape: rounded}
@@ -85,10 +86,10 @@ Wallet ---|3\. eID/eAA presentation  | IPS
 CatAtt ---|4\. Source discovery      | IPS
 AS     ---|5\. Attribute retrieval   | IPS
 AS     ---|6\. Attribute verification| IPS
-IPS   ----|7\. Identity proofing     | EAAS
+Rev    ---|10\. QeAA revocation      | EAAS
+IPS    ---|7\. Identity and<br>attribute proofing | EAAS
 EAAS   ---|8\. QeAA issuance         | Wallet
 EAAS   ---|9\. QeAA validation       | RP
-Rev    ---|10\. QeAA revocation      | EAAS
 ```
 
 ### Data flows and interactions
@@ -108,7 +109,7 @@ Some interfaces do not have common protocols since these are considered to be in
 |4\. Source discovery      |||
 |5\. Attribute retrieval   |||
 |6\. Attribute verification|||
-|7\. Identity proofing     |N/A|N/A|
+|7\. Identity and attribute proofing|N/A|N/A|
 |8\. QeAA issuance         |[WBCS 1: Credential Issuance](https://github.com/webuild-consortium/architecture/blob/main/conformance-specs/cs-01-credential-issuance.md)|Attestation Provider (Issuer)|
 |9\. QeAA validation       |||
 |10\. QeAA revocation      |N/A|N/A|
@@ -123,19 +124,19 @@ participant AS as Authentic<br>source
 participant CatAtt as Catalogue of<br>attributes
 box Qualified trust service provider
     participant EAAS as QeAA service
-    participant IPS as Identity<br>proofing<br>service
+    participant IPS as Identity and<br>attribute<br>proofing<br>service
 end
 participant Wallet
 Wallet ->>+ EAAS : 8. QeAA issuance (authorization request)
-EAAS ->>+ IPS : 7. Identity proofing (request)
+EAAS ->>+ IPS : 7. Identity and attribute<br>proofing (request)
 loop For each eID/eAA
     IPS <<->> Wallet : eID/eAA presentation
 end
-IPS -->>- EAAS : 7. Identity proofing (response)
-loop For each attribute
-    EAAS <<->> CatAtt : 4. Source discovery
-    EAAS <<->> AS : 6. Attribute verification
+loop For each additional attribute
+    IPS <<->> CatAtt : 4. Source discovery
+    IPS <<->> AS : 6. Attribute verification
 end
+IPS -->>- EAAS : 7. Identity and attribute<br>proofing (response)
 EAAS -->>- Wallet : 8. QeAA issuance (authorization grant)
 activate Wallet
 Wallet <<->> EAAS : 8. QeAA issuance (access)
@@ -150,20 +151,20 @@ participant AS as Authentic<br>source
 participant CatAtt as Catalogue of<br>attributes
 box Qualified trust service provider
     participant EAAS as QeAA service
-    participant IPS as Identity<br>proofing<br>service
+    participant IPS as Identity and<br>attribute<br>proofing<br>service
 end
 participant Wallet
 actor User
 User ->>+ EAAS : 8. QeAA issuance (request)
-EAAS ->>+ IPS : 7. Identity proofing (request)
+EAAS ->>+ IPS : 7. Identity and attribute<br>proofing (request)
 loop For each eID/eAA
     IPS <<->> Wallet : eID/eAA presentation
 end
-IPS -->>- EAAS : 7. Identity proofing (response)
-loop For each attribute
-    EAAS <<->> CatAtt : 4. Source discovery
-    EAAS <<->> AS : 6. Attribute verification
+loop For each additional attribute
+    IPS <<->> CatAtt : 4. Source discovery
+    IPS <<->> AS : 6. Attribute verification
 end
+IPS -->>- EAAS : 7. Identity and attribute<br>proofing (response)
 EAAS -->>- User : 8. QeAA issuance (transaction code)
 EAAS -)+ Wallet : 8. QeAA issuance (credential offer)
 User -) Wallet : Transaction code
