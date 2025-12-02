@@ -170,8 +170,8 @@ IPS -->>- EAAS : 7. Identity proofing (response)
 EAAS ->>+ APS : 8. Attribute proofing (request)
 note over APS : [ref] Source discovery and<br>attribute verification
 APS -->>- EAAS : 8. Attribute proofing (response)
-EAAS -->>- User : 9. QeAA issuance (transaction code)
 EAAS -)+ Wallet : 9. QeAA issuance (credential offer)
+EAAS -->>- User : 9. QeAA issuance (transaction code)
 User -) Wallet : Transaction code
 Wallet <<->> EAAS : 9. QeAA issuance (access)
 Wallet <<->>- EAAS : 9. QeAA issuance (credential)
