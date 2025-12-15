@@ -91,7 +91,7 @@ end
 CatSch ---|1\. eAA scheme publication| EAAS
 EAAS   ---|2\. QTSP registration     | TL
 EAAS   ---|9\. QeAA issuance         | Wallet
-IPS    ---|3\. eID/eAA presentation  | Wallet
+IPS    ---|3\. Identity verification | Wallet
 CatAtt ---|4\. Source discovery      | APS
 AS     ---|5\. Attribute retrieval   | APS
 AS     ---|6\. Attribute verification| APS
@@ -100,6 +100,9 @@ APS    ---|8\. Attribute proofing   | EAAS
 IPS    ---|7\. Identity proofing     | EAAS
 EAAS   ---|10\. QeAA validation       | RP
 ```
+
+> [!NOTE]
+> Since WE BUILD focuses on wallets, in this model interface 9 for identity verification is visualised with the subscriber’s wallet in this model. Outside of WE BUILD, under TS 119 461 it can be performed by various means.
 
 ### Data flows and interactions
 
@@ -116,7 +119,7 @@ Some interfaces do not have common protocols since these are considered to be in
 |--|--|--|
 |1\. eAA scheme publication|||
 |2\. QTSP registration     |||
-|3\. eID/eAA presentation  |[WBCS 2: Credential Presentation](https://github.com/webuild-consortium/wp4-architecture/blob/main/conformance-specs/cs-02-credential-presentation.md)|Verifier|
+|3\. Identity verification  |[WBCS 2: Credential Presentation](https://github.com/webuild-consortium/wp4-architecture/blob/main/conformance-specs/cs-02-credential-presentation.md)|Verifier|
 |4\. Source discovery      |||
 |5\. Attribute retrieval   |||
 |6\. Attribute verification|||
@@ -125,6 +128,9 @@ Some interfaces do not have common protocols since these are considered to be in
 |9\. QeAA issuance         |[WBCS 1: Credential Issuance](https://github.com/webuild-consortium/architecture/blob/main/conformance-specs/cs-01-credential-issuance.md)|Attestation Provider (Issuer)|
 |10\. QeAA validation       |||
 |11\. QeAA revocation      |N/A|N/A|
+
+> [!NOTE]
+> While the WE BUILD conformance specifications deliberately limit the degrees of freedom, outside of WE BUILD more options are possible under the applicable standards.
 
 ### Example use case scenarios
 
@@ -143,8 +149,8 @@ end
 participant Wallet
 Wallet ->>+ EAAS : 9. QeAA issuance (authorization request)
 EAAS ->>+ IPS : 7. Identity proofing (request)
-loop For each eID/eAA
-    IPS <<->> Wallet : 3. eID/eAA presentation
+loop For each required evidence
+    IPS <<->> Wallet : 3. Identity verification
 end
 IPS -->>- EAAS : 7. Identity proofing (response)
 EAAS ->>+ APS : 8. Attribute proofing (request)
@@ -172,8 +178,8 @@ participant Wallet
 actor User
 User ->>+ EAAS : 9. QeAA issuance (request)
 EAAS ->>+ IPS : 7. Identity proofing (request)
-loop For each eID/eAA
-    IPS <<->> Wallet : 3. eID/eAA presentation
+loop For each required evidence
+    IPS <<->> Wallet : 3. Identity verification
 end
 IPS -->>- EAAS : 7. Identity proofing (response)
 EAAS ->>+ APS : 8. Attribute proofing (request)
