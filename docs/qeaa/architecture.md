@@ -144,7 +144,7 @@ participant Wallet
 Wallet ->>+ EAAS : 9. QeAA issuance (authorization request)
 EAAS ->>+ IPS : 7. Identity proofing (request)
 loop For each eID/eAA
-    IPS <<->> Wallet : eID/eAA presentation
+    IPS <<->> Wallet : 3. eID/eAA presentation
 end
 IPS -->>- EAAS : 7. Identity proofing (response)
 EAAS ->>+ APS : 8. Attribute proofing (request)
@@ -173,7 +173,7 @@ actor User
 User ->>+ EAAS : 9. QeAA issuance (request)
 EAAS ->>+ IPS : 7. Identity proofing (request)
 loop For each eID/eAA
-    IPS <<->> Wallet : eID/eAA presentation
+    IPS <<->> Wallet : 3. eID/eAA presentation
 end
 IPS -->>- EAAS : 7. Identity proofing (response)
 EAAS ->>+ APS : 8. Attribute proofing (request)
