@@ -47,6 +47,7 @@ The visualisation below represents a value chain, in which the primary data flow
 
 ```mermaid
 ---
+title: Figure 1. Deployment model and interfaces
 config:
   htmlLabels: false
   markdownAutoWrap: true
@@ -109,6 +110,8 @@ Each protocol ideally is specified in a [WE BUILD Conformance Specification](htt
 This way, interoperability can be tested on the [Interoperability Test Bed](https://github.com/webuild-consortium/wp4-interop-test-bed).
 Some interfaces do not have common protocols since these are considered to be internal implementation details where WE BUILD does not require interoperability.
 
+*Table 1. Protocol profiles and QTSP roles*
+
 |Interface|Protocol|QTSP role|
 |--|--|--|
 |1\. eAA scheme publication|||
@@ -125,9 +128,12 @@ Some interfaces do not have common protocols since these are considered to be in
 
 ### Example use case scenarios
 
-#### [QEAA issuance to EUDIW, Wallet-initiated](./issuance-to-eudiw.feature.md#scenario-wallet-initiated)
+#### [QeAA issuance to EUDIW, Wallet-initiated](./issuance-to-eudiw.feature.md#scenario-wallet-initiated)
 
 ```mermaid
+---
+title: Figure 2. QeAA issuance to EUDIW, Wallet-initiated, main success scenario
+---
 sequenceDiagram
 box Qualified trust service provider
     participant APS as Attribute<br>proofing<br>service
@@ -150,9 +156,12 @@ Wallet <<->> EAAS : 9. QeAA issuance (access)
 Wallet <<->>- EAAS : 9. QeAA issuance (credential)
 ```
 
-#### [QEAA issuance to EUDIW, Issuer-initiated](./issuance-to-eudiw.feature.md#scenario-issuer-initiated) with a pre-authorised code
+#### [QeAA issuance to EUDIW, Issuer-initiated](./issuance-to-eudiw.feature.md#scenario-issuer-initiated) with a pre-authorised code
 
 ```mermaid
+---
+title: Figure 3. QeAA issuance to EUDIW, Issuer-initiated, main success scenario
+---
 sequenceDiagram
 box Qualified trust service provider
     participant APS as Attribute<br>proofing<br>service
@@ -180,6 +189,9 @@ Wallet <<->>- EAAS : 9. QeAA issuance (credential)
 #### Source discovery and attribute verification
 
 ```mermaid
+---
+title: Figure 4. Source discovery and attribute verification
+---
 sequenceDiagram
 participant AS as Authentic<br>source
 participant CatAtt as Catalogue of<br>attributes
@@ -195,6 +207,8 @@ end
 ## Deviations from European Digital Identity
 
 In the WE BUILD pre-production environment, some European Digital Identity framework roles are simulated:
+
+*Table 2. Role deviations within WE BUILD*
 
 |Role|WE BUILD group|
 |--|--|
