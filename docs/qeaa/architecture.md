@@ -10,9 +10,9 @@ It complements the [WE BUILD architecture documentation](https://github.com/webu
 
 ### Definitions
 
-In WE BUILD, QTSPs as defined under [eIDAS](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02014R0910-20241018) Art. 3(20) provide pre-production eAA issuance and validation services as defined under Art. 3(16)(g) and (h), technically ready to be audited for qualification as defined under Art. 3(17), for QeAA as defined under Art. 3(45).
+In WE BUILD, QTSPs as defined under [eIDAS] Art. 3(20) provide pre-production eAA issuance and validation services as defined under Art. 3(16)(g) and (h), technically ready to be audited for qualification as defined under Art. 3(17), for QeAA as defined under Art. 3(45).
 
-Adapting from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf), a *trusted register* is a public register, a database, or another (authentic or non-authentic) source that is an authoritative source for the conveyance of attributes in the identity proofing or attribute proofing context. This generalises the concept of *authentic source*.
+[eIDAS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02014R0910-20241018
 
 ## Technical specifications for QeAA
 
@@ -27,7 +27,7 @@ The following decomposition is inspired by [ETSI TS 119 471 v1.1.1](https://www.
     - **QeAA revocation:** The *QTSP* revokes a QeAA upon a trigger *revocation event*, such as an authorised request by a subject or subscriber.
     - **QeAA validation:** The *relying party* uses a *relying party instance* to verify and confirm that a QeAA is valid, typically under mutual authentication with its containing *wallet*.
 - **Identity proofing service:** An electronic service by which the identity and additional attributes of an applying *subscriber* are verified. The verification process uses evidence attesting to the required identity attributes, including evidence from *PID/eAA presentation*, *attribute retrieval*, and *attribute verification*.
-- **Attribute proofing service:** An electronic service by which the attributes of an *eAA subject* are verified. The verification process uses evidence attesting to the required attributes, including evidence from *attribute retrieval* and *attribute verification*. To discover trusted registers, the QTSP may consult the *catalogue of attributes*.
+- **Attribute proofing service:** An electronic service by which the attributes of an *eAA subject* are verified. The verification process uses evidence attesting to the required attributes, including evidence from *attribute retrieval* and *attribute verification*. To discover authentic sources, the QTSP may consult the *catalogue of attributes*.
 
 ### Policy and security requirements
 
@@ -37,11 +37,11 @@ The requirements from [ETSI TS 119 471 v1.1.1](https://www.etsi.org/deliver/etsi
 
 #### Identity proofing service
 
-The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
+The requirements from [eIDAS] Art. 24(1a) and [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
 
 #### Attribute proofing service
 
-The requirements from [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
+The requirements from [eIDAS] Art. 24(1b) and [ETSI TS 119 461 v2.1.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/02.01.01_60/ts_119461v020101p.pdf) apply.
 
 ### Deployment model and interfaces
 
@@ -58,8 +58,8 @@ config:
 ---
 flowchart LR
 subgraph Responsible body
-    AS[Trusted
-    register]@{shape: cyl}
+    AS[Authentic
+    source]@{shape: cyl}
 end
 subgraph EC[Commission]
     CatAtt[Catalogue of
@@ -107,7 +107,7 @@ EAAS   ---|10\. QeAA validation       | RP
 > Since WE BUILD focuses on wallets, in this model interface 9 for identity verification is visualised with the subscriber’s wallet in this model. Outside of WE BUILD, under TS 119 461 it can be performed by various means.
 
 > [!NOTE]
-> This WE BUILD deployment model omits two other means from TS 119 461 by which the attribute proofing service could perform attribute verification: proof-of-access mechanisms (Clauses 8.2.7 and 8.3.7) and accepted documents and attestations (Clauses 8.2.8 and 8.3.8). For proof-of-access mechanisms, the attribute proofing service is assumed to interact with the eAA subject. For attribute verification using electronic attestations of attributes, interface 3 for identity verification can be applied.
+> This WE BUILD deployment model omits three other means from TS 119 461 by which the attribute proofing service could perform attribute verification: trusted registers other than authentic sources (Clauses 8.2.6 & 8.3.6), proof-of-access mechanisms (Clauses 8.2.7 and 8.3.7), and accepted documents and attestations (Clauses 8.2.8 and 8.3.8). The model assumes that each trusted register in WE BUILD is an authentic source. For proof-of-access mechanisms, the attribute proofing service is assumed to interact with the eAA subject. For attribute verification using electronic attestations of attributes, interface 3 for identity verification can be applied.
 
 ### Data flows and interactions
 
@@ -199,7 +199,7 @@ Wallet <<->>- EAAS : 9. QeAA issuance (credential)
 
 #### Source discovery and attribute verification
 
-In this example use case scenario, the trusted register is an authentic source.
+In this example use case scenario, the attributes are verified at an authentic source. Other means for attribute proofing exist.
 
 ```mermaid
 ---
