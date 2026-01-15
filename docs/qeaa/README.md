@@ -6,6 +6,10 @@ This is part of the [QTSP documentation](../README.md).
 
 ![QEAA value chain](qeaa-value-chain.svg)
 
+## Architecture overview
+
+- [Architecture overview for QEAA in WE BUILD](architecture.md)
+
 ## Feature definitions
 
 Below is a non-exhaustive overview of QEAA features that use cases may choose to pilot.
