@@ -8,7 +8,7 @@ This is part of the [QTSP documentation](../README.md).
 
 ## Architecture overview
 
-- [Architecture overview for QeAA in WE BUILD](architecture.md)
+- [Architecture overview for QEAA in WE BUILD](architecture.md)
 
 ## Feature definitions
 
