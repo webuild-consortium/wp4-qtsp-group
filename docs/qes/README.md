@@ -6,9 +6,9 @@ This is documentation of the [WE BUILD: WP4 QTSP group](../README.md).
 
 - Standards
   - Stable
-    - [CSC API v2.1.0.1](https://cloudsignatureconsortium.org/wp-content/uploads/2025/01/csc-api-2.1.0.1.pdf)
-  - Drafts
-    - [CSC DM v0.5.0](https://cloudsignatureconsortium.org/resources/data-model-v-0-5-0-pre-release/)
+    - [CSC API v2.2.0.0](https://cloudsignatureconsortium.org/wp-content/uploads/2025/11/csc-api.pdf)
+    - [CSC DM v1.0.0](https://cloudsignatureconsortium.org/wp-content/uploads/2025/10/csc-dm.pdf)
+    - [CSC_data-model-bindings v1.0.0](https://cloudsignatureconsortium.org/wp-content/uploads/2025/10/data-model-bindings.pdf)
   - Work items
     - [eudi-doc-standards-and-technical-specifications#29](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/issues/29): CSC standards updates
     - [eudi-doc-standards-and-technical-specifications#68](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/issues/68): TS 119 432 update
