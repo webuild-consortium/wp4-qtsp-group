@@ -44,11 +44,11 @@ The requirements from [eIDAS] Art. 24(1a) and [ETSI TS 119 461 v2.1.1](https://w
 
 #### Qualified electronic sealing service
 
-TBD
+The requirements from [eIDAS] Art. 35, Art. 38, Annex III, [ETSI EN 319 411-2 V2.6.1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.06.01_60/en_31941102v020601p.pdf), [ETSI EN 319 401 V3.1.1](https://www.etsi.org/deliver/etsi_en/319400_319499/319401/03.01.01_60/en_319401v030101p.pdf) and [ETSI TS 119 431-1 V1.3.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/11943101/01.03.01_60/ts_11943101v010301p.pdf) apply.
 
 #### Qualified time stamping service
 
-TBD
+The requirements from [eIDAS] Art. 42 apply.
 
 ### Deployment model and interfaces
 
@@ -70,4 +70,9 @@ TBD
 
 In the WE BUILD pre-production environment, some European Business Wallet roles are simulated:
 
-TBD
+*Table 2. Role deviations within WE BUILD*
+
+|Role|WE BUILD group|
+|--|--|
+|Commission||
+|European Digital Directory operator| |
