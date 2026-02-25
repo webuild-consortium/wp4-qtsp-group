@@ -14,6 +14,10 @@ Scope:
 
 - [Architecture overview for QERDS in WE BUILD](architecture.md)
 
+## Technical reports
+
+- [QERDS interoperability framework](interop-framework.md)
+
 ## Informative references
 
 None yet.

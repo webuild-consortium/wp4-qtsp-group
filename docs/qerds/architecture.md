@@ -186,6 +186,9 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 |15\. Capability discovery|||
 |16\. Message relay|||
 
+> [!NOTE]
+> For considerations regarding interface 16. Message relay, see the technical report on the [QERDS interoperability framework](interop-framework.md).
+
 ### Example use case scenarios
 
 #### Data submission between business wallets
