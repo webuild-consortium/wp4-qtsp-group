@@ -161,6 +161,14 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 > The recipient wallet receives notifications and possibly handed over data, matching the submitted data.
 > The sender wallet also receives notifications in the same way that the recipient wallet receives notifications, containing evidence of the transmission.
 
+> [!NOTE]
+> The QERDS can be technically implemented using either or both of:
+>
+> - provider access point, shared among multiple QERDS subscribers, with end-to-end encryption between providers;
+> - subscriber access point, controlled by a single QERDS subscriber using their wallet, with end-to-end encryption between sender and recipient.
+>
+> The provider access point is required at least for interface 11. Evidence transmission, since the provider creates the QERDS evidence.
+
 ### Data flows and interactions
 
 #### Protocol profiles
