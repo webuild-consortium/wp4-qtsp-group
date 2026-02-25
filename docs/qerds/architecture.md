@@ -128,8 +128,7 @@ subgraph Sender
 end
 subgraph S-TSP[Sender qualified trust
 service provider]
-    S-ERDS[Qualified trust
-    service provider]
+    S-ERDS[QERDS]
     S-SMP[Service
     metadata]@{shape: docs}
 end
@@ -139,8 +138,7 @@ subgraph COM[Commission]
 end
 subgraph R-TSP[Recipient qualified
 trust service provider]
-    R-ERDS[Qualified trust
-    service provider]
+    R-ERDS[QERDS]
     R-SMP[Service
     metadata]@{shape: docs}
 end
@@ -166,6 +164,8 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 ### Data flows and interactions
 
 #### Protocol profiles
+
+*Table 1. Protocol profiles and QTSP roles*
 
 |Interface|Protocol|QTSP role|
 |--|--|--|
