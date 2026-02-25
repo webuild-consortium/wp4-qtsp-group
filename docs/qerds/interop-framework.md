@@ -15,8 +15,8 @@ Several options exist for realizing the QERDS. The leading candidate is [AS4 2.0
 1. must be a message protocol that can be adapted to the 4 corner model envisioned for QERDS.
 2. must support end2end message encryption independent from the transport layer (TLS)
 3.  must be able to support crypto algorithm agility including a clear path to post-quantum algorithm support before 2035.
-4.  must be able to support lookup-based trust using the existing EU trust directories.
-
+4.  must be able to support service and capability discovery using a protocol-independent EU Digital Directory
+5. must support any transmitted data and evidence formats, for example using Media Types (IETF RFC 2046)
 
 
 ## Starting point for WE BUILD
