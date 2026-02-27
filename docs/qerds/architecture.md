@@ -11,6 +11,7 @@ It complements the [WE BUILD architecture documentation](https://github.com/webu
 ### Definitions
 
 In WE BUILD, QTSPs as defined under [eIDAS] Art. 3(20) provide pre-production ERDS as defined under Art. 3(16)(g) and (h), technically ready to be audited for qualification as defined under Art. 3(17), for QERDS as defined under Art. 3(37).
+The remainder of this specification uses the QERDS term for the pre-production WE BUILD definition.
 
 [eIDAS]: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02014R0910-20241018
 
@@ -22,7 +23,7 @@ The following decomposition is inspired by [ETSI EN 319 521 v1.1.1], [ETSI EN 31
 
 [ETSI EN 319 521 v1.1.1]: https://www.etsi.org/deliver/etsi_en/319500_319599/319521/01.01.01_60/en_319521v010101p.pdf
 
-- **QERDS:** An electronic service which supports the following QERDS processes. It is provided by a QTSP which is on the *trusted list* upon auditing for conformance to general requirements and to specific EBW interoperability requirements and upon qualification for QEAA issuance.
+- **QERDS:** An electronic service which depends on the following processes. It is provided by a QTSP which is on the *trusted list* upon auditing for conformance to general requirements and to specific EBW interoperability requirements and upon qualification for QEAA issuance.
     - **Message submission:** The *sender* uses the *QTSP* to submit a document or notification to a *wallet*.
     - **Message retrieval:** The *recipient* uses the *QTSP* to retrieve a document or notification in their *wallet*.
     - **Evidence retrieval:** The *QTSP* provides timestamped, sealed evidence to the *wallet* of the *sender* or *recipient* about the transmission.
