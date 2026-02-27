@@ -23,10 +23,10 @@ The following decomposition is inspired by [ETSI EN 319 521 v1.1.1], [ETSI EN 31
 
 [ETSI EN 319 521 v1.1.1]: https://www.etsi.org/deliver/etsi_en/319500_319599/319521/01.01.01_60/en_319521v010101p.pdf
 
-- **QERDS:** An electronic service which depends on the following processes. It is provided by a QTSP which is on the *trusted list* upon auditing for conformance to general requirements and to specific EBW interoperability requirements and upon qualification for QEAA issuance.
-    - **Message submission:** The *sender* uses the *QTSP* to submit a document or notification to a *wallet*.
+- **QERDS:** An electronic service which implements the following processes. It is provided by a QTSP which is on the *trusted list* upon auditing for conformance to general requirements and to specific EBW interoperability requirements and upon qualification for QEAA issuance.
+    - **Message submission:** The *sender* uses the *QTSP* to submit a document or notification to a *wallet*, with protection against the risk of loss, theft, damage or any unauthorised alterations.
     - **Message retrieval:** The *recipient* uses the *QTSP* to retrieve a document or notification in their *wallet*.
-    - **Evidence retrieval:** The *QTSP* provides timestamped, sealed evidence to the *wallet* of the *sender* or *recipient* about the transmission.
+    - **Evidence retrieval:** The *QTSP* provides timestamped, sealed evidence to the *wallet* of the *sender* or *recipient* about the transmission, including proof of sending and receiving the data.
     - **Message relay:** The *QTSP* relays messages from another ERDS, potentially a gateway during the European Business Wallet derogation period.
     - **Common service access:** The *QTSP* accesses message routing, trust management, capability management, and governance functions from common services such as the *European Digital Directory*.
 - **Identity proofing service:** an electronic service by which the identity and additional attributes of an applying *subscriber* are verified. The verification process uses evidence attesting to the required identity attributes, including evidence from *PID/EAA presentation*.
