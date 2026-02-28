@@ -180,6 +180,15 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 > - subscriber access point, controlled by a single QERDS subscriber using their wallet, with end-to-end encryption between sender and recipient.
 >
 > The provider access point is required at least for interface 11. Evidence transmission, since the provider creates the QERDS evidence.
+>
+> Using a provider access point for user messages enables intermediary processing by the QERDS provider.
+> This enables use cases such as conversion between legacy and new data formats, conversion for cross-border data compatibility, and automated business reporting.
+> This does not prevent the recipient from relying on the qualified electronic signatures or seals on any notifications or submitted data, if these are created by the sender, for example using the sender’s business wallet.
+>
+> Using a subscriber access point does not preclude such intermediary processing, but requires different interaction patterns.
+> For example, the subscriber may need to access the intermediary service provider by other means, such as the provider’s business wallet through the QERDS.
+>
+> The WE BUILD work should result in evidence of pros and cons with regard to either technical implementation.
 
 ### Data flows and interactions
 
