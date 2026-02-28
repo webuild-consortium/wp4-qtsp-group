@@ -16,7 +16,7 @@ Scope:
 
 ## Technical reports
 
-- [QERDS interoperability framework](interop-framework.md)
+- [QERDS interoperability framework requirements](interop-framework.md)
 
 ## Informative references
 
