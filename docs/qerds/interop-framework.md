@@ -1,16 +1,16 @@
-# QERDS interoperability framework
-
-Context:
-
-- [QERDS protocol profiles](architecture.md#protocol-profiles), in particular interfaces:
-    - 10. Data transmission
-    - 11. Evidence transmission
-    - 16. Message relay
-- Architecture decision record: [Deliver business wallet data using QERDS](https://github.com/webuild-consortium/wp4-architecture/blob/main/adr/build-qerds.md)
+# QERDS interoperability framework requirements
 
 ## Introduction
 
-Several options exist for realizing the QERDS. The leading candidate is [AS4 2.0](#edelivery-as4) but several other options are possible. Below is a short list of the most promising candidates. The list was selected based on the following criteria:
+Just like the European Business Wallet (EBW) ecosystem, WE BUILD requires an interoperability framework to [Deliver business wallet data using QERDS](https://github.com/webuild-consortium/wp4-architecture/blob/main/adr/build-qerds.md). This includes the creation of [QERDS protocol profiles](architecture.md#protocol-profiles), in particular for interfaces:
+
+- *10. Data transmission* of user messages (notifications or other data) between the QERDS provider and the wallet owner, for example represented by a wallet user or a business application.
+- *11. Evidence transmission* from the QERDS provider and the business wallet, to enable the provision of a common dashboard for the wallet owner to access, store and verify communications.
+- *16. Message relay* between interoperable QERDS providers.
+
+While compatibility with additional interfaces is required, for example to discover services and capabilities, the current document assumes that these can be designed as orthogonal concerns.
+
+Several options exist for realising a framework with these these protocol profiles. The leading candidate is based on [AS4 2.0](#edelivery-as4) but several other options are possible. Below is a short list of the most promising candidates. The list was selected based on the following criteria:
 
 1. must be a message protocol that can be adapted to the 4 corner model envisioned for QERDS.
 2. must support end2end message encryption independent from the transport layer (TLS)
@@ -18,14 +18,27 @@ Several options exist for realizing the QERDS. The leading candidate is [AS4 2.0
 4.  must be able to support service and capability discovery using a protocol-independent EU Digital Directory
 5. must support any transmitted data and evidence formats, for example using Media Types (IETF RFC 2046)
 
-
 ## Starting point for WE BUILD
 
 ### eDelivery AS4
 
-TODO
+The [eDelivery AS4 specifications](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467117619/AS4+Access+Point+specifications) are applied in various EU-initiated networks for *electronic data interchange over the internet with internet integration* ([EDIINT](https://datatracker.ietf.org/wg/ediint/about/)).
+These are based on *applicability statement 4* ([AS4](https://docs.oasis-open.org/ebxml-msg/ebms/v3.0/profiles/AS4-profile/v1.0/AS4-profile-v1.0.html)) as specified by OASIS and standardised internationally as [ISO 15000-2](https://www.iso.org/standard/79109.html).
+The [EN 319 522-4-1](https://www.etsi.org/deliver/etsi_en/319500_319599/3195220401/01.02.01_60/en_3195220401v010201p.pdf) European standard provides a binding of AS4 to the *16. Message relay* interface.
+
+For WE BUILD, [WP4 has decided](https://github.com/webuild-consortium/wp4-architecture/blob/main/adr/build-qerds.md) to start with eDelivery AS4 for *16. Message relay*.
+Whether to use version 1 (widely deployed, strong open source support) or version 2 (newer, with more modern cryptography) still needs to be decided.
+
+For *10. Data transmission* and *11. Evidence transmission*, eDelivery AS4 may be applied as well.
+In that case, the business wallet or other wallet owner software needs to implement an eDelivery AS4 access point to communicate with the QERDS provider.
+However, alternative protocols can be considered as well.
 
 ## Promising candidates for EBW
+
+### JMAP
+
+The JMAP [RFC 8620](https://www.rfc-editor.org/rfc/rfc8620.html) framework could be applied to interfaces *10. Data transmission* and *11. Evidence transmission*.
+While this has previously been done for email, similar application patterns are applicable to the QERDS.
 
 ### Matrix
 
