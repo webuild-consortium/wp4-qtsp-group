@@ -98,11 +98,11 @@ subgraph TLSO[TL scheme operator]
 end
 subgraph Sub[Subscriber]
     Wallet[Wallet]
+    Endpoint[User
+    message]@{shape: doc}
 end
 subgraph RP[Relying party]
-    ERDSVal[Evidence
-    validation
-    system]@{shape: rounded}
+    ERDSVal[Evidence]@{shape: doc}
 end
 
 DD -------|2\. Identifier discovery| Wallet
@@ -113,8 +113,8 @@ Event ---|6\. Message delivery| ECS
 QES ---|7\. Seal creation| ECS
 QTS ---|8\. Time stamp creation| ECS
 ECS ---|9\. Evidence creation| ERDS
-ERDS ---|10\. Data transmission| Wallet
 ERDS ---|11\. Evidence transmission| Wallet
+ERDS ---|10\. Data transmission| Endpoint
 ERDS ---|1\. QTSP registration| TL
 ERDS ---|12\. Evidence validation| ERDSVal
 ```
@@ -131,6 +131,8 @@ config:
 flowchart LR
 subgraph Sender
     S-Wallet[Wallet]
+    S-Msg[User message
+    to send]
 end
 subgraph S-TSP[Sender qualified trust
 service provider]
@@ -150,15 +152,18 @@ trust service provider]
 end
 subgraph Recipient
     R-Wallet[Wallet]
+    R-Msg[Received
+    user message]
 end
 
-S-Wallet ---|13\. Notification creation| S-ERDS
-S-Wallet ---|14\. Data submission| S-ERDS
+S-Wallet ---|11\. Evidence transmission| S-ERDS
+S-Msg ---|13\. Notification creation| S-ERDS
+S-Msg ---|14\. Data submission| S-ERDS
 S-ERDS ---|3\. Service discovery| DD
 DD --- R-ERDS
 S-ERDS ---|15\. Capability discovery| R-SMP
 S-ERDS ---|16\. Message relay| R-ERDS
-R-ERDS ---|10\. Data transmission| R-Wallet
+R-ERDS ---|10\. Data transmission| R-Msg
 R-ERDS ---|11\. Evidence transmission| R-Wallet
 ```
 
