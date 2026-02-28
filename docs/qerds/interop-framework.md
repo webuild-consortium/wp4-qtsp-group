@@ -18,6 +18,9 @@ Several options exist for realising a framework with these these protocol profil
 4. Must be able to support service and capability discovery using a protocol-independent EU Digital Directory.
 5. Must support any transmitted data and evidence formats, for example using Media Types (IETF RFC 2046).
 
+For the end-to-end message encryption, the note regarding [QERDS protocol profiles](architecture.md#protocol-profiles) applies: messages can be encrypted either between provider access points or between subscriber access points.
+This does not need to affect the applicability of profiles to the interfaces, but may affect what combinations may be suitable in an interoperability framework.
+
 ## Starting point for WE BUILD
 
 ### eDelivery AS4
@@ -48,9 +51,13 @@ While this has previously been done for email, similar application patterns are 
 
 [ActivityPub](https://www.w3.org/TR/activitypub/) is a protocol for event-based messaging over HTTP transport. The protocol was initially designed to be used for “social media” event streams but is in fact a general event message protocol. The protocol uses JSON-LD framing. Work on integrating MLS in ActivityPub is [at the Social Web Incubator Community Group](https://github.com/swicg/activitypub-e2ee) which adds group messaging to ActivityPub.
 
+While ActivityPub may be suitable for *16. Message relay* between QERDS providers, another protocol such as [JMAP](#jmap) is required for *10. Data transmission* and *11. Evidence transmission*.
+
 ### DIDComm Messaging
 
 [DIDComm Messaging v2.1](https://identity.foundation/didcomm-messaging/spec/v2.1/) is a message-oriented protocol over multiple transports (HTTP, WebSockets, etc.) that is used in the W3C credential ecosystem. DIDComm doesn’t have a group-keying solution but MLS would be a possibility.
+
+Applying its mediator role, DIDComm Messaging might support the four-corner model and provide protocols for *16. Message relay* as well as *10. Data transmission* and *11. Evidence transmission*.
 
 ## Candidates disregarded by WE BUILD
 
