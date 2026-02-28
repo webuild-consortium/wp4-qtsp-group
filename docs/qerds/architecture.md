@@ -168,9 +168,10 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 ```
 
 > [!NOTE]
-> The sender wallet either submits data or creates a notification.
-> The recipient wallet receives notifications and possibly handed over data, matching the submitted data.
-> The sender wallet also receives notifications in the same way that the recipient wallet receives notifications, containing evidence of the transmission.
+> The sender either submits data or creates a notification.
+> The recipient receives notifications and possibly handed over data, matching the submitted data.
+> The sender also receives notifications in the same way that the recipient receives notifications, containing evidence of the transmission.
+> The evidence is stored in the business wallet of either, while the handed over data can be made available through any application programming interface or user interface to the wallet owner.
 
 > [!NOTE]
 > The QERDS can be technically implemented using either or both of:
