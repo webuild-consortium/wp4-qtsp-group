@@ -220,56 +220,6 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 
 ### Example use case scenarios
 
-#### Data submission between business wallets
-
-```mermaid
----
-title: Figure 3. Data submission between business wallets
-config:
-  htmlLabels: false
-  markdownAutoWrap: true
-  flowchart:
-    #defaultRenderer: "elk"
----
-flowchart LR
-subgraph Sender[Sender's EBW]
-    msg[Document to be 
-    delivered]@{shape: docs}
-    evidenceSender[Evidence of 
-   document sent
-    ]@{shape: docs}
-end
-subgraph Receiver[Receiver's EBW]
-    evidenceReceiver[Evidence of 
-    received 
-    document 
-    ]@{shape: docs}
-    documentReceiver[Consigned document 
-    ]@{shape: docs}
-end
-subgraph SenderQTSP[Sender's Qualified Trust 
-Service Provider]
-    QeRDSServiceSender[QeRDS service]@{shape: rounded}
-end
-subgraph ReceiverQTSP[Receiver's Qualified 
-Trust Service Provider]
-    QeRDSServiceReceiver[QeRDS service]@{shape: rounded}
-end
-subgraph EUD[European Digital Directory]
-discoveryInfo[ Receiver EBW capabilities, endpoints, 
-    etc.]@{shape: cyl}
-end
-Sender ---|1\. Perform identification and authentication of sender| QeRDSServiceSender
-msg ---|2\. Sends document to the QeRDS service used by the sender EBW| QeRDSServiceSender
-SenderQTSP ---|3\. Performs discovery about the receiver EBW QeRDS Service| EUD
-QeRDSServiceSender ---|4\. Performs handshake with receiver's EBW QeRDS| QeRDSServiceReceiver
-QeRDSServiceSender ---|5\. Relays the document to the receiver's EBW QeRDS| QeRDSServiceReceiver
-QeRDSServiceReceiver ---|6\. Notify for acceptance of the document reception| Receiver
-Receiver ---|7\. Perform identification and authentication of receiver| QeRDSServiceReceiver
-QeRDSServiceReceiver ---|8\. Consignment and handover of the document| evidenceReceiver
-QeRDSServiceReceiver ---|9. Notify successful consignment and handover of the document| QeRDSServiceSender
-```
-
 ## Deviations from European Business Wallets
 
 In the WE BUILD pre-production environment, some European Business Wallet roles are simulated:
