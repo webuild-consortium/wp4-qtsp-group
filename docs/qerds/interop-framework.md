@@ -54,7 +54,8 @@ While this has previously been done for email, similar application patterns are 
 
 ## Candidates disregarded by WE BUILD
 
-- XMPP: TODO
+- Email, e.g. AS2 ([RFC 4130](https://www.rfc-editor.org/rfc/rfc4130.html)): provides no clear benefits over [eDelivery AS4](#edelivery-as4).
+- XMPP: faces the same XML-based protocol challenges as [eDelivery AS4](#edelivery-as4) without clear benefits.
 
 ## Discussion
 
