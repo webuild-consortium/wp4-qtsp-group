@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WP4 QTSP Service Catalogue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a href="./" class="brand" aria-label="Catalogue home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">WP4 QTSP Catalogue</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <p class="eyebrow">We Build WP4</p>
+          <h1>QTSP Service catalogue</h1>
+          <p class="subtitle">
+            This GitHub Pages site is published from <code>catalogue/</code>
+          </p>
+          <a class="cta" href="#qtsp-catalogue">Browse QTSPs</a>
+        </div>
+      </section>
+
+      <section id="qtsp-catalogue" class="container panel">
+        <h2>QTSP Service Catalogue</h2>
+        <p class="intro">
+          Order entries by QTSP organization. Use this page to identify which provider can support
+          your target flow and interoperability needs.
+        </p>
+
+        <article class="qtsp-block">
+          <div class="qtsp-head">
+            <h3>Cleverbase</h3>
+            <span class="badge">Active</span>
+          </div>
+
+          <section class="subcard contact-card">
+            <h4>Contact Point</h4>
+            <p><strong>Name:</strong> Hidde Dorhout</p>
+            <p><strong>Email:</strong> <a href="mailto:qtsp-a@example.org">hidde.dorhout@cleverbase.com</a></p>
+          </section>
+
+          <div class="services-stack">
+
+            <section class="service-block qeaa-block">
+              <h4>Qualified Electronic Attribute Attestation (QeAA)</h4>
+              <p><strong>Protocols:</strong> OIDC4VCI, OIDC4VP</p>
+              <p><strong>Supported QeAAs:</strong></p>
+              <ul class="qeaa-list">
+                <li>
+                  <span class="qeaa-name">RB100 Hello World Attestation</span>
+                  <span class="qeaa-meta">
+                    <span class="format-chip">mdoc</span>
+                    <span class="format-chip">sd-jwt</span>
+                    <a
+                      href="https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Rulebook</a
+                    >
+                  </span>
+                </li>
+              </ul>
+            </section>
+
+          <div class="table-wrap">
+            <h4>Test Results</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Use Case / Profile</th>
+                  <th>Test Environment</th>
+                  <th>Result</th>
+                  <th>Last Verified</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Test case 001: WE BUILD Issuer VCI 1.0</td>
+                  <td>Sandbox v2</td>
+                  <td><span class="status status-partial">Partial</span></td>
+                  <td>2026-02-24</td>
+                  <td><a href="#">Report</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <small>Hosted with GitHub Pages from the <code>catalogue/</code> directory.</small>
+    </footer>
+  </body>
+</html>
