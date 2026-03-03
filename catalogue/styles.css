@@ -149,12 +149,81 @@ h1 {
   color: var(--wb-muted);
 }
 
+.catalogue-markdown {
+  margin-top: 1rem;
+}
+
+.markdown-section h3 {
+  margin-top: 0.8rem;
+  color: var(--wb-secondary);
+  font-size: 1.1rem;
+}
+
+.markdown-section h4 {
+  margin-top: 0.7rem;
+  color: var(--wb-secondary);
+  font-size: 1rem;
+}
+
+.markdown-section p,
+.markdown-section ul {
+  margin: 0.5rem 0;
+}
+
+.markdown-section ul {
+  padding-left: 1.2rem;
+}
+
+.markdown-section .qeaa-cards {
+  list-style: none;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.markdown-section .qeaa-card {
+  border: 1px solid #c8d4ee;
+  border-left: 4px solid var(--wb-secondary);
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  box-shadow: 0 2px 8px rgba(0, 29, 88, 0.08);
+}
+
+.markdown-section .qeaa-card p {
+  margin: 0.3rem 0;
+}
+
+.markdown-section .qeaa-card strong {
+  color: var(--wb-secondary);
+}
+
+.markdown-section .qeaa-card a {
+  font-weight: 700;
+}
+
+.markdown-section code {
+  display: inline-block;
+  padding: 0.08rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid #99add6;
+  background: #e8f0ff;
+  color: #001d58;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .qtsp-block {
   margin-top: 1.2rem;
   border: 1px solid var(--wb-border);
   border-radius: 0.9rem;
   padding: 1rem;
   background: #fbfcff;
+}
+
+.markdown-section {
+  margin-top: 0.8rem;
 }
 
 .qtsp-head {

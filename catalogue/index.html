@@ -27,9 +27,7 @@
         <div class="container hero-inner">
           <p class="eyebrow">We Build WP4</p>
           <h1>QTSP Service catalogue</h1>
-          <p class="subtitle">
-            This GitHub Pages site is published from <code>catalogue/</code>
-          </p>
+          <p class="subtitle">This GitHub Pages site is published from <code>catalogue/</code></p>
           <a class="cta" href="#qtsp-catalogue">Browse QTSPs</a>
         </div>
       </section>
@@ -40,71 +38,136 @@
           Order entries by QTSP organization. Use this page to identify which provider can support
           your target flow and interoperability needs.
         </p>
-
-        <article class="qtsp-block">
-          <div class="qtsp-head">
-            <h3>Cleverbase</h3>
-            <span class="badge">Active</span>
-          </div>
-
-          <section class="subcard contact-card">
-            <h4>Contact Point</h4>
-            <p><strong>Name:</strong> Hidde Dorhout</p>
-            <p><strong>Email:</strong> <a href="mailto:qtsp-a@example.org">hidde.dorhout@cleverbase.com</a></p>
-          </section>
-
-          <div class="services-stack">
-
-            <section class="service-block qeaa-block">
-              <h4>Qualified Electronic Attribute Attestation (QeAA)</h4>
-              <p><strong>Protocols:</strong> OIDC4VCI, OIDC4VP</p>
-              <p><strong>Supported QeAAs:</strong></p>
-              <ul class="qeaa-list">
-                <li>
-                  <span class="qeaa-name">RB100 Hello World Attestation</span>
-                  <span class="qeaa-meta">
-                    <span class="format-chip">mdoc</span>
-                    <span class="format-chip">sd-jwt</span>
-                    <a
-                      href="https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md"
-                      target="_blank"
-                      rel="noreferrer"
-                      >Rulebook</a
-                    >
-                  </span>
-                </li>
-              </ul>
-            </section>
-
-          <div class="table-wrap">
-            <h4>Test Results</h4>
-            <table>
-              <thead>
-                <tr>
-                  <th>Use Case / Profile</th>
-                  <th>Test Environment</th>
-                  <th>Result</th>
-                  <th>Last Verified</th>
-                  <th>Evidence</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Test case 001: WE BUILD Issuer VCI 1.0</td>
-                  <td>Sandbox v2</td>
-                  <td><span class="status status-partial">Partial</span></td>
-                  <td>2026-02-24</td>
-                  <td><a href="#">Report</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
+        <div id="catalogue-content" class="catalogue-markdown" aria-live="polite"></div>
       </section>
     </main>
 
     <footer class="container footer">
       <small>Hosted with GitHub Pages from the <code>catalogue/</code> directory.</small>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      function buildQtspBlocks(root) {
+        const originalNodes = Array.from(root.childNodes);
+        const fragment = document.createDocumentFragment();
+        let currentBlock = null;
+        let currentSection = null;
+
+        originalNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+            currentBlock = document.createElement("article");
+            currentBlock.className = "qtsp-block";
+
+            const header = document.createElement("div");
+            header.className = "qtsp-head";
+
+            const title = document.createElement("h3");
+            title.textContent = node.textContent.trim();
+            header.appendChild(title);
+
+            currentSection = document.createElement("div");
+            currentSection.className = "markdown-section";
+
+            currentBlock.appendChild(header);
+            currentBlock.appendChild(currentSection);
+            fragment.appendChild(currentBlock);
+            return;
+          }
+
+          if (!currentSection) {
+            return;
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "P") {
+            const strong = node.querySelector("strong");
+            if (strong && strong.textContent.trim().toLowerCase() === "status:") {
+              const statusText = node.textContent.replace(/^\s*status:\s*/i, "").trim();
+              if (statusText) {
+                const badge = document.createElement("span");
+                badge.className = "badge";
+                badge.textContent = statusText;
+                currentBlock.querySelector(".qtsp-head").appendChild(badge);
+              }
+              return;
+            }
+          }
+
+          currentSection.appendChild(node);
+        });
+
+        root.innerHTML = "";
+        root.appendChild(fragment);
+      }
+
+      function wrapTables(root) {
+        const tables = root.querySelectorAll(".markdown-section table");
+        tables.forEach((table) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "table-wrap";
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        });
+      }
+
+      function enhanceQeaaLists(root) {
+        const headings = root.querySelectorAll(".markdown-section h4");
+        headings.forEach((heading) => {
+          if (heading.textContent.trim().toLowerCase() !== "supported qeaas") {
+            return;
+          }
+
+          const list = heading.nextElementSibling;
+          if (!list || list.tagName !== "UL") {
+            return;
+          }
+
+          list.classList.add("qeaa-cards");
+          list.querySelectorAll(":scope > li").forEach((item) => {
+            item.classList.add("qeaa-card");
+          });
+        });
+      }
+
+      function applyStatusStyles(root) {
+        const statusKeywords = ["pass", "partial", "fail"];
+        const cells = root.querySelectorAll("td");
+        cells.forEach((cell) => {
+          const text = cell.textContent.trim().toLowerCase();
+          if (!statusKeywords.includes(text)) {
+            return;
+          }
+          const span = document.createElement("span");
+          span.className = `status status-${text}`;
+          span.textContent = cell.textContent.trim();
+          cell.textContent = "";
+          cell.appendChild(span);
+        });
+      }
+
+      async function loadCatalogue() {
+        const container = document.getElementById("catalogue-content");
+        container.textContent = "Loading catalogue...";
+
+        try {
+          const response = await fetch("./catalogue.md", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`Failed to load markdown: ${response.status}`);
+          }
+
+          const markdown = await response.text();
+          container.innerHTML = marked.parse(markdown);
+          buildQtspBlocks(container);
+          wrapTables(container);
+          enhanceQeaaLists(container);
+          applyStatusStyles(container);
+        } catch (error) {
+          container.innerHTML = "<p><strong>Could not load catalogue markdown.</strong> Please serve this directory with a local web server (instead of opening with <code>file://</code>) and ensure <code>catalogue/catalogue.md</code> exists.</p>";
+          console.error(error);
+        }
+      }
+
+      loadCatalogue();
+    </script>
   </body>
 </html>
