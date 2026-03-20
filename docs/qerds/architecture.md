@@ -266,6 +266,56 @@ sequenceDiagram
     S_QTSP->>+Sender: Evidence of successful<br>consignment 
     deactivate Sender
     deactivate S_QTSP
+```
+
+#### Receiver flow (detail)
+
+The following diagram details the receiver flow referenced above (message relay and consignment, steps 5–9).
+
+```mermaid
+sequenceDiagram
+    participant S_QTSP as Sender's QERDS<br>service
+    box Receiver's Qualified trust service provider
+        participant R_QTSP as Receiver's QERDS<br>service
+        participant R_IPS as Receiver's Identity<br>proofing<br>service
+        participant R_QES as Receiver's QESeal<br>service
+        participant R_QTS as Receiver's QTS<br>service
+        participant R_ECS as Receiver's Evidence<br>service
+    end
+    participant Receiver as Receiver's EBW
+
+    activate R_QTSP
+    S_QTSP->>R_QTSP: 5. Message relay<br>(16. Message relay)
+    R_QTSP->>Receiver: 6. Notify for acceptance<br>of document reception<br>(10. Data transmission)
+    activate Receiver
+    Receiver->>R_QTSP: 7a. Request consignment<br>(identification context)
+    R_QTSP->>R_IPS: 7b. Identity verification<br>of receiver (4)
+    activate R_IPS
+    R_IPS->>Receiver: Request identity<br>verification
+    Receiver->>R_IPS: Identity<br>verification data
+    R_IPS->>R_ECS: Identity proofing<br>result (5)
+    R_IPS-->>R_QTSP: Verified
+    deactivate R_IPS
+    R_QTSP->>R_ECS: Create evidence<br>(delivery event 6)
+    activate R_ECS
+    R_ECS->>R_QES: Seal creation (7)
+    activate R_QES
+    R_QES-->>R_ECS: Seal
+    deactivate R_QES
+    R_ECS->>R_QTS: Time stamp<br>creation (8)
+    activate R_QTS
+    R_QTS-->>R_ECS: Time stamp
+    deactivate R_QTS
+    R_ECS-->>R_QTSP: Evidence (9)
+    deactivate R_ECS
+    R_QTSP->>Receiver: 8. Consignment and<br>handover of document<br>(10. Data transmission)
+    R_QTSP->>Receiver: Evidence of received<br>document (11. Evidence transmission)
+    Receiver-->>R_QTSP: Done
+    deactivate Receiver
+    R_QTSP->>S_QTSP: 9. Notify successful<br>consignment and handover
+    deactivate R_QTSP
+```
+
 ## Deviations from European Business Wallets
 
 In the WE BUILD pre-production environment, some European Business Wallet roles are simulated:
