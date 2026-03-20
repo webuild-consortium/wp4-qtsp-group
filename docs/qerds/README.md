@@ -14,6 +14,13 @@ Scope:
 
 - [Architecture overview for QERDS in WE BUILD](architecture.md)
 
+## Feature definitions
+
+Below is a non-exhaustive overview of QERDS features that use cases may choose to pilot.
+For each feature in scope for the pilots, the QTSP group develops an interop profile and ensures available service compatibility.
+
+- [QERDS between wallets](between-wallets.feature.md)
+
 ## Technical reports
 
 - [QERDS interoperability framework requirements](interop-framework.md)
