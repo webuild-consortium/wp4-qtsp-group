@@ -1,125 +1,3 @@
-# Deliverable D \[insert number\]
-
-### Overview of Signing and Sealing with EUDI Wallet Methods
-
-\[insert picture\]
-
-Version: \[insert number\]
-
-Date: \[insert date\]
-
-Co-funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union. Neither the European Union nor the granting authority can be held responsible for them.
-
-**Project and document data**
-
-|     |     |
-| --- | --- |
-| **Item** | **Description** |
-| Project title | **W**allet **E**cosystem for **B**usiness and payments **U**se cases on **I**dentification, **L**egal representation and **D**ata sharing |
-| Grant Agreement no | Project 101224751 - WE BUILD |
-| Deliverable title | D4.x Overview of Signing and Sealing with EUDI Wallet Methods |
-| Deliverable type | \[insert deliverable type, check in EU Funding & Tenders Portal\] |
-| Responsible party | \[insert legal name and PIC nr\] |
-| Authors | \[insert name(s)\] |
-| Contributing parties | Alejandro Nieto (DigitelTS), \[insert name(s)\] |
-| Reviewers | Alejandro Nieto (DigitelTS), \[insert name(s)\] |
-| Dissemination level | \[insert dissemination level, check in EU Funding & Tenders Portal\] |
-
-**History of changes**
-
-|     |     |     |
-| --- | --- | --- |
-| **Version** | **Date** | **Change** |
-| \[insert number\] | \[insert date\] | \[insert status/change\] |
-| \[insert number\] | \[insert date\] | \[insert status/change\] |
-| \[insert number\] | \[insert date\] | \[insert status/change\] |
-
-**Table of contents**
-
-[Deliverable D \[insert number\] 1](#_Toc1127353020)
-
-[Overview of Signing and Sealing with EUDI Wallet Methods 1](#_Toc1593049583)
-
-[List of figures 3](#_Toc465213247)
-
-[List of tables 3](#_Toc1965514953)
-
-[1\. Executive summary 4](#_Toc955447301)
-
-[2\. Introduction 4](#_Toc1618955813)
-
-[2.1 Scope and goal 5](#_Toc1713922375)
-
-[2.2 Target audience 5](#_Toc1645789794)
-
-[2.3 Versioning 6](#_Toc1166618735)
-
-[3\. Overview of how to sign using the EUDI Wallet 6](#_Toc1861713097)
-
-[3.1 Signing processes and requirements 8](#_Toc946458962)
-
-[3.2 Actors and roles 11](#_Toc673534712)
-
-[3.3 CSC API v2.2 implications for WeBuild 12](#_Toc2143824461)
-
-[4\. Wallet-centric signing model 14](#_Toc1676582521)
-
-[4.1 Actors 14](#_Toc1361179212)
-
-[4.2 Signing Flows High Level Overview 15](#_Toc327646535)
-
-[4.3 Detailed Signing Flows 15](#_Toc1098511983)
-
-[4.3.2 Remote signing with local SCA 17](#_Toc2012902521)
-
-[4.3.3 Local signing 18](#_Toc238438846)
-
-[5\. QTSP-centric signing model 19](#_Toc1855323883)
-
-[5.1 Remote Qualified Electronic Signatures flow 21](#_Toc2021897680)
-
-[5.1.1 Authorization to access API resources 21](#_Toc602653569)
-
-[5.1.2 Authorization to sign with external SCA 22](#_Toc405072709)
-
-[5.1.3 Signing a document with external SCA 24](#_Toc1385204604)
-
-[6\. Complex signing scenarios 24](#_Toc302402591)
-
-[7\. Regulatory requirements 25](#_Toc2130067236)
-
-[7.1 eIDAS Regulation and Implementing Acts 26](#_Toc383778477)
-
-[7.2 The European Business Wallet proposal 30](#_Toc77257700)
-
-[7.3 Technical standards and protocols for compliant interoperability 31](#_Toc638928963)
-
-[7.4 Practical implications for WeBuild business transactions 32](#_Toc1056425639)
-
-[7.5 Standardization references 33](#_Toc376218635)
-
-[7.6 Requirements within the ARF 34](#_Toc1605002774)
-
-[8\. Use cases in WE BUILD 38](#_Toc1826141882)
-
-[8.1 Bank account opening use case in WP3 PA1 39](#_Toc494139415)
-
-[8.1.1 Signing a bank account contract with a QES 39](#_Toc521541685)
-
-[8.1.2 Issuance of (Q)EAAs 40](#_Toc66480664)
-
-[8.2 \[to be completed\] 40](#_Toc1852268243)
-
-[8.3 \[to be completed\] 40](#_Toc1100248831)
-
-# List of figures
-
-[Figure 1: \[insert name of figure 1\] _6_](#_Toc214424456)
-
-# List of tables
-
-[_Table 1: \[insert name of table\] 7_](#_Toc214421840)
-
 # 1\. Executive summary
 
 The European Digital Identity (EUDI) Wallet introduces a common framework for the provision and use of electronic identity and trust services across the European Union. Within this framework, electronic signatures and electronic seals remain governed by the eIDAS Regulation and the associated ETSI standards that define trust service requirements and assurance levels.
@@ -166,10 +44,6 @@ This document is intended for a technical and regulatory audience involved in th
 - Regulatory, conformity assessment, and standardisation stakeholders.
 
 The reader is expected to be familiar with public key infrastructures, electronic signatures and seals, and the general principles of the eIDAS Regulation and ETSI trust service standards.
-
-## 2.3 Versioning
-
-\[Insert text\]
 
 # 3\. Overview of how to sign using the EUDI Wallet
 
@@ -534,7 +408,7 @@ CEN EN 419 241-1 is explicitly positioned by ETSI as the general requirements ba
 
 For API-level market interoperability, the Cloud Signature Consortium reports that CSC API v2.2 was released on 6 November 2025 and is intended for interoperable cloud signature/seal services, designed to fit modern authorization frameworks (e.g., OAuth 2.0). However, direct access to the v2.2 PDF was not reliably retrievable via automated fetch in this research session; therefore, WeBuild should treat CSC v2.2 as the target interface while ensuring that the wallet-side signature creation application requirements and the QTSP remote QSCD requirements are demonstrably met through the ETSI/EN standards that are explicitly referenced by EU implementing acts.
 
-## _7.4 Practical implications for WeBuild business transactions_
+## 7.4 Practical implications for WeBuild business transactions
 
 For WeBuild B2B/B2G transaction flows, the primary compliance posture should start from the legal “end state” required: when a transaction calls for a handwritten-signature-equivalent outcome, WeBuild should specify QES (natural person) and/or QSeal (legal person) and then build the architecture so that (i) qualified certificates follow recognized profiles, (ii) devices meet QSCD/rQSCD requirements, and (iii) relying parties can validate/retain legal effect cross-border. This maps directly to eIDAS legal effects for QES/QSeal and to the implementing regulations establishing reference standards for certificates and validation.
 
