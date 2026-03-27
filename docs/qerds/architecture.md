@@ -219,26 +219,61 @@ R-ERDS ---|11\. Evidence transmission| R-Wallet
 > For considerations regarding interface 16. Message relay, see the technical report on the [QERDS interoperability framework](interop-framework.md).
 
 ### Example use case scenarios
-The following sequence diagram reflects an example use case of a user as the sender and a receiver EBW. It basically refines previous figures into a time-ordered interaction view and aligns it with the interfaces and considerations.
+
+> [!NOTE]
+> The following sequence diagrams reflect example use cases where the user is a sender with a business wallet (EBW), creating a notification or submitting a document for recipient in another EBW. They basically refine the previous figures into a time-ordered interaction view, aligned with the interfaces and considerations.
+
+#### [QERDS between wallets, data transmission](between-wallets.feature.md#scenario-data-transmission)
 
 ```mermaid
+---
+title: Figure 3. QERDS between wallets, data transmission, main success scenario
+---
 sequenceDiagram
-    actor User as User
-    participant Sender as Sender's EBW
-    box Sender's Qualified trust service provider
-        participant S_QTSP as Sender's QERDS<br>service
-        participant S_IPS as Sender's Identity<br>proofing<br>service
-        participant S_QES as Sender's QESeal<br>service 
-        participant S_QTS as Sender's QTS<br>service 
-        participant S_ECS as Sender's Evidence<br>service 
+    actor User as Wallet user
+    participant Sender as Sender’s<br>business wallet
+    box Sender’s qualified<br>trust service provider
+        participant S_QTSP as QERDS
     end
-    participant DD as European Digital Directory
-    box Receiver's Qualified trust service provider
-        participant R_QTSP as Receiver's QERDS<br>service
+    participant DD as Digital directory
+    box Recipient’s qualified<br>trust service provider
+        participant R_QTSP as QERDS
     end
-    participant Receiver as Receiver's EBW
 
     User->>+Sender: Request to send<br>document
+    Sender->>+S_QTSP: 1a. Request to send<br>(identification context)
+    activate S_QTSP
+    note over S_QTSP: [ref] QERDS between<br>wallets, sending data
+    S_QTSP->>Sender: Evidence of document<br>sent (11. Evidence transmission)
+    deactivate S_QTSP
+
+    S_QTSP->>+DD: 3. Service / identifier discovery<br>(2, 3. Identifier and service discovery)
+    DD-->>-S_QTSP: Receiver EBW<br>capabilities, endpoints
+    S_QTSP->>+R_QTSP: 4. Handshake / capability<br>check (15. Capability discovery)
+    S_QTSP->>R_QTSP: 5. Message relay<br>(16. Message relay)
+    note over R_QTSP: [ref] QERDS between<br>wallets, receiving data
+    R_QTSP->>-S_QTSP: 9. Notify successful<br>consignment and handover
+    S_QTSP->>-Sender: Evidence of successful<br>consignment 
+    deactivate Sender
+```
+
+#### [QERDS between wallets, sending data](between-wallets.feature.md#scenario-sending-data)
+
+```mermaid
+---
+title: Figure 4. QERDS between wallets, sending data, main success scenario
+---
+sequenceDiagram
+    actor User as Wallet user
+    participant Sender as Sender’s<br>business wallet
+    box Sender’s qualified trust service provider
+        participant S_QTSP as QERDS
+        participant S_IPS as Identity proofing<br>service
+        participant S_QES as QESeal creation<br>service 
+        participant S_QTS as QTS creation<br>service 
+        participant S_ECS as Evidence creation<br>service 
+    end
+
     Sender->>+S_QTSP: 1a. Request to send<br>(identification context)
     S_QTSP->>+S_IPS: 1b. Identity verification<br>of sender (4)
     S_IPS->>Sender: Request identity<br>verification of sender
@@ -247,42 +282,31 @@ sequenceDiagram
     S_IPS->>S_ECS: Identity proofing<br>result (5)
     S_IPS-->>-S_QTSP: Verified
     Sender->>S_QTSP: 2. Document / notification<br>(13, 14. Notification creation,<br>Data submission)
-    deactivate Sender
     S_QTSP->>+S_ECS: Create evidence<br>(delivery event 6)
     S_ECS->>+S_QES: Seal creation (7)
     S_QES-->>-S_ECS: Seal
     S_ECS->>+S_QTS: Time stamp<br>creation (8)
     S_QTS-->>-S_ECS: Time stamp
     S_ECS-->>-S_QTSP: Evidence (9)
-    S_QTSP->>+Sender: Evidence of document<br>sent (11. Evidence transmission)
-
-    S_QTSP->>+DD: 3. Service / identifier discovery<br>(2, 3. Identifier and service discovery)
-    DD-->>-S_QTSP: Receiver EBW<br>capabilities, endpoints
-    S_QTSP->>+R_QTSP: 4. Handshake / capability<br>check (15. Capability discovery)
-    S_QTSP->>R_QTSP: 5. Message relay<br>(16. Message relay)
-    note over R_QTSP,Receiver: ref: Receiver flow detailed in the following diagram
-    R_QTSP->>S_QTSP: 9. Notify successful<br>consignment and handover
-    deactivate R_QTSP
-    S_QTSP->>+Sender: Evidence of successful<br>consignment 
-    deactivate Sender
-    deactivate S_QTSP
+    S_QTSP->>-Sender: Evidence of document<br>sent (11. Evidence transmission)
 ```
 
-#### Receiver flow (detail)
-
-The following diagram details the receiver flow referenced above (message relay and consignment, steps 5–9).
+#### [QERDS between wallets, receiving data](between-wallets.feature.md#scenario-receiving-data)
 
 ```mermaid
+---
+title: Figure 5. QERDS between wallets, receiving data, main success scenario
+---
 sequenceDiagram
-    participant S_QTSP as Sender's QERDS<br>service
-    box Receiver's Qualified trust service provider
-        participant R_QTSP as Receiver's QERDS<br>service
-        participant R_IPS as Receiver's Identity<br>proofing<br>service
-        participant R_QES as Receiver's QESeal<br>service
-        participant R_QTS as Receiver's QTS<br>service
-        participant R_ECS as Receiver's Evidence<br>service
+    participant S_QTSP as Sender’s QERDS
+    box Recipient’s qualified trust service provider
+        participant R_QTSP as QERDS
+        participant R_IPS as Identity proofing<br>service
+        participant R_QES as QESeal creation<br>service
+        participant R_QTS as QTS creation<br>service
+        participant R_ECS as Evidence creation<br>service
     end
-    participant Receiver as Receiver's EBW
+    participant Receiver as Recipient’s<br>business wallet
 
     activate R_QTSP
     S_QTSP->>R_QTSP: 5. Message relay<br>(16. Message relay)
