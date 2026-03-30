@@ -14,7 +14,7 @@ At Cleverbase, we help make digital trust a practical reality by building secure
 
 ##### Documentation
 
-TODO
+[QeAA Issuer](https://delivery.lab.cleverbase.io/pid-issuer/issuer/credentialsOffer/generate)
 
 ##### Supported Attestations
 
@@ -30,7 +30,6 @@ A minimal, short-lived QEAA used to test issuance, presentation, and verificatio
 
 [Rulebook](https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md)
 
-https://delivery.lab.cleverbase.io/pid-issuer/issuer/credentialsOffer/generate
 
 **Supported formats**
 
