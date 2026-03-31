@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <title>WP4 QTSP Service Catalogue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a href="./" class="brand" aria-label="Catalogue home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">WP4 QTSP Catalogue</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <p class="eyebrow">We Build WP4</p>
+          <h1>QTSP Service catalogue</h1>
+          <p class="subtitle">This GitHub Pages site is published from <code>catalogue/</code></p>
+          <a class="cta" href="#catalogue-filters">Filter catalogue</a>
+        </div>
+      </section>
+
+      <section id="qtsp-catalogue" class="container panel">
+        <h2>QTSP Service Catalogue</h2>
+        <p class="intro">
+          Order entries by QTSP organization. Use this page to identify which provider can support
+          your target flow and interoperability needs.
+        </p>
+        <section id="catalogue-filters" class="catalogue-filters" aria-label="Catalogue filters">
+          <div class="filter-field">
+            <label for="qtsp-filter">QTSP</label>
+            <select id="qtsp-filter">
+              <option value="">All QTSPs</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="service-filter">Service</label>
+            <select id="service-filter">
+              <option value="">All services</option>
+            </select>
+          </div>
+          <div id="attestation-filter-group" class="filter-field filter-field-wide" hidden>
+            <span class="filter-label">QeAA</span>
+            <div
+              id="attestation-filter-options"
+              class="filter-checkboxes"
+              role="group"
+              aria-label="Filter by QeAA attestation"
+            ></div>
+          </div>
+          <p id="filter-summary" class="filter-summary">Showing all catalogue entries.</p>
+        </section>
+        <div id="catalogue-content" class="catalogue-markdown" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <small>Hosted with GitHub Pages from the <code>catalogue/</code> directory.</small>
+    </footer>
+
+    <button id="scroll-top-button" class="scroll-top-button" type="button" aria-label="Scroll to top">
+      <span aria-hidden="true">↑</span>
+      <span>Top</span>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      function normalizeLabel(text) {
+        return text.replace(/:$/, "").trim().toLowerCase();
+      }
+
+      function createField(label, valueNode) {
+        const field = document.createElement("div");
+        field.className = "attestation-field";
+
+        const term = document.createElement("dt");
+        term.textContent = label;
+
+        const description = document.createElement("dd");
+
+        if (typeof valueNode === "string") {
+          description.textContent = valueNode;
+        } else if (valueNode) {
+          description.appendChild(valueNode);
+        }
+
+        field.appendChild(term);
+        field.appendChild(description);
+        return field;
+      }
+
+      function createAttestationStatusMarker(statusText) {
+        const normalized = statusText.trim().toLowerCase();
+        const marker = document.createElement("span");
+        marker.className = "attestation-status-marker";
+        marker.setAttribute("role", "img");
+        marker.setAttribute("aria-label", `Status: ${statusText.trim()}`);
+        marker.title = statusText.trim();
+
+        if (normalized === "live") {
+          marker.classList.add("attestation-status-live");
+        } else if (normalized === "in progress") {
+          marker.classList.add("attestation-status-progress");
+        } else {
+          marker.classList.add("attestation-status-planned");
+        }
+
+        return marker;
+      }
+
+      function collectUntilHeading(nodes, startIndex, stopTags) {
+        const collected = [];
+        let index = startIndex;
+
+        while (index < nodes.length) {
+          const node = nodes[index];
+          if (node.nodeType === Node.ELEMENT_NODE && stopTags.includes(node.tagName)) {
+            break;
+          }
+          collected.push(node);
+          index += 1;
+        }
+
+        return { nodes: collected, nextIndex: index };
+      }
+
+      function isFieldLabelNode(node) {
+        return (
+          node.nodeType === Node.ELEMENT_NODE &&
+          node.tagName === "P" &&
+          node.childElementCount === 1 &&
+          node.firstElementChild.tagName === "STRONG"
+        );
+      }
+
+      function extractAttestationFields(nodes) {
+        const fields = [];
+        let index = 0;
+
+        while (index < nodes.length) {
+          const node = nodes[index];
+          if (isFieldLabelNode(node)) {
+            const label = node.textContent.trim();
+            const valueNodes = [];
+            let nextIndex = index + 1;
+
+            while (nextIndex < nodes.length && !isFieldLabelNode(nodes[nextIndex])) {
+              valueNodes.push(nodes[nextIndex]);
+              nextIndex += 1;
+            }
+
+            const filteredValueNodes = valueNodes.filter((item) => {
+              return !(item.nodeType === Node.TEXT_NODE && !item.textContent.trim());
+            });
+
+            fields.push({ label, valueNodes: filteredValueNodes });
+            index = nextIndex;
+            continue;
+          }
+
+          if (
+            node.nodeType === Node.ELEMENT_NODE &&
+            !["TABLE"].includes(node.tagName) &&
+            node.textContent.trim()
+          ) {
+            fields.push({ label: "Details", valueNodes: [node] });
+          }
+
+          index += 1;
+        }
+
+        return fields;
+      }
+
+      function buildAttestationCard(title, nodes) {
+        const card = document.createElement("article");
+        card.className = "attestation-card";
+        card.dataset.attestation = title;
+
+        const fields = extractAttestationFields(nodes);
+        const statusField = fields.find(({ label }) => normalizeLabel(label) === "status");
+        const statusText = statusField
+          ? statusField.valueNodes.map((node) => node.textContent).join(" ").trim()
+          : "";
+
+        const header = document.createElement("div");
+        header.className = "attestation-card-head";
+
+        const heading = document.createElement("h6");
+        heading.textContent = title;
+        header.appendChild(heading);
+
+        if (statusText) {
+          header.appendChild(createAttestationStatusMarker(statusText));
+        }
+
+        card.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "attestation-card-body";
+
+        const details = document.createElement("dl");
+        details.className = "attestation-fields";
+
+        fields.forEach(({ label, valueNodes }) => {
+          const normalized = normalizeLabel(label);
+          if (!valueNodes.length) {
+            return;
+          }
+
+          if (normalized === "status") {
+            return;
+          }
+
+          if (normalized === "test results") {
+            const table = valueNodes.find(
+              (node) => node.nodeType === Node.ELEMENT_NODE && node.tagName === "TABLE"
+            );
+            if (table) {
+              const section = document.createElement("section");
+              section.className = "attestation-results";
+
+              const sectionTitle = document.createElement("h6");
+              sectionTitle.className = "attestation-results-title";
+              sectionTitle.textContent = "Test results";
+              section.appendChild(sectionTitle);
+
+              const wrapper = document.createElement("div");
+              wrapper.className = "table-wrap";
+              wrapper.appendChild(table);
+              section.appendChild(wrapper);
+              content.appendChild(section);
+              return;
+            }
+          }
+
+          const fragment = document.createDocumentFragment();
+          valueNodes.forEach((node) => fragment.appendChild(node));
+          details.appendChild(createField(label.replace(/:$/, ""), fragment));
+        });
+
+        if (details.childElementCount) {
+          content.appendChild(details);
+        }
+
+        card.appendChild(content);
+        return card;
+      }
+
+      function buildServicePanel(title, nodes) {
+        const service = document.createElement("details");
+        service.className = "service-panel";
+        service.open = true;
+        service.dataset.service = title;
+
+        const summary = document.createElement("summary");
+        summary.className = "service-summary";
+
+        const titleWrap = document.createElement("div");
+        titleWrap.className = "service-title-wrap";
+
+        const heading = document.createElement("h4");
+        heading.textContent = title;
+        titleWrap.appendChild(heading);
+
+        const helper = document.createElement("p");
+        helper.className = "service-helper";
+        helper.textContent = "Expand to review documentation, attestations, and verification status.";
+        titleWrap.appendChild(helper);
+
+        const meta = document.createElement("span");
+        meta.className = "service-meta";
+
+        const toggle = document.createElement("span");
+        toggle.className = "service-toggle";
+
+        const toggleLabel = document.createElement("span");
+        toggleLabel.className = "service-toggle-label";
+        toggleLabel.setAttribute("data-open", "Collapse");
+        toggleLabel.setAttribute("data-closed", "Expand");
+        toggle.appendChild(toggleLabel);
+
+        const toggleIcon = document.createElement("span");
+        toggleIcon.className = "service-toggle-icon";
+        toggleIcon.setAttribute("aria-hidden", "true");
+        toggleIcon.textContent = "▾";
+        toggle.appendChild(toggleIcon);
+
+        const summaryMeta = document.createElement("div");
+        summaryMeta.className = "service-summary-meta";
+        summaryMeta.appendChild(meta);
+        summaryMeta.appendChild(toggle);
+
+        summary.appendChild(titleWrap);
+        summary.appendChild(summaryMeta);
+        service.appendChild(summary);
+
+        const body = document.createElement("div");
+        body.className = "service-body";
+        service.appendChild(body);
+
+        let index = 0;
+        while (index < nodes.length) {
+          const node = nodes[index];
+          if (node.nodeType !== Node.ELEMENT_NODE || node.tagName !== "H5") {
+            if (
+              node.nodeType === Node.ELEMENT_NODE &&
+              !["H4", "H5", "H6"].includes(node.tagName) &&
+              node.textContent.trim()
+            ) {
+              const intro = body.querySelector(".service-copy") || document.createElement("div");
+              intro.className = "service-copy";
+              intro.appendChild(node);
+              if (!intro.parentNode) {
+                body.appendChild(intro);
+              }
+            }
+            index += 1;
+            continue;
+          }
+
+          const sectionTitle = node.textContent.trim();
+          const sectionChunk = collectUntilHeading(nodes, index + 1, ["H5", "H4"]);
+          const sectionNodes = sectionChunk.nodes;
+
+          if (normalizeLabel(sectionTitle) === "supported attestations") {
+            const cards = document.createElement("div");
+            cards.className = "attestation-grid";
+            let cardCount = 0;
+            let cardIndex = 0;
+
+            while (cardIndex < sectionNodes.length) {
+              const cardNode = sectionNodes[cardIndex];
+              if (cardNode.nodeType === Node.ELEMENT_NODE && cardNode.tagName === "H6") {
+                const cardChunk = collectUntilHeading(sectionNodes, cardIndex + 1, ["H6"]);
+                cards.appendChild(buildAttestationCard(cardNode.textContent.trim(), cardChunk.nodes));
+                cardCount += 1;
+                cardIndex = cardChunk.nextIndex;
+                continue;
+              }
+              cardIndex += 1;
+            }
+
+            const section = document.createElement("section");
+            section.className = "service-section";
+
+            const sectionHead = document.createElement("div");
+            sectionHead.className = "service-section-head";
+
+            const sectionHeading = document.createElement("h5");
+            sectionHeading.textContent = sectionTitle;
+            sectionHead.appendChild(sectionHeading);
+
+            const count = document.createElement("span");
+            count.className = "count-pill";
+            count.textContent = `${cardCount} attestation${cardCount === 1 ? "" : "s"}`;
+            sectionHead.appendChild(count);
+
+            section.appendChild(sectionHead);
+            section.appendChild(cards);
+            body.appendChild(section);
+            meta.textContent = count.textContent;
+          } else {
+            const section = document.createElement("section");
+            section.className = "service-section";
+
+            const sectionHeading = document.createElement("h5");
+            sectionHeading.textContent = sectionTitle;
+            section.appendChild(sectionHeading);
+
+            const copy = document.createElement("div");
+            copy.className = "service-copy";
+            sectionNodes.forEach((child) => copy.appendChild(child));
+            section.appendChild(copy);
+            body.appendChild(section);
+          }
+
+          index = sectionChunk.nextIndex;
+        }
+
+        if (!meta.textContent) {
+          meta.textContent = "Service details";
+        }
+
+        return service;
+      }
+
+      function buildInfoSection(title, nodes) {
+        const section = document.createElement("section");
+        section.className = "info-section";
+
+        const heading = document.createElement("h4");
+        heading.textContent = title;
+        section.appendChild(heading);
+
+        const body = document.createElement("div");
+        body.className = "info-section-body";
+        nodes.forEach((node) => body.appendChild(node));
+        section.appendChild(body);
+
+        return section;
+      }
+
+      function buildQtspBlocks(root) {
+        const originalNodes = Array.from(root.childNodes);
+        const fragment = document.createDocumentFragment();
+        let index = 0;
+
+        while (index < originalNodes.length) {
+          const node = originalNodes[index];
+          if (node.nodeType !== Node.ELEMENT_NODE || node.tagName !== "H2") {
+            index += 1;
+            continue;
+          }
+
+          const qtspChunk = collectUntilHeading(originalNodes, index + 1, ["H2"]);
+          const qtspBlock = document.createElement("details");
+          qtspBlock.className = "qtsp-block";
+          qtspBlock.open = true;
+          qtspBlock.dataset.qtsp = node.textContent.trim();
+
+          const header = document.createElement("summary");
+          header.className = "qtsp-head";
+
+          const titleGroup = document.createElement("div");
+          titleGroup.className = "qtsp-title-group";
+
+          const title = document.createElement("h3");
+          title.textContent = node.textContent.trim();
+          titleGroup.appendChild(title);
+
+          const strapline = document.createElement("p");
+          strapline.className = "qtsp-strapline";
+          strapline.textContent = "Browse trust services, documents, and interoperability status.";
+          titleGroup.appendChild(strapline);
+
+          header.appendChild(titleGroup);
+
+          const headerMeta = document.createElement("div");
+          headerMeta.className = "qtsp-summary-meta";
+
+          const toggle = document.createElement("span");
+          toggle.className = "qtsp-toggle";
+
+          const toggleLabel = document.createElement("span");
+          toggleLabel.className = "qtsp-toggle-label";
+          toggleLabel.setAttribute("data-open", "Collapse");
+          toggleLabel.setAttribute("data-closed", "Expand");
+          toggle.appendChild(toggleLabel);
+
+          const toggleIcon = document.createElement("span");
+          toggleIcon.className = "qtsp-toggle-icon";
+          toggleIcon.setAttribute("aria-hidden", "true");
+          toggleIcon.textContent = "▾";
+          toggle.appendChild(toggleIcon);
+
+          headerMeta.appendChild(toggle);
+          header.appendChild(headerMeta);
+
+          const body = document.createElement("div");
+          body.className = "markdown-section";
+
+          let innerIndex = 0;
+          while (innerIndex < qtspChunk.nodes.length) {
+            const innerNode = qtspChunk.nodes[innerIndex];
+
+            if (innerNode.nodeType === Node.ELEMENT_NODE && innerNode.tagName === "H3") {
+              const sectionTitle = innerNode.textContent.trim();
+              const sectionChunk = collectUntilHeading(qtspChunk.nodes, innerIndex + 1, ["H3"]);
+
+              if (normalizeLabel(sectionTitle) === "trust services") {
+                const services = document.createElement("div");
+                services.className = "services-stack";
+
+                let serviceIndex = 0;
+                while (serviceIndex < sectionChunk.nodes.length) {
+                  const serviceNode = sectionChunk.nodes[serviceIndex];
+                  if (serviceNode.nodeType === Node.ELEMENT_NODE && serviceNode.tagName === "H4") {
+                    const serviceChunk = collectUntilHeading(
+                      sectionChunk.nodes,
+                      serviceIndex + 1,
+                      ["H4"]
+                    );
+                    services.appendChild(
+                      buildServicePanel(serviceNode.textContent.trim(), serviceChunk.nodes)
+                    );
+                    serviceIndex = serviceChunk.nextIndex;
+                    continue;
+                  }
+                  serviceIndex += 1;
+                }
+
+                body.appendChild(services);
+              } else {
+                body.appendChild(buildInfoSection(sectionTitle, sectionChunk.nodes));
+              }
+
+              innerIndex = sectionChunk.nextIndex;
+              continue;
+            }
+
+            if (
+              innerNode.nodeType === Node.ELEMENT_NODE ||
+              (innerNode.nodeType === Node.TEXT_NODE && innerNode.textContent.trim())
+            ) {
+              body.appendChild(innerNode);
+            }
+
+            innerIndex += 1;
+          }
+
+          qtspBlock.appendChild(header);
+          qtspBlock.appendChild(body);
+          fragment.appendChild(qtspBlock);
+          index = qtspChunk.nextIndex;
+        }
+
+        root.innerHTML = "";
+        root.appendChild(fragment);
+      }
+
+      function wrapTables(root) {
+        const tables = root.querySelectorAll(".markdown-section table");
+        tables.forEach((table) => {
+          if (table.parentNode.classList.contains("table-wrap")) {
+            return;
+          }
+          const wrapper = document.createElement("div");
+          wrapper.className = "table-wrap";
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        });
+      }
+
+      function applyStatusStyles(root) {
+        const statusKeywords = ["pass", "partial", "fail"];
+        const cells = root.querySelectorAll("td");
+        cells.forEach((cell) => {
+          const text = cell.textContent.trim().toLowerCase();
+          if (!statusKeywords.includes(text)) {
+            return;
+          }
+          const span = document.createElement("span");
+          span.className = `status status-${text}`;
+          span.textContent = cell.textContent.trim();
+          cell.textContent = "";
+          cell.appendChild(span);
+        });
+      }
+
+      function setSelectOptions(select, values, allLabel) {
+        select.innerHTML = "";
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = allLabel;
+        select.appendChild(defaultOption);
+
+        values.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          select.appendChild(option);
+        });
+      }
+
+      function renderAttestationOptions(container, values) {
+        container.innerHTML = "";
+
+        values.forEach((value) => {
+          const label = document.createElement("label");
+          label.className = "filter-checkbox";
+
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.value = value;
+
+          const text = document.createElement("span");
+          text.textContent = value;
+
+          label.appendChild(input);
+          label.appendChild(text);
+          container.appendChild(label);
+        });
+      }
+
+      function getSelectedAttestations(container) {
+        return Array.from(container.querySelectorAll("input:checked")).map((input) => input.value);
+      }
+
+      function isQeaaServiceName(serviceName) {
+        return (
+          normalizeLabel(serviceName || "") ===
+          "qualified electronic attestation of attributes (qeaa)"
+        );
+      }
+
+      function updateFilterSummary(
+        summary,
+        visibleCount,
+        totalCount,
+        qtspValue,
+        serviceValue,
+        attestationValues
+      ) {
+        if (!visibleCount) {
+          summary.textContent = "No catalogue entries match the current filters.";
+          return;
+        }
+
+        if (!qtspValue && !serviceValue && !attestationValues.length) {
+          summary.textContent = `Showing ${visibleCount} of ${totalCount} QTSP entries.`;
+          return;
+        }
+
+        const parts = [];
+        if (qtspValue) {
+          parts.push(`QTSP: ${qtspValue}`);
+        }
+        if (serviceValue) {
+          parts.push(`Service: ${serviceValue}`);
+        }
+        if (attestationValues.length) {
+          parts.push(`QeAA: ${attestationValues.join(", ")}`);
+        }
+
+        summary.textContent = `Showing ${visibleCount} of ${totalCount} QTSP entries for ${parts.join(" | ")}.`;
+      }
+
+      function setupFilters(root) {
+        const qtspFilter = document.getElementById("qtsp-filter");
+        const serviceFilter = document.getElementById("service-filter");
+        const attestationFilterGroup = document.getElementById("attestation-filter-group");
+        const attestationFilterOptions = document.getElementById("attestation-filter-options");
+        const summary = document.getElementById("filter-summary");
+        const qtspBlocks = Array.from(root.querySelectorAll(".qtsp-block"));
+        const qtspNames = qtspBlocks.map((block) => block.dataset.qtsp).filter(Boolean);
+        const serviceNames = Array.from(
+          new Set(
+            Array.from(root.querySelectorAll(".service-panel"))
+              .map((panel) => panel.dataset.service)
+              .filter(Boolean)
+          )
+        ).sort((a, b) => a.localeCompare(b));
+        const attestationNames = Array.from(
+          new Set(
+            Array.from(root.querySelectorAll(".attestation-card"))
+              .map((card) => card.dataset.attestation)
+              .filter(Boolean)
+          )
+        ).sort((a, b) => a.localeCompare(b));
+
+        setSelectOptions(qtspFilter, qtspNames, "All QTSPs");
+        setSelectOptions(serviceFilter, serviceNames, "All services");
+        renderAttestationOptions(attestationFilterOptions, attestationNames);
+
+        function applyFilters() {
+          const qtspValue = qtspFilter.value;
+          const serviceValue = serviceFilter.value;
+          const qeaaSelected = isQeaaServiceName(serviceValue);
+          const selectedAttestations = qeaaSelected
+            ? getSelectedAttestations(attestationFilterOptions)
+            : [];
+          let visibleCount = 0;
+
+          attestationFilterGroup.hidden = !qeaaSelected;
+          if (!qeaaSelected) {
+            attestationFilterOptions.querySelectorAll("input").forEach((input) => {
+              input.checked = false;
+            });
+          }
+
+          qtspBlocks.forEach((block) => {
+            const matchesQtsp = !qtspValue || block.dataset.qtsp === qtspValue;
+            const servicePanels = Array.from(block.querySelectorAll(".service-panel"));
+            let hasVisibleService = !serviceValue;
+
+            servicePanels.forEach((panel) => {
+              const matchesService = !serviceValue || panel.dataset.service === serviceValue;
+              let hasVisibleAttestation = true;
+
+              if (isQeaaServiceName(panel.dataset.service)) {
+                const attestationCards = Array.from(panel.querySelectorAll(".attestation-card"));
+                hasVisibleAttestation = !selectedAttestations.length;
+
+                attestationCards.forEach((card) => {
+                  const matchesAttestation =
+                    !selectedAttestations.length ||
+                    selectedAttestations.includes(card.dataset.attestation);
+                  card.hidden = !matchesAttestation;
+                  if (matchesAttestation) {
+                    hasVisibleAttestation = true;
+                  }
+                });
+              } else {
+                panel.querySelectorAll(".attestation-card").forEach((card) => {
+                  card.hidden = false;
+                });
+              }
+
+              const visible = matchesService && hasVisibleAttestation;
+              panel.hidden = !visible;
+              if (visible) {
+                panel.open = true;
+                hasVisibleService = true;
+              }
+            });
+
+            const visible = matchesQtsp && hasVisibleService;
+            block.hidden = !visible;
+
+            if (visible) {
+              block.open = true;
+              visibleCount += 1;
+            }
+          });
+
+          updateFilterSummary(
+            summary,
+            visibleCount,
+            qtspBlocks.length,
+            qtspValue,
+            serviceValue,
+            selectedAttestations
+          );
+        }
+
+        qtspFilter.addEventListener("change", applyFilters);
+        serviceFilter.addEventListener("change", applyFilters);
+        attestationFilterOptions.addEventListener("input", applyFilters);
+        applyFilters();
+      }
+
+      function setupScrollTopButton() {
+        const button = document.getElementById("scroll-top-button");
+        if (!button) {
+          return;
+        }
+
+        function updateVisibility() {
+          button.classList.toggle("is-visible", window.scrollY > 320);
+        }
+
+        button.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("scroll", updateVisibility, { passive: true });
+        updateVisibility();
+      }
+
+      async function loadCatalogue() {
+        const container = document.getElementById("catalogue-content");
+        container.textContent = "Loading catalogue...";
+
+        try {
+          const response = await fetch("./catalogue.md", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`Failed to load markdown: ${response.status}`);
+          }
+
+          const markdown = await response.text();
+          container.innerHTML = marked.parse(markdown);
+          buildQtspBlocks(container);
+          wrapTables(container);
+          applyStatusStyles(container);
+          setupFilters(container);
+        } catch (error) {
+          container.innerHTML = "<p><strong>Could not load catalogue markdown.</strong> Please serve this directory with a local web server (instead of opening with <code>file://</code>) and ensure <code>catalogue/catalogue.md</code> exists.</p>";
+          console.error(error);
+        }
+      }
+
+      setupScrollTopButton();
+      loadCatalogue();
+    </script>
+  </body>
+</html>
