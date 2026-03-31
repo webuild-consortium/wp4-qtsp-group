@@ -2,6 +2,8 @@
 
 This is documentation of the [WE BUILD: WP4 QTSP group](../README.md).
 
+Technical Overview of Signing and Sealing in WE BUILD: [Signing and Sealing](https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qes/SigningAndSealing.md)
+
 ## Informative references
 
 - Standards
