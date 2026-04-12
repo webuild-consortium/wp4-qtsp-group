@@ -27,16 +27,23 @@
     <main>
       <section class="hero">
         <div class="container hero-inner">
-          <p class="eyebrow">We Build WP4</p>
-          <h1>QTSP Service catalogue</h1>
-          <p class="subtitle">This GitHub Pages site is published from <code>catalogue/</code></p>
-          <a class="cta" href="#catalogue-filters">Filter catalogue</a>
+          <p id="hero-eyebrow" class="eyebrow">We Build WP4</p>
+          <h1 id="hero-title">QTSP Service catalogue</h1>
+          <p id="hero-subtitle" class="subtitle">
+            This GitHub Pages site is published from <code>catalogue/</code>
+          </p>
+          <div class="hero-actions">
+            <a id="hero-primary-cta" class="cta" href="#catalogue-filters">Filter catalogue</a>
+            <a id="hero-secondary-cta" class="cta cta-secondary" href="./" hidden>
+              Back to overview
+            </a>
+          </div>
         </div>
       </section>
 
       <section id="qtsp-catalogue" class="container panel">
-        <h2>QTSP Service Catalogue</h2>
-        <p class="intro">
+        <h2 id="catalogue-title">QTSP Service Catalogue</h2>
+        <p id="catalogue-intro" class="intro">
           Order entries by QTSP organization. Use this page to identify which provider can support
           your target flow and interoperability needs.
         </p>
@@ -79,6 +86,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
+      function slugify(value) {
+        return value
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      function getQtspIdFromParams() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("id") ? params.get("id").trim() : "";
+      }
+
+      function buildQtspHref(qtspId) {
+        const url = new URL(window.location.href);
+        url.search = "";
+        url.hash = "";
+        url.searchParams.set("id", qtspId);
+        return `${url.pathname}${url.search}`;
+      }
+
       function normalizeLabel(text) {
         return text.replace(/:$/, "").trim().toLowerCase();
       }
@@ -227,25 +256,7 @@
           }
 
           if (normalized === "test results") {
-            const table = valueNodes.find(
-              (node) => node.nodeType === Node.ELEMENT_NODE && node.tagName === "TABLE"
-            );
-            if (table) {
-              const section = document.createElement("section");
-              section.className = "attestation-results";
-
-              const sectionTitle = document.createElement("h6");
-              sectionTitle.className = "attestation-results-title";
-              sectionTitle.textContent = "Test results";
-              section.appendChild(sectionTitle);
-
-              const wrapper = document.createElement("div");
-              wrapper.className = "table-wrap";
-              wrapper.appendChild(table);
-              section.appendChild(wrapper);
-              content.appendChild(section);
-              return;
-            }
+            return;
           }
 
           const fragment = document.createDocumentFragment();
@@ -415,9 +426,40 @@
         return section;
       }
 
+      function buildConformanceSection(qtspName) {
+        const section = document.createElement("section");
+        section.className = "info-section";
+
+        const heading = document.createElement("h4");
+        heading.textContent = "Conformance Overview";
+        section.appendChild(heading);
+
+        const body = document.createElement("div");
+        body.className = "info-section-body";
+
+        const paragraph = document.createElement("p");
+        paragraph.append(
+          `Published interoperability test results for ${qtspName} and its services are maintained in the shared WE BUILD conformance overview.`
+        );
+
+        const linkParagraph = document.createElement("p");
+        const link = document.createElement("a");
+        link.href =
+          "https://webuild-consortium.github.io/wp4-interop-test-bed/docs/conformance-overview.html";
+        link.textContent = "Open the Conformance Overview";
+        linkParagraph.appendChild(link);
+
+        body.appendChild(paragraph);
+        body.appendChild(linkParagraph);
+        section.appendChild(body);
+        return section;
+      }
+
       function buildQtspBlocks(root) {
         const originalNodes = Array.from(root.childNodes);
         const fragment = document.createDocumentFragment();
+        const qtspRecords = [];
+        const usedIds = new Set();
         let index = 0;
 
         while (index < originalNodes.length) {
@@ -429,9 +471,20 @@
 
           const qtspChunk = collectUntilHeading(originalNodes, index + 1, ["H2"]);
           const qtspBlock = document.createElement("details");
+          const qtspName = node.textContent.trim();
+          const baseId = slugify(qtspName) || "qtsp";
+          let qtspId = baseId;
+          let duplicateIndex = 2;
+          while (usedIds.has(qtspId)) {
+            qtspId = `${baseId}-${duplicateIndex}`;
+            duplicateIndex += 1;
+          }
+          usedIds.add(qtspId);
+
           qtspBlock.className = "qtsp-block";
           qtspBlock.open = true;
-          qtspBlock.dataset.qtsp = node.textContent.trim();
+          qtspBlock.dataset.qtsp = qtspName;
+          qtspBlock.dataset.qtspId = qtspId;
 
           const header = document.createElement("summary");
           header.className = "qtsp-head";
@@ -440,7 +493,7 @@
           titleGroup.className = "qtsp-title-group";
 
           const title = document.createElement("h3");
-          title.textContent = node.textContent.trim();
+          title.textContent = qtspName;
           titleGroup.appendChild(title);
 
           const strapline = document.createElement("p");
@@ -452,6 +505,13 @@
 
           const headerMeta = document.createElement("div");
           headerMeta.className = "qtsp-summary-meta";
+
+          const directLink = document.createElement("a");
+          directLink.className = "link-button";
+          directLink.href = buildQtspHref(qtspId);
+          directLink.textContent = "Open page";
+          directLink.setAttribute("aria-label", `Open dedicated page for ${qtspName}`);
+          headerMeta.appendChild(directLink);
 
           const toggle = document.createElement("span");
           toggle.className = "qtsp-toggle";
@@ -523,14 +583,17 @@
             innerIndex += 1;
           }
 
+          body.appendChild(buildConformanceSection(qtspName));
           qtspBlock.appendChild(header);
           qtspBlock.appendChild(body);
           fragment.appendChild(qtspBlock);
+          qtspRecords.push({ id: qtspId, name: qtspName, element: qtspBlock });
           index = qtspChunk.nextIndex;
         }
 
         root.innerHTML = "";
         root.appendChild(fragment);
+        return qtspRecords;
       }
 
       function wrapTables(root) {
@@ -745,6 +808,112 @@
         applyFilters();
       }
 
+      function updatePageChrome(detailRecord, totalCount) {
+        const heroEyebrow = document.getElementById("hero-eyebrow");
+        const heroTitle = document.getElementById("hero-title");
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        const heroPrimaryCta = document.getElementById("hero-primary-cta");
+        const heroSecondaryCta = document.getElementById("hero-secondary-cta");
+        const catalogueTitle = document.getElementById("catalogue-title");
+        const catalogueIntro = document.getElementById("catalogue-intro");
+
+        if (detailRecord) {
+          document.body.classList.add("detail-view");
+          heroEyebrow.textContent = "QTSP profile";
+          heroTitle.textContent = detailRecord.name;
+          heroSubtitle.innerHTML =
+            "Showing the dedicated QTSP page selected through the <code>id</code> query parameter.";
+          heroPrimaryCta.textContent = "Jump to profile";
+          heroPrimaryCta.setAttribute("href", "#catalogue-content");
+          heroSecondaryCta.hidden = false;
+          heroSecondaryCta.setAttribute("href", "./");
+          catalogueTitle.textContent = detailRecord.name;
+          catalogueIntro.textContent =
+            "This view shows one QTSP entry, while preserving the existing overview page for the full catalogue.";
+          return;
+        }
+
+        document.body.classList.remove("detail-view");
+        heroEyebrow.textContent = "We Build WP4";
+        heroTitle.textContent = "QTSP Service catalogue";
+        heroSubtitle.innerHTML =
+          "This GitHub Pages site is published from <code>catalogue/</code>";
+        heroPrimaryCta.textContent = "Filter catalogue";
+        heroPrimaryCta.setAttribute("href", "#catalogue-filters");
+        heroSecondaryCta.hidden = true;
+        catalogueTitle.textContent = "QTSP Service Catalogue";
+        catalogueIntro.textContent =
+          totalCount === 1
+            ? "Showing the only QTSP currently listed in the catalogue."
+            : "Order entries by QTSP organization. Use this page to identify which provider can support your target flow and interoperability needs.";
+      }
+
+      function showQtspDetailView(root, qtspRecords) {
+        const requestedId = getQtspIdFromParams();
+        const filterSection = document.getElementById("catalogue-filters");
+        const summary = document.getElementById("filter-summary");
+
+        if (!requestedId) {
+          filterSection.hidden = false;
+          updatePageChrome(null, qtspRecords.length);
+          return false;
+        }
+
+        const selectedRecord = qtspRecords.find((record) => record.id === requestedId);
+        filterSection.hidden = true;
+
+        if (!selectedRecord) {
+          updatePageChrome(
+            {
+              name: "QTSP not found",
+            },
+            qtspRecords.length
+          );
+          root.innerHTML = "";
+
+          const emptyState = document.createElement("section");
+          emptyState.className = "empty-state";
+          emptyState.setAttribute("aria-live", "polite");
+
+          const heading = document.createElement("h3");
+          heading.textContent = "No QTSP matches this id";
+
+          const detail = document.createElement("p");
+          detail.append("The requested id ");
+          const code = document.createElement("code");
+          code.textContent = requestedId;
+          detail.appendChild(code);
+          detail.append(" does not exist in the current catalogue.");
+
+          const action = document.createElement("p");
+          const link = document.createElement("a");
+          link.className = "link-button";
+          link.href = "./";
+          link.textContent = "Return to the full catalogue";
+          action.appendChild(link);
+
+          emptyState.appendChild(heading);
+          emptyState.appendChild(detail);
+          emptyState.appendChild(action);
+          root.appendChild(emptyState);
+          return true;
+        }
+
+        qtspRecords.forEach((record) => {
+          record.element.hidden = record.id !== requestedId;
+          if (record.id === requestedId) {
+            record.element.open = true;
+            record.element.classList.add("qtsp-block-detail");
+          } else {
+            record.element.classList.remove("qtsp-block-detail");
+          }
+        });
+
+        summary.textContent = `Showing dedicated page for ${selectedRecord.name}.`;
+        updatePageChrome(selectedRecord, qtspRecords.length);
+        return true;
+      }
+
       function setupScrollTopButton() {
         const button = document.getElementById("scroll-top-button");
         if (!button) {
@@ -775,10 +944,12 @@
 
           const markdown = await response.text();
           container.innerHTML = marked.parse(markdown);
-          buildQtspBlocks(container);
+          const qtspRecords = buildQtspBlocks(container);
           wrapTables(container);
           applyStatusStyles(container);
-          setupFilters(container);
+          if (!showQtspDetailView(container, qtspRecords)) {
+            setupFilters(container);
+          }
         } catch (error) {
           container.innerHTML = "<p><strong>Could not load catalogue markdown.</strong> Please serve this directory with a local web server (instead of opening with <code>file://</code>) and ensure <code>catalogue/catalogue.md</code> exists.</p>";
           console.error(error);

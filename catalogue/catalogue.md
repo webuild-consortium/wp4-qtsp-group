@@ -36,12 +36,6 @@ A minimal, short-lived QEAA used to test issuance, presentation, and verificatio
 - SD-JWT
 - mdoc
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| Test case 001: WE BUILD Issuer VCI 1.0 | Interoperability Test Bed | Partial | 2026-02-24 | [Report](#) |
-
 ###### Birth Certificate Attestation
 
 **Description**
@@ -51,12 +45,6 @@ A Birth Certificate Attestation
 **Status**
 
 Live
-
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| Test case 001: WE BUILD Issuer VCI 1.0 | Interoperability Test Bed | Partial | 2026-02-24 | [Report](#) |
 
 ## D-Trust
 
@@ -92,12 +80,6 @@ TODO
 
 - TODO
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
-
 ## Digidentity
 
 ### About
@@ -131,12 +113,6 @@ TODO
 **Supported formats**
 
 - TODO
-
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
 
 ## Digitel TS
 
@@ -179,13 +155,6 @@ A minimal, short-lived QEAA used to test issuance, presentation, and verificatio
 - SD-JWT
 - mdoc
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| Test case 001: WE BUILD Issuer VCI 1.0 | Interoperability Test Bed | Pass | TODO | [Report](#) |
-| Test case 002: WE BUILD Issuer VP 1.0 | Interoperability Test Bed | Pass | TODO | [Report](#) |
-
 ## Docaposte
 
 ### About
@@ -226,13 +195,6 @@ A minimal, short-lived QEAA used to test issuance, presentation, and verificatio
 - SD-JWT
 - mdoc
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| Test case 001: WE BUILD Issuer VCI 1.0 | Interoperability Test Bed | Pass | TODO | [Report](#) |
-| Test case 002: WE BUILD Issuer VP 1.0 | Interoperability Test Bed | Pass | TODO | [Report](#) |
-
 ## Evrotrust Technologies
 
 ### About
@@ -266,12 +228,6 @@ TODO
 **Supported formats**
 
 - TODO
-
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
 
 ## IDnow Trust Services
 
@@ -307,12 +263,6 @@ TODO
 
 - TODO
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
-
 ## Intesi Group
 
 ### About
@@ -347,12 +297,6 @@ TODO
 
 - TODO
 
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
-
 ## Reconi
 
 ### About
@@ -386,9 +330,3 @@ TODO
 **Supported formats**
 
 - TODO
-
-**Test Results**
-
-| Use Case / Profile | Test Environment | Result | Last Verified | Evidence |
-| --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO |
