@@ -233,11 +233,12 @@ TODO
 
 ### About
 
-TODO
+We turn trust into your greatest asset, delivering scalable security, adaptive compliance, and real-time fraud prevention through AI-driven, SaaS-based identity solutions, enabling you to operate seamlessly in a complex digital world.
 
 ### Contact Point(s)
 
-- TODO
+- [Uwe Pfizenmaier](uwe.pfizenmaier@idnow.io)
+- [Sebastian Elfors](sebastian.elfors@idnow.io)
 
 ### Trust Services
 
@@ -249,19 +250,51 @@ TODO
 
 ##### Supported Attestations
 
-###### TODO
+###### TaxID Attestation
 
 **Status**
 
-TODO
+In design
 
 **Description**
 
-TODO
+Tax Identification Number (Tax ID) is a unique identifier assigned to individuals for tax
+purposes. In the European Union (EU), each member state has its own version of the Tax ID,
+tailored to its national tax system but aligned with EU regulations to facilitate cross-border
+transactions and information exchange. The format and structure of Tax IDs vary significantly
+between EU member states; however, they typically include a combination of letters and
+numbers.
+The authentic sources for Tax ID attestations are mainly the National Tax Authorities which
+are the actual issuers of the tax identification numbers. Apart from National Tax Authorities
+the role of the authentic source can also be assumed by other government agencies such as
+social security or public service agencies, in case they hold Tax ID information, or third-party
+services authorized by governments to verify and validate Tax IDs.
+In some countries, there may be no authentic source capable of providing, via
+interoperability, the information required by a QTSP to issue a QEAA, or of functioning as a
+Pub-EAA; in these cases, a manual process can be used in which the attestation is created
+by a QTSP after receiving a relevant physical or electronic document that provides the
+required proof.
+Tax ID attestation embodies the official and unique identification of an individual within a
+national tax system, enabling information exchange within and across EU member states.
+The following sections are based on the assumption that a single attestation is associated
+with a single Tax ID number.
+
 
 **Supported formats**
 
-- TODO
+###### Certificate of Residence Attestation
+
+**Status**
+
+In design
+
+**Description**
+
+A Certificate of Residence (CoR) attestation provides structured, verifiable evidence of a
+natural person’s residential address, bound to their identity. For bank account onboarding,
+the CoR attestation is used together with a PID attestation to:
+
+**Supported formats**
 
 ## Intesi Group
 
