@@ -1,0 +1,534 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://uri.etsi.org/19522/v1#/Evidence",
+  "title": "ETSI EN 319 522-3 V1.2.1 Evidence",
+  "description": "JSON Schema for Electronic Registered Delivery Service (ERDS) Evidence, structurally equivalent to the EvidenceType XML Schema in ETSI EN 319 522-3 V1.2.1 (namespace http://uri.etsi.org/19522/v1#). XML attributes are represented as properties; repeating elements are represented as arrays.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "EN319522v1.1.1",
+      "description": "Schema version (required XML attribute)."
+    },
+    "evidenceIdentifier": {
+      "type": "string",
+      "description": "String identifier for this evidence instance."
+    },
+    "erdsEventId": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI identifying the ERDS event that triggered production of this evidence (Table 2).",
+      "enum": [
+        "http://uri.etsi.org/19522/Event/SubmissionAcceptance",
+        "http://uri.etsi.org/19522/Event/SubmissionRejection",
+        "http://uri.etsi.org/19522/Event/RelayAcceptance",
+        "http://uri.etsi.org/19522/Event/RelayRejection",
+        "http://uri.etsi.org/19522/Event/RelayFailure",
+        "http://uri.etsi.org/19522/Event/NotificationForAcceptance",
+        "http://uri.etsi.org/19522/Event/NotificationForAcceptanceFailure",
+        "http://uri.etsi.org/19522/Event/ConsignmentAcceptance",
+        "http://uri.etsi.org/19522/Event/ConsignmentRejection",
+        "http://uri.etsi.org/19522/Event/AcceptanceRejectionExpiry",
+        "http://uri.etsi.org/19522/Event/NotificationDelivered",
+        "http://uri.etsi.org/19522/Event/ContentConsignment",
+        "http://uri.etsi.org/19522/Event/ContentConsignmentFailure",
+        "http://uri.etsi.org/19522/Event/ConsignmentNotification",
+        "http://uri.etsi.org/19522/Event/ConsignmentNotificationFailure",
+        "http://uri.etsi.org/19522/Event/NotificationAccessTracking",
+        "http://uri.etsi.org/19522/Event/ContentAccessTracking",
+        "http://uri.etsi.org/19522/Event/ContentHandover",
+        "http://uri.etsi.org/19522/Event/ContentHandoverFailure",
+        "http://uri.etsi.org/19522/Event/RelayToNonERDS",
+        "http://uri.etsi.org/19522/Event/RelayToNonERDSFailure",
+        "http://uri.etsi.org/19522/Event/ReceivedFromNonERDS"
+      ]
+    },
+    "eventReasons": {
+      "type": "object",
+      "description": "Container for one or more event reasons.",
+      "properties": {
+        "eventReason": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "A single reason that caused the ERDS event. code is a URI; details provides optional elaboration.",
+            "properties": {
+              "code": {
+                "type": "string",
+                "format": "uri",
+                "description": "URI identifying the event reason."
+              },
+              "details": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Optional additional details about the reason."
+              }
+            },
+            "required": ["code"]
+          }
+        }
+      },
+      "required": ["eventReason"]
+    },
+    "eventTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the event."
+    },
+    "evidenceIssuerPolicyId": {
+      "type": "object",
+      "description": "One or more policy identifiers (URIs, or URNs per RFC 3061 for OID-based policies).",
+      "properties": {
+        "policyId": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "minItems": 1
+        }
+      },
+      "required": ["policyId"]
+    },
+    "evidenceIssuerDetails": {
+      "$ref": "#/definitions/EntityDetailsType",
+      "description": "Details of the entity that issued this evidence."
+    },
+    "senderDetails": {
+      "$ref": "#/definitions/UserDetailsType",
+      "description": "Details of the message sender."
+    },
+    "senderDelegateDetails": {
+      "$ref": "#/definitions/UserDetailsType",
+      "description": "Details of a delegate acting on behalf of the sender."
+    },
+    "recipientDetails": {
+      "type": "array",
+      "description": "One or more recipients of the message.",
+      "items": { "$ref": "#/definitions/UserDetailsType" },
+      "minItems": 1
+    },
+    "recipientsDelegateDetails": {
+      "type": "array",
+      "description": "Zero or more delegates acting on behalf of recipients.",
+      "items": {
+        "allOf": [
+          { "$ref": "#/definitions/UserDetailsType" },
+          {
+            "type": "object",
+            "description": "Extends UserDetailsType with the list of recipients for whom this delegate acts.",
+            "properties": {
+              "delegatingRecipients": {
+                "type": "array",
+                "items": { "type": "integer" },
+                "description": "Indices (integers) of recipientDetails entries for which this delegate acts. Represented as xs:list of xs:integer in XSD."
+              }
+            },
+            "required": ["delegatingRecipients"]
+          }
+        ]
+      }
+    },
+    "submissionTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time at which the message was submitted."
+    },
+    "evidenceRefersToRecipient": {
+      "type": "integer",
+      "description": "1-based index into recipientDetails identifying the specific recipient this evidence pertains to."
+    },
+    "messageIdentifier": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Non-empty string identifying the message."
+    },
+    "userContentInfo": {
+      "type": "object",
+      "description": "Metadata about the user message content.",
+      "properties": {
+        "appLayerIdentifier": {
+          "type": "string",
+          "description": "Optional application-layer identifier for the message."
+        },
+        "composingParts": {
+          "type": "integer",
+          "description": "Optional total number of parts composing the message."
+        },
+        "partsInfo": {
+          "type": "array",
+          "description": "One or more partInfo elements describing individual content parts.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "Metadata for a single content part, including an optional digest.",
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "description": "Identifier for this content part."
+              },
+              "contentType": {
+                "type": "string",
+                "description": "MIME type or other content type designation."
+              },
+              "digestMethod": {
+                "type": "object",
+                "description": "Algorithm used to compute the digest (ds:DigestMethod).",
+                "properties": {
+                  "algorithm": { "type": "string", "format": "uri" }
+                },
+                "required": ["algorithm"]
+              },
+              "digestValue": {
+                "type": "string",
+                "contentEncoding": "base64",
+                "description": "Base64-encoded digest value (ds:DigestValue)."
+              }
+            },
+            "required": ["identifier", "contentType"]
+          }
+        }
+      },
+      "required": ["partsInfo"],
+      "examples": [
+        {
+          "appLayerIdentifier": "contract",
+          "composingParts": 1,
+          "partsInfo": [
+            {
+              "identifier": "contract.pdf",
+              "contentType": "application/pdf",
+              "digestMethod": {
+                "algorithm": "http://www.w3.org/2001/04/xmlenc#sha256"
+              },
+              "digestValue": "ZXhhbXBsZWRpZ2VzdHZhbHVlZm9yY29udHJhY3RwZGY="
+            }
+          ]
+        }
+      ]
+    },
+    "externalErdsDetails": {
+      "$ref": "#/definitions/EntityDetailsType",
+      "description": "Details of an external ERDS involved in the delivery."
+    },
+    "forwardedToExternalSystem": {
+      "type": "string",
+      "description": "Identifier of an external system to which the message was forwarded."
+    },
+    "transactionLogInformation": {
+      "type": "object",
+      "description": "References to one or more external transaction logs.",
+      "properties": {
+        "transactionLog": {
+          "type": "array",
+          "items": {},
+          "minItems": 1,
+          "description": "One or more transaction log entries (open content)."
+        }
+      },
+      "required": ["transactionLog"]
+    },
+    "extensions": {
+      "type": "array",
+      "description": "One or more extension elements.",
+      "minItems": 1,
+      "items": {
+        "allOf": [
+          {},
+          {
+            "type": "object",
+            "description": "Extension element with an optional criticality flag (isCritical XML attribute).",
+            "properties": {
+              "isCritical": {
+                "type": "boolean",
+                "description": "When true, processors that do not understand this extension MUST reject processing."
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "evidenceIdentifier",
+    "erdsEventId",
+    "eventTime",
+    "evidenceIssuerDetails",
+    "senderDetails",
+    "recipientDetails"
+  ],
+  "definitions": {
+    "EntityDetailsType": {
+      "type": "object",
+      "description": "Identity and optional certificate details for an entity (issuer or external ERDS).",
+      "properties": {
+        "identity": { "$ref": "#/definitions/IdentityAttributesType" },
+        "certificateDetails": {
+          "type": "array",
+          "description": "One to three certificate representations, each being an X.509 certificate or a certificate ID (xs:choice maxOccurs='3').",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "DER-encoded X.509 certificate in Base64.",
+                "properties": {
+                  "x509Certificate": {
+                    "type": "string",
+                    "contentEncoding": "base64"
+                  }
+                },
+                "required": ["x509Certificate"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "description": "Certificate identified by digest and optional issuer/serial.",
+                "properties": {
+                  "certId": { "$ref": "#/definitions/CertIDTypeV2" }
+                },
+                "required": ["certId"],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "any": {
+          "description": "Extension point for additional entity data."
+        }
+      },
+      "required": ["identity"]
+    },
+
+    "IdentityAttributesType": {
+      "type": "object",
+      "description": "One or more SAML Attributes describing the entity's identity.",
+      "properties": {
+        "attribute": {
+          "type": "array",
+          "description": "SAML 2.0 Attributes (saml:Attribute).",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "SAML 2.0 saml:Attribute element.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Attribute name (required)."
+              },
+              "nameFormat": {
+                "type": "string",
+                "format": "uri",
+                "description": "URI identifying the name format."
+              },
+              "friendlyName": {
+                "type": "string",
+                "description": "Human-readable name for the attribute."
+              },
+              "attributeValue": {
+                "type": "array",
+                "items": {},
+                "description": "Zero or more attribute values (saml:AttributeValue); each value may be any type."
+              }
+            },
+            "required": ["name"]
+          }
+        }
+      },
+      "required": ["attribute"]
+    },
+
+    "CertIDTypeV2": {
+      "type": "object",
+      "description": "Certificate identifier comprising a digest and an optional issuer/serial (V2 variant per RFC 5652).",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional URI locating the certificate."
+        },
+        "certDigest": {
+          "type": "object",
+          "description": "Digest of the certificate (ds:DigestMethod + ds:DigestValue).",
+          "properties": {
+            "digestMethod": {
+              "type": "object",
+              "description": "XML digital signature DigestMethod: identifies the digest algorithm by URI.",
+              "properties": {
+                "algorithm": { "type": "string", "format": "uri" }
+              },
+              "required": ["algorithm"]
+            },
+            "digestValue": { "type": "string", "contentEncoding": "base64" }
+          },
+          "required": ["digestMethod", "digestValue"]
+        },
+        "issuerSerialV2": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "description": "DER-encoded IssuerSerial (V2) identifying the certificate issuer and serial number."
+        }
+      },
+      "required": ["certDigest"]
+    },
+
+    "UserDetailsType": {
+      "type": "object",
+      "description": "Identity, identifier, and assurance details for a user (sender, recipient, or delegate).",
+      "properties": {
+        "identity": { "$ref": "#/definitions/IdentityAttributesType" },
+        "identifier": {
+          "type": "object",
+          "description": "A non-empty string identifier within a named scheme (xs:simpleContent extension).",
+          "properties": {
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The identifier value."
+            },
+            "identifierSchemeName": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Name of the identification scheme (required XML attribute)."
+            }
+          },
+          "required": ["value", "identifierSchemeName"]
+        },
+        "assuranceLevelsDetails": {
+          "description": "Assurance level information expressed as one of two alternative structures (xs:choice of two sequences).",
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Option 1: a global assurance level together with authentication details.",
+              "properties": {
+                "globalAssuranceLevel": {
+                  "$ref": "#/definitions/AssuranceLevelDetailsType"
+                },
+                "authenticationDetails": {
+                  "$ref": "#/definitions/AuthenticationDetailsType"
+                }
+              },
+              "required": ["globalAssuranceLevel", "authenticationDetails"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "description": "Option 2: per-factor assurance levels (authentication, identity proof, optional federation).",
+              "properties": {
+                "authenticationDetsAndAssuranceLevel": {
+                  "type": "object",
+                  "description": "An assurance level paired with optional authentication details.",
+                  "properties": {
+                    "assuranceLevel": {
+                      "$ref": "#/definitions/AssuranceLevelDetailsType"
+                    },
+                    "authenticationDetails": {
+                      "$ref": "#/definitions/AuthenticationDetailsType"
+                    }
+                  },
+                  "required": ["assuranceLevel"]
+                },
+                "identityProofAssuranceLevel": {
+                  "$ref": "#/definitions/AssuranceLevelDetailsType"
+                },
+                "federationAssuranceLevel": {
+                  "$ref": "#/definitions/AssuranceLevelDetailsType"
+                }
+              },
+              "required": [
+                "authenticationDetsAndAssuranceLevel",
+                "identityProofAssuranceLevel"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+
+    "AssuranceLevelDetailsType": {
+      "type": "object",
+      "description": "Details about a single assurance level, including an optional policy reference.",
+      "properties": {
+        "assuranceLevel": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI identifying the assurance level."
+        },
+        "policyId": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional URI identifying an applicable policy."
+        },
+        "policyIdDetails": {
+          "type": "string",
+          "description": "Optional textual details about the policy."
+        },
+        "policyIdDetailsResources": {
+          "type": "array",
+          "description": "Optional multilingual URIs for policy detail resources.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "A URI tagged with a mandatory language code (xml:lang attribute).",
+            "properties": {
+              "value": { "type": "string", "format": "uri", "minLength": 1 },
+              "lang": {
+                "type": "string",
+                "description": "BCP 47 language tag (xml:lang)."
+              }
+            },
+            "required": ["value", "lang"]
+          }
+        }
+      },
+      "required": ["assuranceLevel"]
+    },
+
+    "AuthenticationDetailsType": {
+      "description": "Authentication details expressed as one of four alternatives: a SAML Assertion, an OAuth2 token, explicit time/method, or an opaque 'other' value.",
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "SAML 2.0 Assertion.",
+          "properties": {
+            "assertion": {
+              "type": "object",
+              "description": "SAML 2.0 saml:Assertion element (externally defined)."
+            }
+          },
+          "required": ["assertion"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "OAuth2 token (any structure).",
+          "properties": {
+            "oAuth2": {}
+          },
+          "required": ["oAuth2"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Explicit authentication time and method URI.",
+          "properties": {
+            "authenticationTime": { "type": "string", "format": "date-time" },
+            "authenticationMethod": { "type": "string", "format": "uri" }
+          },
+          "required": ["authenticationTime", "authenticationMethod"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Any other authentication details.",
+          "properties": {
+            "other": {}
+          },
+          "required": ["other"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
