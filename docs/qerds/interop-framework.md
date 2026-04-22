@@ -106,7 +106,7 @@ Both ETSI EN 319 522-1 (ERDS) and DIDComm Messaging v2.1 independently arrive at
 
 1. **ERDS Evidence Protocol** *(most critical)*: DIDComm has no equivalent to ERDS's 17 legally-binding evidence event types (covering submission, relay, consignment, and handover). A purpose-built DIDComm evidence protocol must be defined, covering mandatory events: `SubmissionAcceptance`, `RelayAcceptance`, `ContentConsignment`, `ContentHandover`, and their failure variants.
 
-2. **Legal Identity Binding:** DIDs are cryptographic identifiers by default. The profile must specify acceptable DID methods that bind to verified legal identity (candidates: `did:ebsi`, `did:elsi`, eIDAS-anchored methods, or Verifiable Credentials).
+2. **Legal Identity Binding:** DIDs are cryptographic identifiers by default. The profile must specify acceptable DID methods that bind to verified legal identity (candidates: `did:ebsi`, `did:elsi`, eIDAS-anchored methods, or Verifiable Credentials). An obvious candidate is to specify a new DID method based on the existing AS4 registry model.
 
 3. **Trusted Timestamping:** RFC 3161 timestamp tokens must be embedded in evidence messages; no built-in mechanism exists in DIDComm.
 
