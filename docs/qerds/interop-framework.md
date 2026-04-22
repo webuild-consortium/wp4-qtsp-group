@@ -69,3 +69,49 @@ Applying its mediator role, DIDComm Messaging might support the four-corner mode
 All of the promising candidates are relatively mature protocols and each of them arguably have a larger deployed base than AS4 has today, when disregarding public and private business-to-business and business-to-government interchange. In the case of Matrix, the deployed base is very large and ActivityPub (without the MLS extension) is even more widely deployed. The DIDComm protocol is perhaps the choice that is closest to AS4 in structure even if DIDComm Messaging v2.1 has a somewhat different key management mechanism at its core. All of these would be easy to adapt to the current EU trust directory (e.g. the one used in Peppol).
 
 The existence of a group-based encryption mechanism means that flows that are not just 1–1 – i.e. “mailing list”-type flows with perfect forward secrecy becomes possible. For the EBW this could be important for use cases where more than two parties need to exchange messages, for instance when an auditor is invited to monitor a message exchange betwen a government agency and a legal entity. Within WE BUILD, no use case is known yet which could validate this assumption.
+
+# Appendix A: DIDComm/ERDS gap analysis
+
+**[Full document →](https://docs.google.com/document/d/1y6e9bI4kVCKQwbdgbNLdu53exWAoG0CQ/edit)**
+*Architectural Compatibility, 4-Corner Model Mapping, and Feasibility of Profiling DIDComm 2.1 as a Post-Quantum ERDS | April 2026*
+
+---
+
+## Central Finding
+
+Both ETSI EN 319 522-1 (ERDS) and DIDComm Messaging v2.1 independently arrive at a **4-corner architectural model** for trusted message delivery. They are structurally isomorphic at the level of roles, routing, and evidence of delivery. A DIDComm-based ERDS profile is **technically feasible** and offers meaningful advantages over the current AS4/ebXML approach.
+
+## Architecture Mapping
+
+| ERDS Concept | DIDComm 2.1 Equivalent |
+|---|---|
+| Sender / ERD-UA | Sender agent (Alice) |
+| Sender's ERDS (S-ERDS) | Sender's Mediator(s) |
+| ERDS Relay Interface | Forward message / mediator routing |
+| Recipient's ERDS (R-ERDS) | Recipient's Mediator(s) |
+| Recipient / ERD-UA | Recipient agent (Bob) |
+| Common Service Interface (CSI) | DID resolution infrastructure |
+| Trust Status List (TSL) | Trusted DID method / trust registry |
+| ERDS Evidence | *(No direct equivalent — must be profiled)* |
+
+## Strengths of DIDComm as an ERDS Foundation
+
+- **Post-quantum ready:** Native JSON/JOSE cryptography enables clean migration to ML-DSA and ML-KEM algorithms.
+- **Algorithm-agile identity:** DID Documents support flexible key management without protocol changes.
+- **Transport independence:** Runs over HTTPS, WebSockets, Bluetooth, SMTP, and others without protocol-level changes.
+- **Decentralized trust:** Reduces dependence on centralized AS4 connectivity networks; DID Document updates propagate routing changes automatically.
+- **Store-and-forward:** DIDComm mediator semantics match ERDS consignment and asynchronous delivery models natively.
+
+## Key Gaps Requiring Profiling
+
+1. **ERDS Evidence Protocol** *(most critical)*: DIDComm has no equivalent to ERDS's 17 legally-binding evidence event types (covering submission, relay, consignment, and handover). A purpose-built DIDComm evidence protocol must be defined, covering mandatory events: `SubmissionAcceptance`, `RelayAcceptance`, `ContentConsignment`, `ContentHandover`, and their failure variants.
+
+2. **Legal Identity Binding:** DIDs are cryptographic identifiers by default. The profile must specify acceptable DID methods that bind to verified legal identity (candidates: `did:ebsi`, `did:elsi`, eIDAS-anchored methods, or Verifiable Credentials).
+
+3. **Trusted Timestamping:** RFC 3161 timestamp tokens must be embedded in evidence messages; no built-in mechanism exists in DIDComm.
+
+4. **Capability Negotiation:** ERDS requires a structured handshake covering supported formats, evidence types, and authentication strength; DIDComm offers only basic service endpoint metadata.
+
+## Conclusion
+
+DIDComm 2.1 provides a strong cryptographic and transport foundation that maps naturally onto ERDS requirements. The primary work for a conformant profile is defining the **evidence protocol** — the single most important deliverable of any profiling effort. With this protocol in place, DIDComm offers a modern, post-quantum-ready path forward for registered electronic delivery.
