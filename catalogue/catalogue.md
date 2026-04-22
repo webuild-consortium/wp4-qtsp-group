@@ -122,7 +122,8 @@ Digitel TS develops infrastructure and services for digital identity, electronic
 
 ### Contact Point(s)
 
-- TODO
+- [Alejandro Nieto](alejandro.nieto@madisonmk.com)
+- [Alejandro Alfonso](alejandro.alfonso@madisonmk.com)
 
 ### Trust Services
 
