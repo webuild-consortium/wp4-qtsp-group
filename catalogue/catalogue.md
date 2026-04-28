@@ -28,8 +28,7 @@ Live
 
 A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
 
-[Rulebook](https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md)
-
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
 
 **Supported formats**
 
@@ -149,7 +148,7 @@ TODO
 
 A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
 
-[Rulebook](https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md)
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
 
 **Supported formats**
 
@@ -189,7 +188,7 @@ TODO
 
 A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
 
-[Rulebook](https://github.com/webuild-consortium/wp4-qtsp-group/blob/main/docs/qeaa/rulebooks/rb100_hello_world_attestation.md)
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
 
 **Supported formats**
 
