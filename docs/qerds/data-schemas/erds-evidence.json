@@ -17,6 +17,10 @@
       "type": "string",
       "description": "String identifier for this evidence instance."
     },
+    "ERDSEventId": {
+      "$ref": "#/definitions/ERDSEventId",
+      "description": "URI identifying the ERDS event that triggered production of this evidence (Table 2 of ETSI EN 319 522-3)."
+    },
     "EventReasons": {
       "type": "object",
       "description": "Container for one or more event reasons.",
