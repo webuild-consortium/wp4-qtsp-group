@@ -72,6 +72,9 @@ The existence of a group-based encryption mechanism means that flows that are no
 
 # Appendix A: DIDComm/ERDS gap analysis
 
+> [!NOTE]
+> The technical report below was drafted but not completed by the WP4 QTSP group. We keep it avaiable as a potentially useful reference. For open discussion points, see [wp4-qtsp-group#22](https://github.com/webuild-consortium/wp4-qtsp-group/pull/22).
+
 **[Full document →](https://docs.google.com/document/d/1y6e9bI4kVCKQwbdgbNLdu53exWAoG0CQ/edit)**
 *Architectural Compatibility, 4-Corner Model Mapping, and Feasibility of Profiling DIDComm 2.1 as a Post-Quantum ERDS | April 2026*
 
