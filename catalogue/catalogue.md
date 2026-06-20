@@ -296,6 +296,40 @@ the CoR attestation is used together with a PID attestation to:
 
 **Supported formats**
 
+## iGrant.io
+
+### About
+
+[iGrant.io](https://igrant.io) is a data exchange and consent management provider enabling organisations to manage personal data exchange in a secure, privacy-preserving and compliant manner.
+
+### Contact Point(s)
+
+- [Support](mailto:support@igrant.io)
+
+### Trust Services
+
+#### Qualified Electronic Attestation of Attributes (QeAA)
+
+##### Documentation
+
+TODO
+
+##### Supported Attestations
+
+###### TODO
+
+**Status**
+
+TODO
+
+**Description**
+
+TODO
+
+**Supported formats**
+
+- TODO
+
 ## Intesi Group
 
 ### About
