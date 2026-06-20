@@ -334,11 +334,14 @@ TODO
 
 ### About
 
-TODO
+Intesi Group is an Italian Qualified Trust Service Provider (QTSP) delivering a comprehensive suite of eIDAS-compliant trust services, including electronic signatures, electronic seals, time stamping and electronic attestation of attributes. The EUDI Wallet is a living ecosystem in constant evolution, and we are committed to keeping pace with its developments, supporting public and private organisations in integrating qualified trust services into the wallet ecosystem.
+
+As an active participant in the WE BUILD consortium, Intesi Group contributes to piloting real-world use cases for electronic signing and sealing, as well as the issuance and verification of Electronic Attestations of Attributes (EAAs), helping validate the wallet's capabilities and accelerate market readiness ahead of the European rollout.
 
 ### Contact Point(s)
 
-- TODO
+- [vmanaila@intesigroup.com](mailto:vmanaila@intesigroup.com)
+- [fbarcellini@intesigroup.com](mailto:fbarcellini@intesigroup.com)
 
 ### Trust Services
 
@@ -346,11 +349,11 @@ TODO
 
 ##### Documentation
 
-TODO
+[Hello World](https://webuild.test4mind.com/hello-world)
 
 ##### Supported Attestations
 
-###### TODO
+###### Hello World Attestation
 
 **Status**
 
@@ -358,11 +361,12 @@ TODO
 
 **Description**
 
-TODO
+A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows, according to WE BUILD Rulebook: https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-hello-world
 
 **Supported formats**
 
-- TODO
+- SD-JWT
+- mdoc
 
 ## Reconi
 
