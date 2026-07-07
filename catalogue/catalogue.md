@@ -376,7 +376,7 @@ One of the providers of eHerkenning for > 15 years. eHerkenning is a public priv
 
 ### Contact Point(s)
 
-- TODO
+- [René Bonte](mailto:rbonte@reconi.com)
 
 ### Trust Services
 
