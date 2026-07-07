@@ -1,6 +1,6 @@
 # Catalogue Site
 
-This directory is the source for the GitHub Pages website.
+This directory is the source for the [GitHub Pages website](https://webuild-consortium.github.io/wp4-qtsp-group/).
 
 ## Contributing content
 
