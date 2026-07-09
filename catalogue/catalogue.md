@@ -376,7 +376,7 @@ One of the providers of eHerkenning for > 15 years. eHerkenning is a public priv
 
 ### Contact Point(s)
 
-- [Hidde Dorhout](mailto:hidde.dorhout@cleverbase.com)
+- [René Bonte](mailto:rbonte@reconi.nl)
 
 ### Trust Services
 
