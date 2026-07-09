@@ -376,7 +376,7 @@ One of the providers of eHerkenning for > 15 years. eHerkenning is a public priv
 
 ### Contact Point(s)
 
-- TODO
+- [René Bonte](mailto:rbonte@reconi.nl)
 
 ### Trust Services
 
@@ -384,20 +384,39 @@ One of the providers of eHerkenning for > 15 years. eHerkenning is a public priv
 
 ##### Documentation
 
-TODO
+[QeAA Issuer](https://recwebpoc.azurewebsites.net/))
 
 ##### Supported Attestations
 
-###### TODO
+###### Hello World Attestation
 
 **Status**
 
-TODO
+Live
 
 **Description**
 
-TODO
+A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
 
 **Supported formats**
 
-- TODO
+- SD-JWT
+
+
+###### Authorisation Attestations
+
+**Description**
+
+Reconi will issue for BU3 and SC2 (and maybe other use cases), Authorisation Attestations in SD-JWT format to EUDI Wallets and EU Business Wallets. 
+It remains to be seen if technically this will be one attestation, or different ones (EU PoA, PoA, PoR, ...)
+[ToDo: Link(s) to Rulebook(s)](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
+
+**Status**
+
+In Design
+
+**Supported formats**
+
+- SD-JWT
