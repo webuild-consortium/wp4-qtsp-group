@@ -10,6 +10,11 @@ This is documentation of the [WE BUILD: WP4 QTSP group](../README.md).
 - [rWSCD](rwscd/README.md)
 - [RPAC/RPRC](rpac-rprc/README.md)
 
+## Use case tracking
+
+- [Use case tracking](use-cases/README.md): status of qualified trust
+  services in the WE BUILD use cases and their providers
+
 ## General references
 
 - WE BUILD Consortium
