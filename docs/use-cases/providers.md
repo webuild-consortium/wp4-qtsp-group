@@ -11,6 +11,12 @@ confirms membership. The *Qualification* column records whether the
 provider is qualified for the listed services on the
 [EU trusted lists](https://eidas.ec.europa.eu/efda/trust-services/browse/eidas/tls).
 
+> [!NOTE]
+> This overview is based on the use case scenario specifications from
+> April 2026 and may be outdated. If the status or the parties involved in
+> your use case have changed, please update the table, see
+> [how to update](README.md#how-to-update).
+
 ## Overview
 
 | Provider | Country | Q services in scenarios | Scenarios | QTSP group | Qualification | Notes | Updated | Status |

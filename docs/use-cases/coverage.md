@@ -8,6 +8,12 @@ scenarios of the use case. Providers marked *tbc* or *technology for QTSP*
 are counted between brackets and do not count towards the two-provider
 threshold. `—` means the service is not required.
 
+> [!NOTE]
+> This overview is based on the use case scenario specifications from
+> April 2026 and may be outdated. If the status or the parties involved in
+> your use case have changed, please update the table, see
+> [how to update](README.md#how-to-update).
+
 ## Overview
 
 | Use case | Title | QEAA | QES | QESeal | QERDS | Notes | Updated | Status |

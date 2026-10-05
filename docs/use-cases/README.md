@@ -77,7 +77,7 @@ interoperability between independent providers.
 ## Sources and method
 
 The initial content is based on the WE BUILD v1.0 scenario specifications
-(June 2026), taken from the *Roles and participants* sections, the
+(April 2026), taken from the *Roles and participants* sections, the
 attestation tables and the scenario flow descriptions. Where a
 specification leaves a role blank or marks it n/a, that is stated
 literally rather than inferred.
@@ -107,6 +107,10 @@ Points to be aware of:
   consistent about them.
 
 ## How to update
+
+The content may be outdated, since the scenario specifications have
+evolved since April 2026. Use case and provider contacts are asked to
+update the tables when the status or the parties involved have changed.
 
 Changes follow the normal [contribution process](../../README.md#contributing):
 fork the repository and create a pull request. Small edits can be made

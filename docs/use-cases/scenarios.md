@@ -3,6 +3,12 @@
 Implementation status of the qualified trust service part of each WE BUILD
 use case scenario. See the [legend and update instructions](README.md).
 
+> [!NOTE]
+> This overview is based on the use case scenario specifications from
+> April 2026 and may be outdated. If the status or the parties involved in
+> your use case have changed, please update the table, see
+> [how to update](README.md#how-to-update).
+
 ## Overview
 
 | ID | Scenario | Q services | Q service providers | Notes | Updated | Status |
