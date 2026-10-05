@@ -22,8 +22,17 @@ The tracking covers these trust services:
 | QES | Qualified electronic signature (natural person) |
 | QESeal | Qualified electronic seal (legal person) |
 | QERDS | Qualified electronic registered delivery service |
+| RPAC/RPRC | Relying party access certificate and registration certificate (WRPAC/WRPRC) |
 
-Relying party access and registration certificates (WRPAC/WRPRC),
+RPAC/RPRC is not a qualified trust service, but its issuance is in scope
+of the QTSP group, see the [RPAC/RPRC documentation](../rpac-rprc/README.md).
+According to the WE BUILD blueprint, relying parties, PID providers and
+attestation providers need at least one access certificate per service
+([trust ecosystem](https://github.com/webuild-consortium/wp4-architecture/blob/main/blueprint/appendix-trust-ecosystem.md)).
+RPAC/RPRC is therefore considered required in every scenario. Where a
+specification does not mention it, this is recorded as *not specified*,
+so that it can be followed up with the use case.
+
 Pub-EAA and non-qualified EAA are mentioned in the scenario details for
 context, but are not scored.
 
@@ -47,7 +56,7 @@ the QTSP group can influence, not the pilot as a whole.
 | 🟢 Working | The qualified trust services work in the pilot according to the WE BUILD specifications, and are tested (link the test results). |
 | 🟡 In progress | It is clear what needs to be done, but work remains. |
 | 🔴 Blocked | It is unclear what needs to be done: a blocking issue, missing specifications or no provider assigned (link the issue). |
-| ⚪ Not applicable | The scenario uses no qualified trust services. |
+| ⚪ Not applicable | The scenario uses none of the services in scope. |
 | ❔ Not assessed | No status has been assessed yet. |
 
 ### Use case coverage
@@ -61,7 +70,7 @@ in the *Notes* column.
 | 🟢 Covered | Qualified trust services are applied, and each required service has at least two providers attached. |
 | 🟡 Limited | Qualified trust services are applied, but a required service has fewer than two providers, or only providers marked *tbc*. |
 | 🔴 Gap | Qualified trust services are required, but none of them has a provider assigned. |
-| ⚪ Not applicable | The use case uses no qualified trust services. |
+| ⚪ Not applicable | The use case uses none of the services in scope. |
 
 At least two providers per service are needed to demonstrate
 interoperability between independent providers.
@@ -93,9 +102,10 @@ Points to be aware of:
   Spherity are listed as QEAA provider with the annotation *interim,
   technology for QTSP*. They supply the technology, not the qualified
   status.
-- **RP certificates** are only described in detail in PA1 scenario 1, PA2
-  scenario A.2 and SC5. Other scenarios rely on them implicitly through the
-  WP4 trust infrastructure.
+- **RPAC/RPRC** are only described in PA1 scenario 1, PA2 scenario A.2
+  and SC5, and no specification names a TSP as issuer. Other scenarios
+  rely on them implicitly through the WP4 trust infrastructure. This is an
+  action point for the QTSP group and the use cases.
 - **Draft specifications.** BU1 scenarios 3/4 (v0.7), BU6 scenario 4
   (v0.1), PA1 scenario 3 (v0.82) and PA3 scenario 2 (no version) were still
   drafts at the time of export and may change.

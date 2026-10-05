@@ -46,6 +46,10 @@ provider is qualified for the listed services on the
 
 ## Not included
 
+No specification names a TSP as issuer of RPAC/RPRC. Issuers will be
+added here once they are known, see [coverage](coverage.md#rpacrprc-all-use-cases).
+
+
 Public bodies that issue Pub-EAA, also in the combined QEAA/Pub-EAA role
 of BU6, and issuers of non-qualified EAA are listed in the
 [scenario details](scenarios.md#scenario-details) only.

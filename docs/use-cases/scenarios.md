@@ -13,41 +13,41 @@ use case scenario. See the [legend and update instructions](README.md).
 
 | ID | Scenario | Q services | Q service providers | Notes | Updated | Status |
 |---|---|---|---|---|---|---|
-| BU1-1 | KYC (B2B vertical) | QEAA | Procivis, Spherity (technology for QTSP) | No qualified QEAA provider named. | 2026-10-05 | ❔ |
-| BU1-2 | KYS (B2B vertical) | QEAA | Procivis, Spherity (technology for QTSP) | No qualified QEAA provider named. | 2026-10-05 | ❔ |
-| BU1-3 | KYC for sole traders | QEAA | Docaposte, Cleverbase, Procivis (tbc), Signicat (tbc) | Draft specification (v0.7). | 2026-10-05 | ❔ |
-| BU1-4 | KYS for sole traders | QEAA | Docaposte, Cleverbase, Procivis (tbc), Signicat (tbc) | Draft specification (v0.7). | 2026-10-05 | ❔ |
-| BU1-5 | Know Your Employee (KYE) | QEAA | SwissSign | | 2026-10-05 | ❔ |
-| BU2-1 | Create a company branch in an EU or EEA Member State | QEAA, QES, QESeal, QERDS (MVP+) | D-Trust (QEAA, QES) | QESeal required, provider not explicitly assigned. | 2026-10-05 | ❔ |
-| BU2-2 | Register a company branch with a tax authority | QEAA, QES | None named | All provider roles empty; assumed to be delivered by WP4. | 2026-10-05 | 🔴 |
-| BU3-1 | Filing VAT declaration using tax portal | QEAA, QES, QESeal | QEAA: Reconi, Signicat, Digidentity, Cleverbase. QES: Cleverbase, KPN, Digidentity, Signicat. | QESeal provider not named. | 2026-10-05 | ❔ |
-| BU3-2 | Filing VAT declaration using M2M | QEAA, QES, QESeal, QERDS | QEAA: Reconi, Signicat, Digidentity. QES: Cleverbase, KPN, Digidentity, Signicat. QERDS: Cleverbase, Ledger Leopard. | QESeal provider not named. | 2026-10-05 | ❔ |
-| BU3-3 | Issuing VAT ID (tax portal) | QEAA, QES, QESeal | QEAA: Reconi, Signicat, Digidentity, Cleverbase. QES: Cleverbase, KPN, Digidentity, Signicat. | QESeal provider not named. | 2026-10-05 | ❔ |
-| BU3-4 | Issuing VAT ID using M2M | QEAA, QES, QESeal, QERDS | QEAA: Cleverbase, Signicat. QES: Cleverbase, Signicat. | QESeal and QERDS providers not named. | 2026-10-05 | ❔ |
-| BU4-1A | Issue a power of attorney (PoA) | QEAA | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | Qualification of the PoA as QEAA still under discussion. | 2026-10-05 | ❔ |
-| BU4-1B | Issue powers of representation (PoR) to an EU Business Wallet | QEAA | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | | 2026-10-05 | ❔ |
-| BU4-1C | Get access to service | QEAA | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | | 2026-10-05 | ❔ |
-| BU5-1 | Micro-credentials | None | — | | 2026-10-05 | ⚪ |
-| BU6-1 | Full power access to OOTS | QEAA or Pub-EAA | Public bodies in a combined QEAA/Pub-EAA role | No QTSP named; PL not filled in. | 2026-10-05 | ❔ |
-| BU6-4 | Attestations and OOTS combined | QEAA or Pub-EAA | Public bodies in a combined QEAA/Pub-EAA role; WP4-QEAA placeholder for PL | Draft specification (v0.1). | 2026-10-05 | ❔ |
-| SC2-1 | Seamless onboarding across data space initiatives (Agri-X) | None in MVP | — | QES/QTSP role defined but not exercised. | 2026-10-05 | ⚪ |
-| SC5-1 | Supplier pre-approval | None | — | WE BUILD QEAA only; attestation is a non-qualified EAA. | 2026-10-05 | ⚪ |
-| SC5-2 | Service provider authorization | QEAA (pending analysis) | QEAA provider out of scope | Qualification is a working assumption pending analysis. | 2026-10-05 | ❔ |
-| SC5-3 | Service provider authorization verifiable by tax administration (MVP+) | QEAA (pending analysis) | QEAA provider out of scope | Qualification is a working assumption pending analysis. | 2026-10-05 | ❔ |
-| SC5-4 | Direct eInvoicing between business wallets | QERDS | Not assigned | QERDS provider is an open point. | 2026-10-05 | 🔴 |
-| SC5-5 | Peppol enhancements (MVP+) | QESeal, QERDS | Not assigned | No separate scenario specification; QTSP role not assigned. | 2026-10-05 | 🔴 |
-| PA1-1 | Open a personal bank account | QEAA | IDnow Trust Services, InfoCert | | 2026-10-05 | ❔ |
-| PA1-3 | Contract signing in banking KYC and onboarding (QES) | QEAA, QES | IDnow Trust Services | Draft specification (v0.82). | 2026-10-05 | ❔ |
-| PA1-4 | Issue attestations and micro-credentials to the wallet | None | — | | 2026-10-05 | ⚪ |
-| PA2-A1 | A2A strong customer authentication | None | — | | 2026-10-05 | ⚪ |
-| PA2-A2 | A2A payment initiation | None | — | QES explicitly "won't have". | 2026-10-05 | ⚪ |
-| PA2-B1 | Card-based online payment SCA with EUDIW | None | — | | 2026-10-05 | ⚪ |
-| PA2-B2 | Card-based payment initiation with EUDIW | None | — | | 2026-10-05 | ⚪ |
-| PA3-1 | Opening a bank account | QEAA, QES | QEAA: Digidentity, Procivis (with QTSPs). QES: Digidentity, D-Trust, Procivis (with QTSPs). | | 2026-10-05 | ❔ |
-| PA3-2 | Digital signatures | QEAA, QES | QEAA: Digidentity, PWPW, D-Trust (tbc). QES: Digidentity, PWPW, D-Trust. | Draft specification (no version). | 2026-10-05 | ❔ |
-| PA3-3 | IBAN ownership verification | None | — | | 2026-10-05 | ⚪ |
-| PA4-1.1 | Card payment / deferred invoice (eReceipt) | None | — | Trust infrastructure for (Q)EAAs is an open point. | 2026-10-05 | ⚪ |
-| PA4-1.2 | IBAN payment / upfront invoice (eReceipt) | None | — | | 2026-10-05 | ⚪ |
+| BU1-1 | KYC (B2B vertical) | QEAA, RPAC/RPRC | Procivis, Spherity (technology for QTSP) | No qualified QEAA provider named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU1-2 | KYS (B2B vertical) | QEAA, RPAC/RPRC | Procivis, Spherity (technology for QTSP) | No qualified QEAA provider named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU1-3 | KYC for sole traders | QEAA, RPAC/RPRC | Docaposte, Cleverbase, Procivis (tbc), Signicat (tbc) | Draft specification (v0.7). RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU1-4 | KYS for sole traders | QEAA, RPAC/RPRC | Docaposte, Cleverbase, Procivis (tbc), Signicat (tbc) | Draft specification (v0.7). RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU1-5 | Know Your Employee (KYE) | QEAA, RPAC/RPRC | SwissSign | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU2-1 | Create a company branch in an EU or EEA Member State | QEAA, QES, QESeal, QERDS (MVP+), RPAC/RPRC | D-Trust (QEAA, QES) | QESeal required, provider not explicitly assigned. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU2-2 | Register a company branch with a tax authority | QEAA, QES, RPAC/RPRC | None named | All provider roles empty; assumed to be delivered by WP4. RPAC/RPRC not specified. | 2026-10-05 | 🔴 |
+| BU3-1 | Filing VAT declaration using tax portal | QEAA, QES, QESeal, RPAC/RPRC | QEAA: Reconi, Signicat, Digidentity, Cleverbase. QES: Cleverbase, KPN, Digidentity, Signicat. | QESeal provider not named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU3-2 | Filing VAT declaration using M2M | QEAA, QES, QESeal, QERDS, RPAC/RPRC | QEAA: Reconi, Signicat, Digidentity. QES: Cleverbase, KPN, Digidentity, Signicat. QERDS: Cleverbase, Ledger Leopard. | QESeal provider not named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU3-3 | Issuing VAT ID (tax portal) | QEAA, QES, QESeal, RPAC/RPRC | QEAA: Reconi, Signicat, Digidentity, Cleverbase. QES: Cleverbase, KPN, Digidentity, Signicat. | QESeal provider not named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU3-4 | Issuing VAT ID using M2M | QEAA, QES, QESeal, QERDS, RPAC/RPRC | QEAA: Cleverbase, Signicat. QES: Cleverbase, Signicat. | QESeal and QERDS providers not named. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU4-1A | Issue a power of attorney (PoA) | QEAA, RPAC/RPRC | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | Qualification of the PoA as QEAA still under discussion. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU4-1B | Issue powers of representation (PoR) to an EU Business Wallet | QEAA, RPAC/RPRC | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU4-1C | Get access to service | QEAA, RPAC/RPRC | Registradores, T-Systems, Cleverbase, Docaposte, Intesi Group | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU5-1 | Micro-credentials | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU6-1 | Full power access to OOTS | QEAA or Pub-EAA, RPAC/RPRC | Public bodies in a combined QEAA/Pub-EAA role | No QTSP named; PL not filled in. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| BU6-4 | Attestations and OOTS combined | QEAA or Pub-EAA, RPAC/RPRC | Public bodies in a combined QEAA/Pub-EAA role; WP4-QEAA placeholder for PL | Draft specification (v0.1). RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| SC2-1 | Seamless onboarding across data space initiatives (Agri-X) | RPAC/RPRC | — | QES/QTSP role defined but not exercised. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| SC5-1 | Supplier pre-approval | RPAC/RPRC | RPAC/RPRC: WE BUILD, no TSP named. | WE BUILD QEAA only; attestation is a non-qualified EAA. | 2026-10-05 | ❔ |
+| SC5-2 | Service provider authorization | QEAA (pending analysis), RPAC/RPRC | QEAA provider out of scope RPAC/RPRC: WE BUILD, no TSP named. | Qualification is a working assumption pending analysis. | 2026-10-05 | ❔ |
+| SC5-3 | Service provider authorization verifiable by tax administration (MVP+) | QEAA (pending analysis), RPAC/RPRC | QEAA provider out of scope RPAC/RPRC: WE BUILD, no TSP named. | Qualification is a working assumption pending analysis. | 2026-10-05 | ❔ |
+| SC5-4 | Direct eInvoicing between business wallets | QERDS, RPAC/RPRC | Not assigned RPAC/RPRC: WE BUILD, no TSP named. | QERDS provider is an open point. | 2026-10-05 | 🔴 |
+| SC5-5 | Peppol enhancements (MVP+) | QESeal, QERDS, RPAC/RPRC | Not assigned RPAC/RPRC: WE BUILD, no TSP named. | No separate scenario specification; QTSP role not assigned. | 2026-10-05 | 🔴 |
+| PA1-1 | Open a personal bank account | QEAA, RPAC/RPRC | QEAA: IDnow Trust Services, InfoCert. RPAC/RPRC: WP4 Access CA, no TSP named. | | 2026-10-05 | ❔ |
+| PA1-3 | Contract signing in banking KYC and onboarding (QES) | QEAA, QES, RPAC/RPRC | IDnow Trust Services | Draft specification (v0.82). RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA1-4 | Issue attestations and micro-credentials to the wallet | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA2-A1 | A2A strong customer authentication | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA2-A2 | A2A payment initiation | RPAC/RPRC | RPAC/RPRC: WE BUILD, no TSP named. | QES explicitly "won't have". | 2026-10-05 | ❔ |
+| PA2-B1 | Card-based online payment SCA with EUDIW | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA2-B2 | Card-based payment initiation with EUDIW | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA3-1 | Opening a bank account | QEAA, QES, RPAC/RPRC | QEAA: Digidentity, Procivis (with QTSPs). QES: Digidentity, D-Trust, Procivis (with QTSPs). | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA3-2 | Digital signatures | QEAA, QES, RPAC/RPRC | QEAA: Digidentity, PWPW, D-Trust (tbc). QES: Digidentity, PWPW, D-Trust. | Draft specification (no version). RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA3-3 | IBAN ownership verification | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA4-1.1 | Card payment / deferred invoice (eReceipt) | RPAC/RPRC | — | Trust infrastructure for (Q)EAAs is an open point. RPAC/RPRC not specified. | 2026-10-05 | ❔ |
+| PA4-1.2 | IBAN payment / upfront invoice (eReceipt) | RPAC/RPRC | — | RPAC/RPRC not specified. | 2026-10-05 | ❔ |
 
 ## Scenario details
 
@@ -66,6 +66,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Wallets:** EBW only: Spherity, Procivis, Credenco.
 - **Note:** some holders require the relying party to use an EBW instead of
   an RP component when requesting confidential data.
+- **RPAC/RPRC:** not specified.
 
 #### BU1-2 – KYS (B2B vertical)
 
@@ -75,6 +76,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Pub-EAA:** Bundesanzeiger Verlag, KVK, Dutch Tax Agency, DATEV,
   Infogreffe/Docaposte.
 - **Wallets:** EBW only: Spherity, Procivis, Credenco.
+- **RPAC/RPRC:** not specified.
 
 #### BU1-3 – KYC for sole traders, and BU1-4 – KYS for sole traders
 
@@ -89,6 +91,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Wallets:** Docaposte (EBW), Digidentity (EUDI), Dutch EUDI wallet
   (EUDI); tbc: iGrant.io (hybrid), Credenco (EBW), SIROS (EBW/hybrid),
   Procivis (EBW).
+- **RPAC/RPRC:** not specified.
 
 #### BU1-5 – Know Your Employee (KYE)
 
@@ -98,6 +101,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **QEAA:** SwissSign.
 - **EAA:** SICPA, Bosch.
 - **Wallets:** EUDI: Credenco, walt.id. No EBW provider listed.
+- **RPAC/RPRC:** not specified.
 
 ### BU2 – Create company branch
 
@@ -116,6 +120,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
   assumed to be delivered by WP4.
 - **Wallets:** EUDI and EBW: iGrant.io, Credenco, Procivis, SIROS. The user
   must hold both an EUDI wallet and an EU Business Wallet.
+- **RPAC/RPRC:** not specified.
 
 #### BU2-2 – Register a company branch with a tax authority
 
@@ -128,6 +133,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
   - No QESeal or QERDS in scope.
 - **QEAA, EAA, QES:** not filled in. Assumed to be delivered by WP4.
 - **Wallets:** EUDI and EBW: iGrant.io, Credenco, Procivis, SIROS.
+- **RPAC/RPRC:** not specified.
 
 ### BU3 – Foreign tax declaration (VAT)
 
@@ -148,6 +154,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **PID:** Digidentity, KPN, Cleverbase, Signicat, Digdir, DIGG.
 - **Wallets:** EUDI: Cleverbase, Digidentity, KPN, Digdir. Users of EUDI
   and business wallet are mocked; no separate EBW provider listed.
+- **RPAC/RPRC:** not specified.
 
 #### BU3-2 – Filing VAT declaration using M2M
 
@@ -166,6 +173,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **QESeal:** no provider named.
 - **Wallets:** EUDI: Cleverbase, Digidentity, KPN, Digdir. EBW: Credenco;
   QEAA and QERDS are delivered towards the business wallet.
+- **RPAC/RPRC:** not specified.
 
 #### BU3-3 – Issuing VAT ID (tax portal)
 
@@ -185,6 +193,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Wallets:** EUDI: Cleverbase, Digidentity, KPN, Digdir. EBW: Credenco,
   Ledger Leopard, Cleverbase. The VAT ID must be issuable to both an EUDI
   wallet and a business wallet.
+- **RPAC/RPRC:** not specified.
 
 #### BU3-4 – Issuing VAT ID using M2M
 
@@ -205,6 +214,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Wallets:** EUDI: Cleverbase, Digidentity, KPN, Ubiqu. Primarily a
   business wallet scenario; the Pub-EAA is issued towards the business
   wallet, the EUDI wallet is optional for confirming authorisations.
+- **RPAC/RPRC:** not specified.
 
 ### BU4 – Company representative acting on behalf of company
 
@@ -221,6 +231,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
   Group.
 - **QES:** empty.
 - **Wallets:** EBW: Procivis, Credenco. No EUDI wallet (EUBW-based MVP).
+- **RPAC/RPRC:** not specified.
 
 #### BU4-1B – Issue powers of representation (PoR) to an EU Business Wallet
 
@@ -233,6 +244,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **EAA:** Registradores, T-Systems, DATEV, Cleverbase, Docaposte, Intesi
   Group.
 - **Wallets:** EBW: Procivis, Credenco. No EUDI wallet.
+- **RPAC/RPRC:** not specified.
 
 #### BU4-1C – Get access to service
 
@@ -247,6 +259,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Wallets:** EBW: Procivis, Credenco; Orange is also listed as wallet
   provider. End users access services through both the EUDI wallet and the
   European Business Wallet.
+- **RPAC/RPRC:** not specified.
 
 ### BU5 – Issue micro-credentials
 
@@ -260,6 +273,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
   BUILD project.
 - **Wallets:** EUDI: GRNET, GUnet (wwWallet), Procivis (Procivis One),
   E-gov Moldova (Evo), Sphereon, SIROS (SIROS ID). No EBW.
+- **RPAC/RPRC:** not specified.
 
 ### BU6 – Business access to OOTS
 
@@ -272,6 +286,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **PID:** GRNET/MoDG, MC, ARTE, MDT, KVK.
 - **Wallets:** EUDI: GRNET/MoDG, Ministry of Digital Affairs (PL), ARTE,
   MDT, KVK. No EBW listed.
+- **RPAC/RPRC:** not specified.
 
 #### BU6-4 – Attestations and OOTS combined
 
@@ -282,6 +297,7 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **EAA:** must also be able to issue PoR and CR attestations.
 - **Wallets:** EUDI: GRNET/MoDG, Ministry of Digital Affairs (PL), ARTE,
   MDT, KVK. No EBW listed.
+- **RPAC/RPRC:** not specified.
 
 ### SC2 – Trusted data sharing for data spaces
 
@@ -298,14 +314,15 @@ that are not scored, such as Pub-EAA, EAA and PID providers.
 - **Trusted list:** LoTE set up by the use case lead in the WP4 LoTL
   (Raidiam); credential catalogue by SIROS.
 - **Wallets:** Spherity (EBW), Digidentity (EUDI and EBW), LutraLabs (EBW).
+- **RPAC/RPRC:** not specified.
 
 ### SC5 – eInvoicing
 
 Shared across SC5: EAA provider DATEV; QES provider role ValidatedID and
 Banqup; trusted list registrar IDunion; EBW providers Sphereon and Credenco.
-No EUDI wallet: SC5 is fully EBW and system-to-system. RP certificates are
+No EUDI wallet: SC5 is fully EBW and system-to-system. RPAC/RPRC are
 WE BUILD RP access certificates; WE BUILD does not issue eIDAS RP access
-certificates.
+certificates. No TSP is named as issuer.
 
 Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 `SC5/Scenario/Description.md`.
@@ -361,7 +378,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 
 - **Source:** `PA1/WEBUILD WP3 PA1-01 specification v1.0.docx`
 - **Q services:** QEAA. No QES, QESeal or QERDS.
-- **RP certificates (not scored):** central to the scenario. The RP or its
+- **RPAC/RPRC:** central to the scenario, no TSP named as issuer. The RP or its
   intermediary must obtain a WRPAC from an access CA and, where issued,
   present a WRPRC. Alternative flows AF7/AF8 cover failed access
   certificate validation and out-of-scope requests.
@@ -387,6 +404,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 - **Wallets:** EUDI: walt.id (with National Bank of Greece) and Izertis
   (with Banca Sella); other PA1 wallets are usable if the RPs extend
   coverage. No EBW.
+- **RPAC/RPRC:** not specified.
 
 #### PA1-4 – Issue attestations and micro-credentials to the wallet
 
@@ -397,6 +415,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   Bank of Greece, Banca Sella, Banca Transilvania, Air Bank, Komerční Banka,
   ČSOB. WUA supplied by the WP4 wallet group.
 - **Wallets:** EUDI: Lissi, Compellio, Samsung, Aricoma, Izertis. No EBW.
+- **RPAC/RPRC:** not specified.
 
 ### PA2 – Consumer payments
 
@@ -409,12 +428,13 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   party for the SCA-IBAN attestation. Banks: National Bank of Greece,
   Komerční banka. PISP: Mastercard Open Banking Services EU, Tink.
 - **Wallets:** EUDI: Aricoma. No EBW.
+- **RPAC/RPRC:** not specified.
 
 #### PA2-A2 – A2A payment initiation
 
 - **Source:** `PA2/wp3_pa2_a2_mvp_v1.0.docx`
 - **Q services:** none. QES capability is explicitly "won't have".
-- **RP certificates (not scored):** the merchant or its PISP must be
+- **RPAC/RPRC:** the merchant or its PISP must be
   registered as relying party and hold a valid WE BUILD RP access
   certificate.
 - **EAA:** Bank iD CZ, Fast Ferries. **PID:** GRNET, Aricoma. SCA-IBAN
@@ -431,6 +451,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   SpareBank 1); possible support from Authologic, iGrant.io, Lissi,
   Netcetera, Mastercard, Worldline.
 - **Wallets:** EUDI: Google Wallet (tbc), GRNET, iGrant.io, Veridas. No EBW.
+- **RPAC/RPRC:** not specified.
 
 #### PA2-B2 – Card-based payment initiation with EUDIW
 
@@ -440,6 +461,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 - **Roles:** EAA provider and validator TSP: Mastercard. Credential issuance
   facilitator: G+D Netcetera. ACS: Worldline, Entersekt. PSP: Worldline.
 - **Wallets:** EUDI: iGrant.io, walt.id, Google. No EBW.
+- **RPAC/RPRC:** not specified.
 
 ### PA3 – Corporate banking
 
@@ -461,6 +483,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 - **Wallets:** EUDI (natural person): Digidentity, Procivis, Governikus,
   SWIYU Swiss reference implementation, Aricoma. EBW (legal person):
   Spherity, Procivis.
+- **RPAC/RPRC:** not specified.
 
 #### PA3-2 – Digital signatures
 
@@ -478,6 +501,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
 - **Wallets:** EUDI: Digidentity, Procivis; other TBD for DE and PL. EBW:
   Credenco, Spherity, Procivis; other TBD for PL. The bank also needs a
   business wallet to issue the contract.
+- **RPAC/RPRC:** not specified.
 
 #### PA3-3 – IBAN ownership verification
 
@@ -487,6 +511,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   verification of issuers ("assumed trust").
 - **EAA:** Deutsche Bank.
 - **Wallets:** EUDI: Procivis. EBW: Spherity.
+- **RPAC/RPRC:** not specified.
 
 ### PA4 – Corporate payments
 
@@ -503,6 +528,7 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   Worldline (PSP acquiring).
 - **Wallets:** EBW: iGrant.io (buyer 2, travel agent), Procivis (seller).
   EUDI: iGrant.io (buyer 1, sole trader).
+- **RPAC/RPRC:** not specified.
 
 #### PA4-1.2 – IBAN payment / upfront invoice (eReceipt)
 
@@ -513,3 +539,4 @@ Sources: `SC5/Scenario/Scenario1.md` to `Scenario4.md`, and
   Deutsche Bank for the IBAN attestation; employer through EBW/HR system.
   Intermediaries: DATEV (buyer's ERP), Bosch ERP (eReceipt).
 - **Wallets:** EBW: SIROS (buyer), Procivis (seller). No EUDI wallet.
+- **RPAC/RPRC:** not specified.
