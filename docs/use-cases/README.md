@@ -6,8 +6,6 @@ providers deliver them.
 
 - [Scenarios](scenarios.md): implementation status of the qualified trust
   service part of each use case scenario.
-- [Use case coverage](coverage.md): per use case, whether the qualified
-  trust services it needs have enough providers attached.
 - [Providers](providers.md): providers that deliver qualified trust
   services within WE BUILD, and their involvement in the QTSP group and the
   use cases.
@@ -58,22 +56,6 @@ the QTSP group can influence, not the pilot as a whole.
 | 🔴 Blocked | It is unclear what needs to be done: a blocking issue, missing specifications or no provider assigned (link the issue). |
 | ⚪ Not applicable | The scenario uses none of the services in scope. |
 | ❔ Not assessed | No status has been assessed yet. |
-
-### Use case coverage
-
-Scored over the required services of the use case. Services marked MVP+
-are listed but not scored. Services with too few providers are explained
-in the *Notes* column.
-
-| Status | Meaning |
-|---|---|
-| 🟢 Covered | Qualified trust services are applied, and each required service has at least two providers attached. |
-| 🟡 Limited | Qualified trust services are applied, but a required service has fewer than two providers, or only providers marked *tbc*. |
-| 🔴 Gap | Qualified trust services are required, but none of them has a provider assigned. |
-| ⚪ Not applicable | The use case uses none of the services in scope. |
-
-At least two providers per service are needed to demonstrate
-interoperability between independent providers.
 
 ### Providers
 
