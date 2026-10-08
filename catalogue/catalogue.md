@@ -420,3 +420,157 @@ In Design
 **Supported formats**
 
 - SD-JWT
+
+## Validated ID a Namirial Company
+
+### About
+
+Namirial is a European Qualified Trust Service Provider (QTSP) headquartered in Italy, supervised under the eIDAS Regulation. Namirial Group provides qualified electronic signatures and seals, time stamping, qualified electronic registered delivery, digital onboarding, and long-term preservation to public and private organizations across Europe.
+
+For the EUDI Wallet ecosystem, Namirial operates a wallet and an issuance and verification platform that lets organizations issue (Q)EAAs and verify PID and attestations via OpenID4VCI and OpenID4VP, in SD-JWT VC and mdoc formats. In WE BUILD, Namirial takes part as wallet provider, verifier, PID issuer and EAA issuer, and contributes to the SC5 eInvoicing and BU4 Power of Representation use cases.
+
+### Contact Point(s)
+
+- [Andreas Abraham](mailto:a.abraham@namirial.com)
+- [Marco Scognamiglio](mailto:m.scognamiglio@namirial.com)
+
+### Trust Services
+
+#### Qualified Electronic Attestation of Attributes (QeAA)
+
+##### Documentation
+
+TODO
+
+##### Supported Attestations
+
+###### Hello World Attestation
+
+**Status**
+
+Testing (pre-production)
+
+**Description**
+
+A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-hello-world)
+
+**Supported formats**
+
+- SD-JWT
+- mdoc
+
+###### eInvoice Attestation (SC5)
+
+**Status**
+
+In design
+
+**Description**
+
+Lets a supplier issue an electronic invoice as a verifiable attestation directly to the buyer's Business Wallet, without an intermediary service provider (SC5 scenario "Direct eInvoicing using Business Wallets"). Invoice semantics follow EN 16931 / Peppol BIS 3.0.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-eInvoice)
+
+**Supported formats**
+
+- SD-JWT
+
+###### Approved Supplier Attestation (SC5)
+
+**Status**
+
+In design
+
+**Description**
+
+Proves that a supplier is recognized and approved by a buyer, so service providers can trust the buyer–supplier relationship in eInvoicing flows (including automated IBAN verification).
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-approved-supplier)
+
+**Supported formats**
+
+- SD-JWT
+
+###### Authorized Service Provider Attestation (SC5)
+
+**Status**
+
+In design
+
+**Description**
+
+Proves that a service provider is authorized to send or receive invoices, or submit tax data, on behalf of a company.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-authorized-service-provider)
+
+**Supported formats**
+
+- SD-JWT
+
+###### Power of Attorney Attestation (BU4)
+
+**Status**
+
+Testing (pre-production)
+
+**Description**
+
+Attests that a natural person has been authorized by a legal entity (the principal) to act on its behalf within a defined scope, e.g., a tax advisor acting for a company (BU4 Scenario 1a). Issued based on the PID of the representative and the EBWOID of the company, following the WE BUILD Power of X (PoX) common representation model.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-poa-pox)
+
+**Supported formats**
+
+- SD-JWT
+
+###### Power of Representation Attestation (BU4)
+
+**Status**
+
+Testing (pre-production)
+
+**Description**
+
+Attests that a natural person is a legal representative of a company (e.g. a director registered in the business register), so that the representative can act on behalf of the company using an EUDI Wallet or EU Business Wallet (BU4 Scenario 1b). Follows the WE BUILD Power of X (PoX) common representation model.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/tree/main/rulebooks/rb-poa-pox)
+
+**Supported formats**
+
+- SD-JWT
+
+#### Qualified Electronic Signature (QES)
+
+##### Documentation
+
+TODO
+
+##### Supported Services
+
+###### Remote Qualified Electronic Signature
+
+**Status**
+
+Live
+
+**Description**
+
+Remote QES based on qualified certificates issued by Namirial as QTSP, with keys held in a remote QSCD. Signing can be integrated into business workflows via API.
+
+**Supported formats**
+
+- PAdES
+- CAdES
+- XAdES
+
+###### QES with EUDI Wallet Identification
+
+**Status**
+
+In design
+
+**Description**
+
+Issuance of a qualified certificate and remote QES where the signer is identified via PID presentation from an EUDI Wallet (OpenID4VP, level of assurance high), in line with the WE BUILD QES tasks for PID/LPID-based signing.
