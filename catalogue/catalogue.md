@@ -419,6 +419,7 @@ In Design
 
 **Supported formats**
 
+- SD-JWT
 
 ## Validated ID a Namirial Company
 
