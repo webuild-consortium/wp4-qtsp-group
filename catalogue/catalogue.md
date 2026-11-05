@@ -1,3 +1,43 @@
+## Aruba S.p.A.
+
+### About
+
+Aruba, founded in 1994, is Italy's Cloud Champion and one of the leading European providers of digital infrastructure and platforms built on proprietary assets. The company designs and manages the entire technology stack: from data center design and construction to cloud platforms, from trust and security services to connectivity and software solutions supporting digital strategies and AI-based applications.
+As part of the POTENTIAL Large-Scale Pilot, Aruba played a leading role in defining the reference implementations for the integration of the EUDI Wallet with digital signature systems. Building on this design activity, Aruba successfully participated in cross-border interoperability tests, validating end-to-end wallet-based signature and identity flows using its own EUDI Wallet implementation, its relying party and relaying gateway components, and its qualified trust service infrastructure for electronic signatures and related services.   
+Thanks to its long-standing role as a qualified trust service provider (QTSP), identity provider, and cloud infrastructure operator, Aruba combines regulatory expertise, operational reliability, and hands-on experience in delivering wallet-enabled digital services at national and European scale.
+
+### Contact Point(s)
+
+- [Marco Pancioni](mailto:marco.pancioni@staff.aruba.it)
+- [Giorgio Gamberi](mailto:giorgio.gamberi@staff,aruba.it)
+- [Giulia Collodel](mailto:giulia.collodel@staff.aruba.it)
+
+### Trust Services
+
+#### Qualified Electronic Attestation of Attributes (QeAA)
+
+##### Documentation
+
+[QeAA Issuer](https://wallet.aruba.io)
+
+##### Supported Attestations
+
+###### Hello World Attestation
+
+**Status**
+
+Live
+
+**Description**
+
+A minimal, short-lived QEAA used to test issuance, presentation, and verification interoperability in pre-production wallet flows.
+
+[Rulebook](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog/blob/main/rulebooks/ds005-hello-world-rulebook.md)
+
+**Supported formats**
+
+- SD-JWT
+- mdoc
 ## Cleverbase
 
 ### About
